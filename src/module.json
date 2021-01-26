@@ -1,27 +1,27 @@
 {
-  "name": "foundry-typescript-template",
-  "title": "Typescript Template",
-  "description": "", 
+  "name": "focus-sheet",
+  "title": "Focus Sheet",
+  "description": "Automatically open and focus the current combatant's actor sheet.",
+  "author": "jagoe — ich#0084",
   "authors": [
     {
-      "name": "spacemandev",
-      "discord": "spacemandev#6256"
+      "name": "jagoe",
+      "discord": "ich#0084"
     }
   ],
-  "version": "0.0.1",
+  "version": "0.1.0",
   "minimumCoreVersion": "0.7.9",
   "compatibleCoreVersion": "0.7.9",
   "manifestPlusVersion": "1.0.0",
   "url": "",
   "manifest": "",
   "download": "",
+  "bugs": "",
+  "changelog": "",
   "type": "module",
   "includes": [
-    "./assets/**",
     "./lang/**",
     "./scripts/**",
-    "./styles/**",
-    "./templates/**",
     "./module.json",
     "./README.md"
   ],
@@ -29,7 +29,7 @@
     {
       "type": "icon",
       "location": ""
-    }, 
+    },
     {
       "type": "cover",
       "location": ""
@@ -40,10 +40,7 @@
     }
   ],
   "esmodules": [
-    "scripts/module.js"
-  ],
-  "styles": [
-    "styles/module.css"
+    "scripts/index.js"
   ],
   "languages": [
     {
