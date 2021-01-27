@@ -18,8 +18,8 @@
       "NodeJS",
     ],
     "typeRoots": [
-      "util/types",
-      "../src/types",
+      "@types",
+      "../src/@types",
       "../node_modules/@types",
     ],
     "allowUmdGlobalAccess": true,
