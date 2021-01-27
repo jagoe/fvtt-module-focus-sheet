@@ -40,7 +40,7 @@
     }
   ],
   "esmodules": [
-    "scripts/index.js"
+    "scripts/module.js"
   ],
   "languages": [
     {

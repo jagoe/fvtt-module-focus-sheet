@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "..",
     "moduleResolution": "node",
     "target": "ES6",
     "lib": [
@@ -10,20 +10,23 @@
       "ES2018"
     ],
     "types": [
+      "node",
       "foundry-pc-types",
-      "node"
+      "chai",
+      "mocha",
     ],
     "allowUmdGlobalAccess": true,
     "paths": {
       "@src/*": [
-        "./src/scripts/*"
+        "src/scripts/*"
       ]
     }
   },
-  "files": [
-    "./gulpfile.ts"
+  "include": [
+    "./**/*.test.ts",
+    "../src/scripts/**/*.ts",
   ],
   "exclude": [
-    "node_modules"
-  ]
+    "../node_modules"
+  ],
 }

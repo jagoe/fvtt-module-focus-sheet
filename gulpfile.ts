@@ -1,21 +1,27 @@
-const gulp = require('gulp')
-const ts = require('gulp-typescript')
-const project = ts.createProject('tsconfig.json')
+import {task, src, dest, parallel, series} from 'gulp'
+import * as del from 'del'
+import {createProject} from 'gulp-typescript'
+import * as mocha from 'gulp-spawn-mocha'
 
-gulp.task('compile', () => {
-  return gulp.src('src/**/*.ts').pipe(project()).pipe(gulp.dest('dist/'))
+const project = createProject('src/tsconfig.json')
+
+task('clean', async () => {
+  del.sync('dist')
+  return Promise.resolve()
 })
 
-gulp.task('copy', async () => {
-  return new Promise((resolve, _reject) => {
-    gulp.src('README.md').pipe(gulp.dest('dist/'))
-    gulp.src('src/module.json').pipe(gulp.dest('dist/'))
-    gulp.src('src/lang/**').pipe(gulp.dest('dist/lang/'))
-    gulp.src('src/templates/**').pipe(gulp.dest('dist/templates/'))
-    gulp.src('src/styles/**').pipe(gulp.dest('dist/styles/'))
-    gulp.src('src/assets/**').pipe(gulp.dest('dist/assets/'))
-    resolve(undefined)
-  })
+task('compile', () => {
+  return src('src/**/*.ts').pipe(project()).pipe(dest('dist/'))
 })
 
-gulp.task('build', gulp.parallel('compile', 'copy'))
+task('copy', async () => {
+  src('README.md').pipe(dest('dist/'))
+  src('src/module.json').pipe(dest('dist/'))
+  src('src/lang/**').pipe(dest('dist/lang/'))
+  src('src/templates/**').pipe(dest('dist/templates/'))
+  src('src/styles/**').pipe(dest('dist/styles/'))
+  src('src/assets/**').pipe(dest('dist/assets/'))
+  return Promise.resolve()
+})
+
+task('build', series('clean', parallel('compile', 'copy')))

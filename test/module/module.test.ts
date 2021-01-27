@@ -1,5 +1,7 @@
+import {} from '@src/module'
+
 describe('Module', () => {
-  describe('Init', () => {
+  describe('Initialize', () => {
     it('should register "focusCombatantSheet" on "updateCombat" event', () => {})
   })
 })

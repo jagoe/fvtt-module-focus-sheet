@@ -4,5 +4,9 @@
       "directory": "src",
       "changeProcessCWD": true
     },
+    {
+      "directory": "test",
+      "changeProcessCWD": true
+    },
   ]
 }
