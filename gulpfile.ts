@@ -1,7 +1,6 @@
 import {task, src, dest, parallel, series} from 'gulp'
 import * as del from 'del'
 import {createProject} from 'gulp-typescript'
-import * as mocha from 'gulp-spawn-mocha'
 
 const project = createProject('src/tsconfig.json')
 

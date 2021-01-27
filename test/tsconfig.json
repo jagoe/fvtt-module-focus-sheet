@@ -14,19 +14,32 @@
       "foundry-pc-types",
       "chai",
       "mocha",
+      "PopoutModule",
+      "NodeJS",
+    ],
+    "typeRoots": [
+      "util/types",
+      "../src/types",
+      "../node_modules/@types",
     ],
     "allowUmdGlobalAccess": true,
+    "esModuleInterop": true,
     "paths": {
+      "@/*": [
+        "test/*"
+      ],
       "@src/*": [
         "src/scripts/*"
-      ]
+      ],
     }
   },
   "include": [
     "./**/*.test.ts",
     "../src/scripts/**/*.ts",
+    "../src/scripts/**/*.d.ts",
+    "./**/*.d.ts",
   ],
   "exclude": [
     "../node_modules"
-  ],
+  ]
 }

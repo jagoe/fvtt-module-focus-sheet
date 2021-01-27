@@ -1,2 +1,2 @@
-export * from './focus.js'
-export * from './get.js'
+export * from './focus'
+export * from './get'

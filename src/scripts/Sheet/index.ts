@@ -1,1 +1,1 @@
-export * from './focusCombatantSheet.js'
+export * from './focusCombatantSheet'

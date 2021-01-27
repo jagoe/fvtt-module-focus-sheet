@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "moduleResolution": "node",
     "target": "ES6",
     "lib": [
@@ -11,14 +10,9 @@
     ],
     "types": [
       "foundry-pc-types",
-      "node"
+      "node",
     ],
     "allowUmdGlobalAccess": true,
-    "paths": {
-      "@src/*": [
-        "./src/scripts/*"
-      ]
-    }
   },
   "files": [
     "./gulpfile.ts"

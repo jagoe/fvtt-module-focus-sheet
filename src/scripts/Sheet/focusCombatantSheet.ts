@@ -1,5 +1,5 @@
-import {getSheet} from '../Combat/index.js'
-import {focus, get} from '../Popout/index.js'
+import {getSheet} from '../Combat/index'
+import {focus, get} from '../Popout/index'
 
 /**
  * Focus the current actor/token sheet of the current combatant.\
