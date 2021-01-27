@@ -1,1 +1,1 @@
-export * from './getSheet'
+export * from './getCombatantSheet'

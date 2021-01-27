@@ -1,4 +1,6 @@
-export function get(sheet: BaseEntitySheet<{}, Entity<{}>>) {
+import {Sheet} from '../Sheet'
+
+export function get(sheet: Sheet) {
   if (!PopoutModule) {
     return null
   }

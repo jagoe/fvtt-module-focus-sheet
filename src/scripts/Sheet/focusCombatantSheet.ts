@@ -1,4 +1,4 @@
-import {getSheet} from '../Combat/index'
+import {getCombatantSheet} from '../Combat/index'
 import {focus, get} from '../Popout/index'
 
 /**
@@ -8,7 +8,7 @@ import {focus, get} from '../Popout/index'
  * @param combat A Combat instance (usually provided by a hook)
  */
 export function focusCombatantSheet(combat: Combat) {
-  const sheet = getSheet(combat)
+  const sheet = getCombatantSheet(combat)
   if (!sheet || !sheet.rendered) {
     // combatant does not have a sheet
     return
