@@ -39,8 +39,8 @@
       "location": ""
     }
   ],
-  "esmodules": [
-    "scripts/module.js"
+  "scripts": [
+    "scripts/focus-sheet.js"
   ],
   "languages": [
     {
