@@ -69,6 +69,15 @@ describe('Module', () => {
       expect(focusStub.called).to.be.false
     })
 
+    it('should return early if the player has insufficient permission', () => {
+      getSheetStub.returns(SHEET)
+      permissionStub.returns(false)
+
+      focusCombatantSheet(COMBAT)
+
+      expect(getPopoutStub.called).to.be.false
+    })
+
     it('should return early if the combatant sheet is not currently being rendered', () => {
       getSheetStub.returns(cast({...SHEET, rendered: false}))
 
@@ -97,6 +106,30 @@ describe('Module', () => {
           focusCombatantSheet(COMBAT)
 
           expect(openStub.called).to.be.true
+        })
+      })
+    })
+
+    describe('Settings', () => {
+      describe('Auto open', () => {
+        beforeEach(() => {
+          SETTINGS.AutoOpen.Enabled = true
+        })
+
+        it('should render the sheet if it has not been rendered already', () => {
+          const renderSpy = sandbox.spy()
+          getSheetStub.returns(cast({...SHEET, rendered: false, render: renderSpy}))
+          getPopoutStub.returns(null)
+
+          focusCombatantSheet(COMBAT)
+
+          expect(renderSpy.calledWith(true)).to.be.true
+        })
+
+        describe('As Popout', () => {
+          beforeEach(() => {
+            SETTINGS.AutoOpen.AsPopout = true
+          })
         })
       })
     })
