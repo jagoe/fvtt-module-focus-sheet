@@ -1,9 +1,10 @@
 import {Sheet} from '../Sheet'
+import {isActive} from './isActive'
 
-export function get(sheet: Sheet): PopoutModule.PopoutState | null {
-  if (PopoutModule === undefined) {
+export function get(sheet: Sheet): PopoutState | null {
+  if (!isActive()) {
     return null
   }
 
-  return PopoutModule.singleton.poppedOut.get(sheet.appId) ?? null
+  return globalThis.PopoutModule.singleton.poppedOut.get(sheet.appId) ?? null
 }

@@ -1,11 +1,11 @@
-declare namespace PopoutModule {
-  const singleton: Popout
+declare interface PopoutModuleContainer {
+  singleton: Popout
+}
 
-  class Popout {
-    public poppedOut: Map<number, PopoutState>
-  }
+declare class Popout {
+  public poppedOut: Map<number, PopoutState>
+}
 
-  class PopoutState {
-    window: Window
-  }
+declare class PopoutState {
+  window: Window
 }

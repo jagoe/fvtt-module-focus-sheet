@@ -1,5 +1,5 @@
 import {getCombatantSheet} from '@src/Combat'
-import {cast} from '@util/cast'
+import {cast} from '@/@util/cast'
 import {expect} from 'chai'
 
 describe('Combat', () => {

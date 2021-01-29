@@ -1,3 +1,3 @@
-export function focus(popout: PopoutModule.PopoutState): void {
+export function focus(popout: PopoutState): void {
   popout.window.focus()
 }
