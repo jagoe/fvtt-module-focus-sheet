@@ -1,6 +1,7 @@
 import * as focus from '@src/Popout/focus'
 import * as getCombatantSheet from '@src/Combat/getCombatantSheet'
 import * as getPopout from '@src/Popout/getPopout'
+import * as isSheetOpen from '@src/Sheet/isSheetOpen'
 
 import {SinonSpy, SinonStub, createSandbox} from 'sinon'
 
@@ -14,6 +15,7 @@ describe('Module', () => {
     let getSheetStub: SinonStub<[combat: Combat], Sheet | null>
     let getPopoutStub: SinonStub<[sheet: Sheet], PopoutState | null>
     let focusPopoutStub: SinonStub<[popout: PopoutState], void>
+    let isSheetOpenStub: SinonStub<[sheet: Sheet | null], boolean>
     const bringToTopSpy: SinonSpy<unknown[], void> = sandbox.spy()
 
     const COMBAT: Combat = cast({})
@@ -24,6 +26,7 @@ describe('Module', () => {
       getSheetStub = sandbox.stub(getCombatantSheet, 'getCombatantSheet')
       getPopoutStub = sandbox.stub(getPopout, 'getPopout')
       focusPopoutStub = sandbox.stub(focus, 'focus')
+      isSheetOpenStub = sandbox.stub(isSheetOpen, 'isSheetOpen')
     })
 
     afterEach(() => {
@@ -34,16 +37,8 @@ describe('Module', () => {
       sandbox.restore()
     })
 
-    it('should return early if there is no combatant sheet', () => {
-      getSheetStub.returns(null)
-
-      focusCombatantSheet(COMBAT)
-
-      expect(getPopoutStub.called).to.be.false
-    })
-
-    it('should return early if the combatant sheet is not currently being rendered', () => {
-      getSheetStub.returns(cast({...SHEET, rendered: false}))
+    it('should return early if the sheet is not open', () => {
+      isSheetOpenStub.returns(false)
 
       focusCombatantSheet(COMBAT)
 
@@ -52,6 +47,7 @@ describe('Module', () => {
 
     it('should focus the popout instead of the sheet if one exists', () => {
       getSheetStub.returns(SHEET)
+      isSheetOpenStub.returns(true)
       getPopoutStub.returns(POPOUT)
 
       focusCombatantSheet(COMBAT)
@@ -63,6 +59,7 @@ describe('Module', () => {
 
     it('should focus the sheet if no popout exists', () => {
       getSheetStub.returns(SHEET)
+      isSheetOpenStub.returns(true)
       getPopoutStub.returns(null)
 
       focusCombatantSheet(COMBAT)

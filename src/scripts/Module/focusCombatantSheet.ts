@@ -1,6 +1,7 @@
 import {focus, getPopout} from '../Popout/index'
 
 import {getCombatantSheet} from '../Combat/index'
+import {isSheetOpen} from '../Sheet'
 
 /**
  * Focus the current actor/token sheet of the current combatant.\
@@ -10,7 +11,7 @@ import {getCombatantSheet} from '../Combat/index'
  */
 export function focusCombatantSheet(combat: Combat): void {
   const sheet = getCombatantSheet(combat)
-  if (!sheet || !sheet.rendered) {
+  if (!isSheetOpen(sheet)) {
     // combatant does not have a sheet
     return
   }
