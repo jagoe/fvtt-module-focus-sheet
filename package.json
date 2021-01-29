@@ -29,6 +29,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "foundry-pc-types": "https://gitlab.com/foundry-projects/foundry-pc/foundry-pc-types/-/archive/master/foundry-pc-types-master.tar",
+    "generate-json-from-js-webpack-plugin": "^0.1.1",
     "gulp": "^4.0.2",
     "husky": "^5.0.8",
     "mocha": "^8.2.1",

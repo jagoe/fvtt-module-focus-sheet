@@ -1,5 +1,7 @@
-import {src, dest} from 'gulp'
 import * as del from 'del'
+
+import {dest, src} from 'gulp'
+
 import webpack from 'webpack'
 import webpackConfig from '../webpack.config'
 
@@ -27,7 +29,6 @@ export async function compile() {
 export async function copyStatic() {
   src('README.md').pipe(dest('dist/'))
   src('src/module.json').pipe(dest('dist/'))
-  src('src/lang/**').pipe(dest('dist/lang/'))
   src('src/templates/**').pipe(dest('dist/templates/'))
   src('src/styles/**').pipe(dest('dist/styles/'))
   src('src/assets/**').pipe(dest('dist/assets/'))
