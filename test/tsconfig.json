@@ -17,14 +17,14 @@
       "../node_modules/@types",
     ],
     "paths": {
-      "@/*": [
-        "test/*"
-      ],
       "@util/*": [
         "test/@util/*"
       ],
       "@src/*": [
         "src/scripts/*"
+      ],
+      "@/*": [
+        "test/*"
       ],
     },
   },

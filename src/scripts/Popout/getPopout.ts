@@ -1,6 +1,6 @@
 import {isActive} from './isActive'
 
-export function get(sheet: Sheet): PopoutState | null {
+export function getPopout(sheet: Sheet): PopoutState | null {
   if (!isActive()) {
     return null
   }

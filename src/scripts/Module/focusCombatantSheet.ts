@@ -1,5 +1,6 @@
+import {focus, getPopout} from '../Popout/index'
+
 import {getCombatantSheet} from '../Combat/index'
-import {focus, get} from '../Popout/index'
 
 /**
  * Focus the current actor/token sheet of the current combatant.\
@@ -14,7 +15,7 @@ export function focusCombatantSheet(combat: Combat): void {
     return
   }
 
-  const popout = get(sheet)
+  const popout = getPopout(sheet)
   if (popout !== null) {
     focus(popout)
   } else {

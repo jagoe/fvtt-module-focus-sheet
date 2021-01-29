@@ -1,3 +1,3 @@
 export * from './focus'
-export * from './get'
+export * from './getPopout'
 export * from './isActive'
