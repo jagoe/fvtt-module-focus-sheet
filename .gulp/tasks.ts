@@ -1,7 +1,7 @@
 import {src, dest} from 'gulp'
 import * as del from 'del'
-import * as webpack from 'webpack'
-import * as webpackConfig from '../webpack.config'
+import webpack from 'webpack'
+import webpackConfig from '../webpack.config'
 
 export async function clean() {
   del.sync(['dist'])
@@ -15,7 +15,7 @@ export async function compile() {
         reject(err)
       }
 
-      if (stats.hasErrors()) {
+      if (stats?.hasErrors()) {
         reject(new Error(stats.toString()))
       }
 

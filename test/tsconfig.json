@@ -1,14 +1,7 @@
 {
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": "..",
-    "moduleResolution": "node",
-    "target": "ES6",
-    "lib": [
-      "DOM",
-      "ES6",
-      "ES2017",
-      "ES2018"
-    ],
     "types": [
       "node",
       "foundry-pc-types",
@@ -22,24 +15,16 @@
       "../src/@types",
       "../node_modules/@types",
     ],
-    "allowUmdGlobalAccess": true,
-    "esModuleInterop": true,
     "paths": {
       "@/*": [
         "test/*"
       ],
+      "@util/*": [
+        "test/@util/*"
+      ],
       "@src/*": [
         "src/scripts/*"
       ],
-    }
+    },
   },
-  "include": [
-    "./**/*.test.ts",
-    "../src/scripts/**/*.ts",
-    "../src/scripts/**/*.d.ts",
-    "./**/*.d.ts",
-  ],
-  "exclude": [
-    "../node_modules"
-  ]
 }

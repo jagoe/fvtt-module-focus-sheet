@@ -1,5 +1,5 @@
 import {focusCombatantSheet} from '../Sheet/index'
 
-export function initialize() {
+export function initialize(): void {
   Hooks.on('updateCombat', focusCombatantSheet)
 }

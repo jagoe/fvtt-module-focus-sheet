@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {initialize} from '@src/Module'
-import {HooksMock} from '@/_util/HooksMock'
+import {HooksMock} from '@/@util/HooksMock'
 
 describe('Module', () => {
   before(() => {

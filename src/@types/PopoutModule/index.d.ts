@@ -1,4 +1,4 @@
-declare module PopoutModule {
+declare namespace PopoutModule {
   const singleton: Popout
 
   class Popout {

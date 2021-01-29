@@ -1,1 +1,1 @@
-export type Sheet = BaseEntitySheet<{}, Entity<{}>>
+export type Sheet = BaseEntitySheet<unknown, Entity<unknown>>

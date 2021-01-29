@@ -7,7 +7,7 @@ import {focus, get} from '../Popout/index'
  *
  * @param combat A Combat instance (usually provided by a hook)
  */
-export function focusCombatantSheet(combat: Combat) {
+export function focusCombatantSheet(combat: Combat): void {
   const sheet = getCombatantSheet(combat)
   if (!sheet || !sheet.rendered) {
     // combatant does not have a sheet
@@ -15,7 +15,7 @@ export function focusCombatantSheet(combat: Combat) {
   }
 
   const popout = get(sheet)
-  if (popout) {
+  if (popout !== null) {
     focus(popout)
   } else {
     sheet.bringToTop()
