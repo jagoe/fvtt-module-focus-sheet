@@ -1,3 +1,3 @@
-import {initialize} from './module/initialize.js'
+import {initialize} from './Module/initialize'
 
 initialize()

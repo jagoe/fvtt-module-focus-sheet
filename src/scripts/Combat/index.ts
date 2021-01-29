@@ -1,1 +1,1 @@
-export * from './getSheet.js'
+export * from './getCombatantSheet'

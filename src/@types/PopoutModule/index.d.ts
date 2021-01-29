@@ -1,6 +1,8 @@
-declare class PopoutModule {
-  public static singleton: PopoutModule
+declare interface PopoutModuleContainer {
+  singleton: Popout
+}
 
+declare class Popout {
   public poppedOut: Map<number, PopoutState>
 }
 

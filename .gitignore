@@ -1,5 +1,9 @@
+# dependencies
+node_modules/
+yarn-error.log
+
 # build artifacts
 dist
 
-# dependencies
-node_modules/
+# test artifacts
+.nyc_output
