@@ -1,4 +1,3 @@
-import {Sheet} from '../Sheet'
 import {isActive} from './isActive'
 
 export function get(sheet: Sheet): PopoutState | null {

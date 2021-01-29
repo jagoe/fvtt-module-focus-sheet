@@ -7,8 +7,9 @@
       "foundry-pc-types",
       "chai",
       "mocha",
-      "PopoutModule",
       "NodeJS",
+      "PopoutModule",
+      "Sheet",
     ],
     "typeRoots": [
       "@types",

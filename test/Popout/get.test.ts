@@ -1,7 +1,6 @@
 import {createSandbox, SinonStub} from 'sinon'
 import {expect} from 'chai'
 import {get} from '@src/Popout'
-import {Sheet} from '@src/Sheet'
 import * as isActive from '@src/Popout/isActive'
 
 describe('Popout', () => {
