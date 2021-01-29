@@ -1,4 +1,4 @@
-import {focus, open, playerHasPermissionToView, playerHasPermissionToView} from '../Sheet'
+import {focus, open, playerHasPermissionToView} from '../Sheet'
 
 import {Settings} from '../Settings'
 import {getCombatantSheet} from '../Combat/index'

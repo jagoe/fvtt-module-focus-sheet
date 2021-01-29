@@ -52,44 +52,44 @@ describe('Module', () => {
       sandbox.restore()
     })
 
-    it('should return early if there is no combatant sheet', () => {
+    it('should return early if there is no combatant sheet', async () => {
       getSheetStub.returns(null)
 
-      focusCombatantSheet(COMBAT)
+      await focusCombatantSheet(COMBAT)
 
       expect(focusStub.called).to.be.false
     })
 
-    it('should return early if the player has insufficient permission', () => {
+    it('should return early if the player has insufficient permission', async () => {
       getSheetStub.returns(SHEET)
       permissionStub.returns(false)
 
-      focusCombatantSheet(COMBAT)
+      await focusCombatantSheet(COMBAT)
 
       expect(focusStub.called).to.be.false
     })
 
-    it('should return early if the player has insufficient permission', () => {
+    it('should return early if the player has insufficient permission', async () => {
       getSheetStub.returns(SHEET)
       permissionStub.returns(false)
 
-      focusCombatantSheet(COMBAT)
+      await focusCombatantSheet(COMBAT)
 
-      expect(getPopoutStub.called).to.be.false
+      expect(focusStub.called).to.be.false
     })
 
-    it('should return early if the combatant sheet is not currently being rendered', () => {
+    it('should return early if the combatant sheet is not currently being rendered', async () => {
       getSheetStub.returns(cast({...SHEET, rendered: false}))
 
-      focusCombatantSheet(COMBAT)
+      await focusCombatantSheet(COMBAT)
 
       expect(focusStub.called).to.be.false
     })
 
-    it('should focus the sheet', () => {
+    it('should focus the sheet', async () => {
       getSheetStub.returns(SHEET)
 
-      focusCombatantSheet(COMBAT)
+      await focusCombatantSheet(COMBAT)
 
       expect(focusStub.called).to.be.true
     })
@@ -100,36 +100,12 @@ describe('Module', () => {
           SETTINGS.AutoOpen.Enabled = true
         })
 
-        it('should open the sheet if it has not been rendered yet', () => {
+        it('should open the sheet if it has not been rendered yet', async () => {
           getSheetStub.returns(cast({...SHEET, rendered: false}))
 
-          focusCombatantSheet(COMBAT)
+          await focusCombatantSheet(COMBAT)
 
           expect(openStub.called).to.be.true
-        })
-      })
-    })
-
-    describe('Settings', () => {
-      describe('Auto open', () => {
-        beforeEach(() => {
-          SETTINGS.AutoOpen.Enabled = true
-        })
-
-        it('should render the sheet if it has not been rendered already', () => {
-          const renderSpy = sandbox.spy()
-          getSheetStub.returns(cast({...SHEET, rendered: false, render: renderSpy}))
-          getPopoutStub.returns(null)
-
-          focusCombatantSheet(COMBAT)
-
-          expect(renderSpy.calledWith(true)).to.be.true
-        })
-
-        describe('As Popout', () => {
-          beforeEach(() => {
-            SETTINGS.AutoOpen.AsPopout = true
-          })
         })
       })
     })
