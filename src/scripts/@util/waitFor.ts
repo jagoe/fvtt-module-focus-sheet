@@ -12,7 +12,7 @@ export async function waitFor(condition: () => boolean, timeout = 1000, title?: 
     await sleep(step)
   }
 
-  throw new Error(`Timout of ${timeout}ms exceeded${title !== undefined ? ` (${title})` : ''}`)
+  throw new Error(`Timout of ${timeout} ms exceeded${title !== undefined ? ` (${title})` : ''}`)
 }
 
 async function sleep(ms: number): Promise<void> {
