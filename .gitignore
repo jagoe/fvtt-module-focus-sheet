@@ -1,5 +1,6 @@
-# build artifacts
-dist
-
 # dependencies
 node_modules/
+yarn-error.log
+
+# build artifacts
+dist

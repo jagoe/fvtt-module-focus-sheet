@@ -1,25 +1,23 @@
 {
-  "name": "foundry-typescript-template",
+  "name": "fvtt-module-focus-sheet",
   "version": "1.0.0",
-  "description": "Foundry VTT Typescript Template",
+  "description": "Foundry VTT Module - Focus Sheet",
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
-    "test": "TS_NODE_PROJECT=./test/tsconfig.json npx mocha --config ./.mocharc.js"
+    "test": "TS_NODE_PROJECT=./test/tsconfig.json mocha --config ./.mocharc.js"
   },
   "author": "jagoe",
-  "license": "GNU GPL V3",
+  "license": "GPL-3.0-or-later",
   "devDependencies": {
     "@types/chai": "^4.2.14",
-    "@types/del": "^4.0.0",
     "@types/gulp": "^4.0.8",
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.10.1",
     "@types/sinon": "^9.0.10",
     "chai": "^4.2.0",
     "del": "^6.0.0",
-    "esm": "^3.2.25",
-    "foundry-pc-types": "gitlab:foundry-projects/foundry-pc/foundry-pc-types",
+    "foundry-pc-types": "https://gitlab.com/foundry-projects/foundry-pc/foundry-pc-types/-/archive/master/foundry-pc-types-master.tar",
     "gulp": "^4.0.2",
     "mocha": "^8.2.1",
     "sinon": "^9.2.4",
