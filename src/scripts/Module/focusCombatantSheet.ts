@@ -1,8 +1,7 @@
-import {focus, getPopout} from '../Modules/Popout/index'
+import {focus, open, playerHasPermissionToView} from '../Sheet'
 
 import {Settings} from '../Settings'
 import {getCombatantSheet} from '../Combat/index'
-import {playerHasPermissionToView} from '../Sheet'
 
 /**
  * Focus the current actor/token sheet of the current combatant.\
@@ -10,7 +9,7 @@ import {playerHasPermissionToView} from '../Sheet'
  *
  * @param combat A Combat instance (usually provided by a hook)
  */
-export function focusCombatantSheet(combat: Combat): void {
+export async function focusCombatantSheet(combat: Combat): Promise<void> {
   const settings = Settings.GetInstance()
 
   const sheet = getCombatantSheet(combat)
@@ -28,15 +27,9 @@ export function focusCombatantSheet(combat: Combat): void {
     return
   }
 
-  if (!sheet.rendered) {
-    sheet.render(true)
-    return
-  }
-
-  const popout = getPopout(sheet)
-  if (popout !== null) {
-    focus(popout)
+  if (sheet.rendered) {
+    focus(sheet)
   } else {
-    sheet.bringToTop()
+    await open(sheet)
   }
 }
