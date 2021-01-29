@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
-    "test": "TS_NODE_PROJECT=./test/tsconfig.json mocha --config ./.mocharc.js"
+    "test": "TS_NODE_PROJECT=./test/tsconfig.json mocha --config ./.mocharc.js",
+    "test:coverage": "nyc yarn test"
   },
   "author": "jagoe",
   "license": "GPL-3.0-or-later",
@@ -20,6 +21,7 @@
     "foundry-pc-types": "https://gitlab.com/foundry-projects/foundry-pc/foundry-pc-types/-/archive/master/foundry-pc-types-master.tar",
     "gulp": "^4.0.2",
     "mocha": "^8.2.1",
+    "nyc": "^15.1.0",
     "sinon": "^9.2.4",
     "ts-loader": "^8.0.14",
     "ts-node": "^9.1.1",
