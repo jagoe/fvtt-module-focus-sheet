@@ -6,7 +6,7 @@ import {cast} from '@util/cast'
 import {expect} from 'chai'
 import {getPopout} from '@src/Modules/Popout'
 
-describe('Popout', () => {
+describe('Modules: Popout', () => {
   const sandbox = createSandbox()
   let isActiveStub: SinonStub
 

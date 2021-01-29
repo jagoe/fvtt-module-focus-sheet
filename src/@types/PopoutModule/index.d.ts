@@ -3,6 +3,8 @@ declare namespace PopoutModule {
 
   class Popout {
     public poppedOut: Map<number, PopoutState>
+    public ID: string
+    public onPopoutClicked(domID: string, app: Application)
   }
 
   class PopoutState {

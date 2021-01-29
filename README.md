@@ -26,7 +26,7 @@ Then, as GM, enable the `Focus Sheet` module in the `Manage Modules` settings in
 
 The module can be configured using the `Module Settings`, providing the following options:
 
-### (TBD) Automatically Open Sheets
+### Automatically Open Sheets
 
 By default, the current combatant's sheet will only be brought to the top/focused if has already been opened.\
 Enabling this setting also opens the sheet if it has not been opened yet, but only if the player has at least Observer

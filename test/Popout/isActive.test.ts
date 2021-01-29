@@ -1,7 +1,7 @@
 import {expect} from 'chai'
-import {isActive} from '@src/Modules/Popout'
+import {isActive} from '@src/Modules'
 
-describe('Popout', () => {
+describe('Modules: Popout', () => {
   describe('Is Active', () => {
     const modules = new Map<string, {active: boolean}>()
     const moduleKey = 'test-module'

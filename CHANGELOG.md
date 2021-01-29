@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.0
+
+### Features
+
+* add main feature: automatically open sheets
+
 ## v0.1.1
 
 ### Bugfix

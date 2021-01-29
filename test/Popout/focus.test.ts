@@ -2,7 +2,7 @@ import {createSandbox} from 'sinon'
 import {expect} from 'chai'
 import {focus} from '@src/Modules/Popout'
 
-describe('Poput', () => {
+describe('Modules: Poput', () => {
   const sandbox = createSandbox()
 
   after(() => {
