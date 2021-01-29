@@ -9,12 +9,8 @@
     "build": "gulp build",
     "lint": "eslint .",
     "test": "TS_NODE_PROJECT=./test/tsconfig.json mocha --config ./.mocharc.js",
-    "test:coverage": "nyc yarn test"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint"
-    }
+    "test:coverage": "nyc yarn test",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@types/chai": "^4.2.14",
@@ -33,7 +29,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "foundry-pc-types": "https://gitlab.com/foundry-projects/foundry-pc/foundry-pc-types/-/archive/master/foundry-pc-types-master.tar",
     "gulp": "^4.0.2",
-    "husky": "^4.3.8",
+    "husky": "^5.0.8",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
     "sinon": "^9.2.4",
