@@ -54,6 +54,7 @@
     "no-unused-expressions": "error",
     "no-useless-constructor": "error",
     "no-var": "error",
+    "no-warning-comments": "error",
     "object-curly-spacing": "off"
   }
 }
