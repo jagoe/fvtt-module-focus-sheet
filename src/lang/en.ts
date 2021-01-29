@@ -1,6 +1,4 @@
-import {SETTING_AUTO_OPEN, SETTING_AUTO_OPEN_POPOUT} from '../scripts/Popout/constants'
-
-import {MODULE_KEY} from '../scripts/Module/constants'
+import {MODULE_KEY, SETTING_AUTO_OPEN, SETTING_AUTO_OPEN_POPOUT} from '../scripts/Module/constants'
 
 function i18n(...settings: string[]): string {
   return `${MODULE_KEY}.${settings.join('.')}`

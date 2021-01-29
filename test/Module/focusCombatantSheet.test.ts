@@ -1,8 +1,8 @@
-import * as focus from '@src/Popout/focus'
+import * as focus from '@src/Modules/Popout/focus'
 import * as getCombatantSheet from '@src/Combat/getCombatantSheet'
-import * as getPopout from '@src/Popout/getPopout'
-import * as isSheetOpen from '@src/Sheet/isSheetOpen'
+import * as getPopout from '@src/Modules/Popout/getPopout'
 
+import {ModuleSettings, Settings} from '@src/Settings'
 import {SinonSpy, SinonStub, createSandbox} from 'sinon'
 
 import {cast} from '@util/cast'
@@ -10,23 +10,35 @@ import {expect} from 'chai'
 import {focusCombatantSheet} from '@src/Module'
 
 describe('Module', () => {
-  describe('focus combatant sheet', () => {
+  describe('Focus combatant sheet', () => {
     const sandbox = createSandbox()
     let getSheetStub: SinonStub<[combat: Combat], Sheet | null>
-    let getPopoutStub: SinonStub<[sheet: Sheet], PopoutState | null>
-    let focusPopoutStub: SinonStub<[popout: PopoutState], void>
-    let isSheetOpenStub: SinonStub<[sheet: Sheet | null], boolean>
-    const bringToTopSpy: SinonSpy<unknown[], void> = sandbox.spy()
+    let getPopoutStub: SinonStub<[sheet: Sheet], PopoutModule.PopoutState | null>
+    let focusPopoutStub: SinonStub<[popout: PopoutModule.PopoutState], void>
+    let getSettingsStub: SinonStub<[], Settings>
+    const bringToTopSpy: SinonSpy = sandbox.spy()
 
+    let SETTINGS: ModuleSettings
     const COMBAT: Combat = cast({})
     const SHEET: Sheet = cast({rendered: true, bringToTop: bringToTopSpy})
-    const POPOUT: PopoutState = cast({})
+    const POPOUT: PopoutModule.PopoutState = cast({})
 
     before(() => {
       getSheetStub = sandbox.stub(getCombatantSheet, 'getCombatantSheet')
       getPopoutStub = sandbox.stub(getPopout, 'getPopout')
       focusPopoutStub = sandbox.stub(focus, 'focus')
-      isSheetOpenStub = sandbox.stub(isSheetOpen, 'isSheetOpen')
+      getSettingsStub = sandbox.stub(Settings, 'GetInstance')
+    })
+
+    beforeEach(() => {
+      SETTINGS = {
+        AutoOpen: {
+          AsPopout: false,
+          Enabled: false,
+        },
+      }
+
+      getSettingsStub.returns(cast(SETTINGS))
     })
 
     afterEach(() => {
@@ -37,8 +49,16 @@ describe('Module', () => {
       sandbox.restore()
     })
 
-    it('should return early if the sheet is not open', () => {
-      isSheetOpenStub.returns(false)
+    it('should return early if there is no combatant sheet', () => {
+      getSheetStub.returns(null)
+
+      focusCombatantSheet(COMBAT)
+
+      expect(getPopoutStub.called).to.be.false
+    })
+
+    it('should return early if the combatant sheet is not currently being rendered', () => {
+      getSheetStub.returns(cast({...SHEET, rendered: false}))
 
       focusCombatantSheet(COMBAT)
 
@@ -47,7 +67,7 @@ describe('Module', () => {
 
     it('should focus the popout instead of the sheet if one exists', () => {
       getSheetStub.returns(SHEET)
-      isSheetOpenStub.returns(true)
+      getSheetStub.returns(cast(SHEET))
       getPopoutStub.returns(POPOUT)
 
       focusCombatantSheet(COMBAT)
@@ -59,13 +79,36 @@ describe('Module', () => {
 
     it('should focus the sheet if no popout exists', () => {
       getSheetStub.returns(SHEET)
-      isSheetOpenStub.returns(true)
       getPopoutStub.returns(null)
 
       focusCombatantSheet(COMBAT)
 
       expect(focusPopoutStub.called).to.be.false
       expect(bringToTopSpy.calledOnce).to.be.true
+    })
+
+    describe('Settings', () => {
+      describe('Auto open', () => {
+        beforeEach(() => {
+          SETTINGS.AutoOpen.Enabled = true
+        })
+
+        it('should render the sheet if not rendered already', () => {
+          const renderSpy = sandbox.spy()
+          getSheetStub.returns(cast({...SHEET, rendered: false, render: renderSpy}))
+          getPopoutStub.returns(null)
+
+          focusCombatantSheet(COMBAT)
+
+          expect(renderSpy.calledWith(true)).to.be.true
+        })
+
+        describe('As Popout', () => {
+          beforeEach(() => {
+            SETTINGS.AutoOpen.AsPopout = true
+          })
+        })
+      })
     })
   })
 })

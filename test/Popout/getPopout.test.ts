@@ -1,10 +1,10 @@
-import * as isActive from '@src/Popout/isActive'
+import * as isActive from '@src/Modules/isActive'
 
 import {SinonStub, createSandbox} from 'sinon'
 
 import {cast} from '@util/cast'
 import {expect} from 'chai'
-import {getPopout} from '@src/Popout'
+import {getPopout} from '@src/Modules/Popout'
 
 describe('Popout', () => {
   const sandbox = createSandbox()
@@ -22,11 +22,11 @@ describe('Popout', () => {
     sandbox.restore()
   })
 
-  describe('get', () => {
-    const POPPED_OUT_SHEETS: Map<number, PopoutState> = new Map()
-    const POPOUT_MODULE: PopoutModuleContainer = {singleton: {poppedOut: POPPED_OUT_SHEETS}}
+  describe('Get popout', () => {
+    const POPPED_OUT_SHEETS: Map<number, PopoutModule.PopoutState> = new Map()
+    const POPOUT_MODULE = {singleton: {poppedOut: POPPED_OUT_SHEETS}}
     const SHEET: Sheet = ({appId: 1} as unknown) as Sheet
-    const POPOUT: PopoutState = cast({})
+    const POPOUT: PopoutModule.PopoutState = cast({})
 
     beforeEach(() => {
       global.PopoutModule = POPOUT_MODULE

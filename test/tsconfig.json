@@ -27,5 +27,8 @@
         "test/*"
       ],
     },
+    "sourceMap": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
   },
 }
