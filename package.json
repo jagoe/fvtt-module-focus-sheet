@@ -8,6 +8,7 @@
   "scripts": {
     "build": "gulp build",
     "lint": "eslint .",
+    "lint:changed": "eslint $(git diff --name-only master | grep -E \"(.js$|.ts$)\")",
     "test": "TS_NODE_PROJECT=./test/tsconfig.json mocha --config ./.mocharc.js",
     "test:coverage": "nyc yarn test",
     "postinstall": "husky install"
