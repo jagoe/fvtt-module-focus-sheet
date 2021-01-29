@@ -1,9 +1,8 @@
-import {SETTING_AUTO_OPEN, SETTING_AUTO_OPEN_POPOUT} from '@src/Popout/constants'
+import {MODULE_KEY, SETTING_AUTO_OPEN, SETTING_AUTO_OPEN_POPOUT} from '@src/Module/constants'
 
-import {MODULE_KEY} from '@src/Module/constants'
 import {cast} from '@util/cast'
 import {expect} from 'chai'
-import {registerSettings} from '@src/Module/registerSettings'
+import {registerSettings} from '@src/Settings'
 
 describe('Module', () => {
   describe('register settings', () => {

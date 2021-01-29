@@ -1,5 +1,5 @@
 import {focusCombatantSheet} from './focusCombatantSheet'
-import {registerSettings} from './registerSettings'
+import {registerSettings} from '../Settings/registerSettings'
 
 export function initialize(): void {
   Hooks.once('init', registerSettings)

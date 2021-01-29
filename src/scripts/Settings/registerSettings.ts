@@ -1,6 +1,4 @@
-import {SETTING_AUTO_OPEN, SETTING_AUTO_OPEN_POPOUT} from '../Popout/constants'
-
-import {MODULE_KEY} from './constants'
+import {MODULE_KEY, SETTING_AUTO_OPEN, SETTING_AUTO_OPEN_POPOUT} from '../Module/constants'
 
 export function registerSettings(): void {
   game.settings.register(MODULE_KEY, SETTING_AUTO_OPEN, {
