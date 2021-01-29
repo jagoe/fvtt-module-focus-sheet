@@ -27,6 +27,18 @@
         "default": "array"
       }
     ],
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        "multiline": {
+          "delimiter": "none"
+        },
+        "singleline": {
+          "delimiter": "semi",
+          "requireLast": false
+        }
+      }
+    ],
     "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/strict-boolean-expressions": [
       "error",
@@ -54,6 +66,7 @@
     "no-unused-expressions": "error",
     "no-useless-constructor": "error",
     "no-var": "error",
+    "no-warning-comments": "error",
     "object-curly-spacing": "off"
   }
 }

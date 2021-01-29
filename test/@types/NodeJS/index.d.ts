@@ -4,8 +4,9 @@ declare global {
   namespace NodeJS {
     interface Global {
       Hooks: unknown
-      PopoutModule: PopoutModuleContainer | undefined
+      PopoutModule: typeof PopoutModule | undefined
       game: Game
+      ENTITY_PERMISSIONS: Record<string, number>
     }
   }
 }

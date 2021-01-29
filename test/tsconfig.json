@@ -8,8 +8,8 @@
       "chai",
       "mocha",
       "NodeJS",
+      "FoundryVTT",
       "PopoutModule",
-      "Sheet",
     ],
     "typeRoots": [
       "@types",
@@ -27,5 +27,8 @@
         "test/*"
       ],
     },
+    "sourceMap": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
   },
 }

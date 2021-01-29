@@ -1,14 +1,18 @@
 import {createSandbox} from 'sinon'
-import {focus} from '@src/Popout'
 import {expect} from 'chai'
+import {focus} from '@src/Modules/Popout'
 
 describe('Poput', () => {
   const sandbox = createSandbox()
 
-  describe('focus', () => {
+  after(() => {
+    sandbox.restore()
+  })
+
+  describe('Focus', () => {
     it('should call the focus method of the popout window', () => {
       const spy = sandbox.spy()
-      const popout: PopoutState = {
+      const popout: PopoutModule.PopoutState = {
         window: ({focus: spy} as unknown) as Window,
       }
 

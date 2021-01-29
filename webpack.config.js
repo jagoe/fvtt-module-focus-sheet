@@ -1,4 +1,5 @@
 const path = require('path')
+const GenerateJsonFromJsPlugin = require('generate-json-from-js-webpack-plugin')
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/scripts/module.ts'),
@@ -15,7 +16,13 @@ module.exports = {
     extensions: ['.ts'],
   },
   output: {
-    filename: 'focus-sheet.js',
-    path: path.resolve(__dirname, 'dist', 'scripts'),
+    filename: 'scripts/focus-sheet.js',
+    path: path.resolve(__dirname, 'dist'),
   },
+  plugins: [
+    new GenerateJsonFromJsPlugin({
+      path: './src/lang/en.ts',
+      filename: 'lang/en.json',
+    }),
+  ],
 }

@@ -1,19 +1,37 @@
-export const HooksMock = {
-  _registeredEvents: {},
+export type EventType = 'single' | 'multi'
+export interface Handler {
+  name: string
+  type: EventType
+}
 
+const _registeredEvents: Record<string, Handler[]> = {}
+
+function hasEventHandlers(event: string): boolean {
+  return _registeredEvents[event] !== undefined
+}
+
+function registerEvent(event: string, handler: (...params: unknown[]) => void, type: EventType): void {
+  if (!hasEventHandlers(event)) {
+    _registeredEvents[event] = [{name: handler.name, type}]
+  } else {
+    _registeredEvents[event].push({name: handler.name, type})
+  }
+}
+
+export const HooksMock = {
   on(event: string, handler: (...params: unknown[]) => void): void {
-    if (!this._registeredEvents[event]) {
-      this._registeredEvents[event] = [handler.name]
-    } else {
-      this._registeredEvents[event].push(handler.name)
-    }
+    registerEvent(event, handler, 'multi')
   },
 
-  hasRegisteredEvent(event: string, handler: string): boolean {
-    if (!this._registeredEvents[event]) {
-      return false
+  once(event: string, handler: (...params: unknown[]) => void): void {
+    registerEvent(event, handler, 'single')
+  },
+
+  getRegisteredEvent(event: string, handler: string): Handler | null {
+    if (!hasEventHandlers(event)) {
+      return null
     }
 
-    return this._registeredEvents[event].some((h) => h === handler)
+    return _registeredEvents[event].find((h) => h.name === handler) ?? null
   },
 }
