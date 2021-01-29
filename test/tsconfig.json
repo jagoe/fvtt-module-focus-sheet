@@ -8,8 +8,8 @@
       "chai",
       "mocha",
       "NodeJS",
+      "FoundryVTT",
       "PopoutModule",
-      "Sheet",
     ],
     "typeRoots": [
       "@types",

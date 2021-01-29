@@ -25,11 +25,11 @@ describe('Popout', () => {
   describe('Get popout', () => {
     const POPPED_OUT_SHEETS: Map<number, PopoutModule.PopoutState> = new Map()
     const POPOUT_MODULE = {singleton: {poppedOut: POPPED_OUT_SHEETS}}
-    const SHEET: Sheet = ({appId: 1} as unknown) as Sheet
+    const SHEET: ActorSheet = ({appId: 1} as unknown) as ActorSheet
     const POPOUT: PopoutModule.PopoutState = cast({})
 
     beforeEach(() => {
-      global.PopoutModule = POPOUT_MODULE
+      global.PopoutModule = cast(POPOUT_MODULE)
       POPPED_OUT_SHEETS.set(SHEET.appId, POPOUT)
     })
 

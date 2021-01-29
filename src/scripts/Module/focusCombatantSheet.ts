@@ -2,6 +2,7 @@ import {focus, getPopout} from '../Modules/Popout/index'
 
 import {Settings} from '../Settings'
 import {getCombatantSheet} from '../Combat/index'
+import {playerHasPermissionToView} from '../Sheet'
 
 /**
  * Focus the current actor/token sheet of the current combatant.\
@@ -15,6 +16,10 @@ export function focusCombatantSheet(combat: Combat): void {
   const sheet = getCombatantSheet(combat)
   if (!sheet) {
     // combatant does not have a sheet
+    return
+  }
+
+  if (!playerHasPermissionToView(sheet)) {
     return
   }
 

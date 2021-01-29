@@ -1,6 +1,7 @@
 import * as focus from '@src/Modules/Popout/focus'
 import * as getCombatantSheet from '@src/Combat/getCombatantSheet'
 import * as getPopout from '@src/Modules/Popout/getPopout'
+import * as playerHasPermissionToView from '@src/Sheet/playerHasPermissionToView'
 
 import {ModuleSettings, Settings} from '@src/Settings'
 import {SinonSpy, SinonStub, createSandbox} from 'sinon'
@@ -12,15 +13,16 @@ import {focusCombatantSheet} from '@src/Module'
 describe('Module', () => {
   describe('Focus combatant sheet', () => {
     const sandbox = createSandbox()
-    let getSheetStub: SinonStub<[combat: Combat], Sheet | null>
-    let getPopoutStub: SinonStub<[sheet: Sheet], PopoutModule.PopoutState | null>
+    const bringToTopSpy: SinonSpy = sandbox.spy()
+    let getSheetStub: SinonStub<[combat: Combat], ActorSheet | null>
+    let getPopoutStub: SinonStub<[sheet: ActorSheet], PopoutModule.PopoutState | null>
     let focusPopoutStub: SinonStub<[popout: PopoutModule.PopoutState], void>
     let getSettingsStub: SinonStub<[], Settings>
-    const bringToTopSpy: SinonSpy = sandbox.spy()
+    let permissionStub: SinonStub<[sheet: ActorSheet], boolean>
 
     let SETTINGS: ModuleSettings
     const COMBAT: Combat = cast({})
-    const SHEET: Sheet = cast({rendered: true, bringToTop: bringToTopSpy})
+    const SHEET: ActorSheet = cast({rendered: true, bringToTop: bringToTopSpy})
     const POPOUT: PopoutModule.PopoutState = cast({})
 
     before(() => {
@@ -28,6 +30,7 @@ describe('Module', () => {
       getPopoutStub = sandbox.stub(getPopout, 'getPopout')
       focusPopoutStub = sandbox.stub(focus, 'focus')
       getSettingsStub = sandbox.stub(Settings, 'GetInstance')
+      permissionStub = sandbox.stub(playerHasPermissionToView, 'playerHasPermissionToView')
     })
 
     beforeEach(() => {
@@ -39,6 +42,7 @@ describe('Module', () => {
       }
 
       getSettingsStub.returns(cast(SETTINGS))
+      permissionStub.returns(true)
     })
 
     afterEach(() => {
@@ -51,6 +55,15 @@ describe('Module', () => {
 
     it('should return early if there is no combatant sheet', () => {
       getSheetStub.returns(null)
+
+      focusCombatantSheet(COMBAT)
+
+      expect(getPopoutStub.called).to.be.false
+    })
+
+    it('should return early if the player has insufficient permission', () => {
+      getSheetStub.returns(SHEET)
+      permissionStub.returns(false)
 
       focusCombatantSheet(COMBAT)
 
@@ -93,7 +106,7 @@ describe('Module', () => {
           SETTINGS.AutoOpen.Enabled = true
         })
 
-        it('should render the sheet if not rendered already', () => {
+        it('should render the sheet if it has not been rendered already', () => {
           const renderSpy = sandbox.spy()
           getSheetStub.returns(cast({...SHEET, rendered: false, render: renderSpy}))
           getPopoutStub.returns(null)
