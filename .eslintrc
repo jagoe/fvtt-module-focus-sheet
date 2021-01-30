@@ -27,6 +27,7 @@
         "default": "array"
       }
     ],
+    "@typescript-eslint/indent": "off",
     "@typescript-eslint/member-delimiter-style": [
       "error",
       {
@@ -62,6 +63,7 @@
         "functions": "always-multiline"
       }
     ],
+    "indent": "off",
     "no-duplicate-imports": "error",
     "no-unused-expressions": "error",
     "no-useless-constructor": "error",

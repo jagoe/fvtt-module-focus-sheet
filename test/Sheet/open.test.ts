@@ -73,17 +73,17 @@ describe('Sheet', () => {
     })
 
     const positionTestCases = [
-      {x: 0, y: 0},
-      {x: undefined, y: 100},
-      {x: -100, y: undefined},
-      {x: undefined, y: undefined},
+      {left: 0, top: 0},
+      {left: undefined, top: 100},
+      {left: -100, top: undefined},
+      {left: undefined, top: undefined},
     ]
     positionTestCases.forEach((position) => {
       it(
         'should position a popped-in sheet according to the settings ' +
-          `(x: ${position.x ?? '<undefined>'}| y: ${position.y ?? '<undefined>'})`,
+          `(x: ${position.left ?? '<undefined>'} | y: ${position.top ?? '<undefined>'})`,
         async () => {
-          await open(SHEET, {...SETTINGS, Position: {X: position.x, Y: position.y}})
+          await open(SHEET, {...SETTINGS, Position: {X: position.left, Y: position.top}})
 
           expect(setPositionStub.calledOnceWithExactly(position)).to.be.true
         },
