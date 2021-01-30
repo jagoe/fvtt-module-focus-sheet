@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/Foundry-v0.7.9-informational)
+![Supported Foundry Version](https://img.shields.io/badge/Foundry-v0.7.9-informational)
 <!--- Downloads @ Latest Badge -->
 ![Latest Release Download Count](https://img.shields.io/github/downloads/jagoe/fvtt-module-focus-sheet/latest/module.zip)
 

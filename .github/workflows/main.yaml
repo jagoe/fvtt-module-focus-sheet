@@ -2,12 +2,30 @@ name: Module CI/CD
 
 on:
   push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
-  build:
+  test:
+    on:
+      push:
+      workflow_dispatch:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: NPM install
+      uses: bahmutov/npm-install@v1.6.0
+      with:
+        useLockFile: true
+    - name: Test
+      shell: bask
+      run: npm run test
+
+  release:
+    on:
+      push:
+        branches:
+          - main
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
