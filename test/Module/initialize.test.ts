@@ -2,7 +2,7 @@ import {HooksMock} from '@/@util/HooksMock'
 import {expect} from 'chai'
 import {initialize} from '@src/Module'
 
-describe('Module', () => {
+export function initializeTests(): void {
   before(() => {
     global.Hooks = HooksMock
   })
@@ -24,4 +24,4 @@ describe('Module', () => {
       expect(handler?.type).to.equal('single')
     })
   })
-})
+}

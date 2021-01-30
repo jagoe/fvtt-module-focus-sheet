@@ -2,7 +2,7 @@ import {cast} from '@util/cast'
 import {expect} from 'chai'
 import {playerHasPermissionToView} from '@src/Sheet'
 
-describe('Sheet', () => {
+export function playerHasPermissionToViewTests(): void {
   describe('Player has permission to view sheet', () => {
     enum ENTITY_PERMISSIONS {
       NONE = 0,
@@ -37,4 +37,4 @@ describe('Sheet', () => {
       })
     })
   })
-})
+}

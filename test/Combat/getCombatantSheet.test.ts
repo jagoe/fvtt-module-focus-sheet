@@ -1,8 +1,8 @@
-import {getCombatantSheet} from '@src/Combat'
 import {cast} from '@/@util/cast'
 import {expect} from 'chai'
+import {getCombatantSheet} from '@src/Combat'
 
-describe('Combat', () => {
+export function getCombatSheetTests(): void {
   describe('Get combatant sheet', () => {
     it('should return null if there is no active combatant', () => {
       const combat: Partial<Combat> = {combatant: null}
@@ -41,4 +41,4 @@ describe('Combat', () => {
       expect(combatantSheet!.id).to.equal(id)
     })
   })
-})
+}

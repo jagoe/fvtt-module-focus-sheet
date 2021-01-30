@@ -6,31 +6,28 @@ import {cast} from '@util/cast'
 import {expect} from 'chai'
 import {getPopout} from '@src/Modules/Popout'
 
-describe('Modules: Popout', () => {
-  const sandbox = createSandbox()
-  let isActiveStub: SinonStub
-
-  before(() => {
-    isActiveStub = sandbox.stub(isActive, 'isActive')
-  })
-
-  beforeEach(() => {
-    isActiveStub.returns(true)
-  })
-
-  after(() => {
-    sandbox.restore()
-  })
-
+export function getPopoutTests(): void {
   describe('Get popout', () => {
+    const sandbox = createSandbox()
+    let isActiveStub: SinonStub
+
     const POPPED_OUT_SHEETS: Map<number, PopoutModule.PopoutState> = new Map()
     const POPOUT_MODULE = {singleton: {poppedOut: POPPED_OUT_SHEETS}}
     const SHEET: ActorSheet = ({appId: 1} as unknown) as ActorSheet
     const POPOUT: PopoutModule.PopoutState = cast({})
 
+    before(() => {
+      isActiveStub = sandbox.stub(isActive, 'isActive')
+    })
+
     beforeEach(() => {
+      isActiveStub.returns(true)
       global.PopoutModule = cast(POPOUT_MODULE)
       POPPED_OUT_SHEETS.set(SHEET.appId, POPOUT)
+    })
+
+    after(() => {
+      sandbox.restore()
     })
 
     it('should return null if the Popout! module is not active', () => {
@@ -54,4 +51,4 @@ describe('Modules: Popout', () => {
       expect(popout).to.eql(POPOUT)
     })
   })
-})
+}

@@ -8,38 +8,38 @@ import {cast} from '@util/cast'
 import {expect} from 'chai'
 import {open} from '@src/Sheet'
 
-describe('Sheet', () => {
-  const sandbox = createSandbox()
-  const renderStub = sandbox.stub()
-  let openPopoutStub: SinonStub<[sheet: ActorSheet, position: ModuleSettings['AutoOpen']['Position']], void>
-  let waitForStub: SinonStub
-  const setPositionStub = sandbox.stub()
-
-  const SHEET: ActorSheet = cast({
-    render: renderStub,
-    actor: {name: 'Rincewind the Wizzard'},
-    setPosition: setPositionStub,
-  })
-  const SETTINGS: ModuleSettings['AutoOpen'] = {Enabled: true, AsPopout: false, Position: {}}
-
-  before(() => {
-    openPopoutStub = sandbox.stub(openPopout, 'open')
-    waitForStub = sandbox.stub(waitFor, 'waitFor')
-  })
-
-  beforeEach(() => {
-    waitForStub.resolves()
-  })
-
-  afterEach(() => {
-    sandbox.reset()
-  })
-
-  after(() => {
-    sandbox.restore()
-  })
-
+export function openTests(): void {
   describe('Open', () => {
+    const sandbox = createSandbox()
+    const renderStub = sandbox.stub()
+    let openPopoutStub: SinonStub<[sheet: ActorSheet, position: ModuleSettings['AutoOpen']['Position']], void>
+    let waitForStub: SinonStub
+    const setPositionStub = sandbox.stub()
+
+    const SHEET: ActorSheet = cast({
+      render: renderStub,
+      actor: {name: 'Rincewind the Wizzard'},
+      setPosition: setPositionStub,
+    })
+    const SETTINGS: ModuleSettings['AutoOpen'] = {Enabled: true, AsPopout: false, Position: {}}
+
+    before(() => {
+      openPopoutStub = sandbox.stub(openPopout, 'open')
+      waitForStub = sandbox.stub(waitFor, 'waitFor')
+    })
+
+    beforeEach(() => {
+      waitForStub.resolves()
+    })
+
+    afterEach(() => {
+      sandbox.reset()
+    })
+
+    after(() => {
+      sandbox.restore()
+    })
+
     it('should render the sheet', async () => {
       await open(SHEET, SETTINGS)
 
@@ -90,4 +90,4 @@ describe('Sheet', () => {
       )
     })
   })
-})
+}

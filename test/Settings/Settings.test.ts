@@ -4,6 +4,7 @@ import {Settings} from '@src/Settings'
 import {cast} from '@util/cast'
 import {createSandbox} from 'sinon'
 import {expect} from 'chai'
+import {registerSettingsTests} from './registerSettings.test'
 
 describe('Settings', () => {
   const sandbox = createSandbox()
@@ -46,4 +47,6 @@ describe('Settings', () => {
       expect(settings.AutoOpen.Position.Y).to.equal(undefined)
     })
   })
+
+  registerSettingsTests()
 })

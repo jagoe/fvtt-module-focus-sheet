@@ -8,40 +8,40 @@ import {cast} from '@util/cast'
 import {expect} from 'chai'
 import {open} from '@src/Modules/Popout'
 
-describe('Modules: Popout', () => {
-  const sandbox = createSandbox()
-
-  const popoutStub = sandbox.stub()
-  let setPositionStub: SinonStub<
-    [popout: PopoutModule.PopoutState, position: ModuleSettings['AutoOpen']['Position']],
-    void
-  >
-  let getPopoutStub: SinonStub<[sheet: ActorSheet], PopoutModule.PopoutState | null>
-
-  const POPOUT_MODULE_ID = 'popout'
-  const SHEET_APP_ID = 'x33'
-  const SHEET: ActorSheet = cast({appId: SHEET_APP_ID})
-  const POPOUT: PopoutModule.PopoutState = cast({})
-
-  before(() => {
-    global.PopoutModule = cast({singleton: {ID: POPOUT_MODULE_ID, onPopoutClicked: popoutStub}})
-    getPopoutStub = sandbox.stub(getPopout, 'getPopout')
-    setPositionStub = sandbox.stub(setPosition, 'setPosition')
-  })
-
-  beforeEach(() => {
-    getPopoutStub.returns(POPOUT)
-  })
-
-  afterEach(() => {
-    sandbox.reset()
-  })
-
-  after(() => {
-    sandbox.restore()
-  })
-
+export function openTests(): void {
   describe('Open', () => {
+    const sandbox = createSandbox()
+
+    const popoutStub = sandbox.stub()
+    let setPositionStub: SinonStub<
+      [popout: PopoutModule.PopoutState, position: ModuleSettings['AutoOpen']['Position']],
+      void
+    >
+    let getPopoutStub: SinonStub<[sheet: ActorSheet], PopoutModule.PopoutState | null>
+
+    const POPOUT_MODULE_ID = 'popout'
+    const SHEET_APP_ID = 'x33'
+    const SHEET: ActorSheet = cast({appId: SHEET_APP_ID})
+    const POPOUT: PopoutModule.PopoutState = cast({})
+
+    before(() => {
+      global.PopoutModule = cast({singleton: {ID: POPOUT_MODULE_ID, onPopoutClicked: popoutStub}})
+      getPopoutStub = sandbox.stub(getPopout, 'getPopout')
+      setPositionStub = sandbox.stub(setPosition, 'setPosition')
+    })
+
+    beforeEach(() => {
+      getPopoutStub.returns(POPOUT)
+    })
+
+    afterEach(() => {
+      sandbox.reset()
+    })
+
+    after(() => {
+      sandbox.restore()
+    })
+
     it('should open the popout for the correct sheet', () => {
       const expectedSheetId = `popout_${POPOUT_MODULE_ID}_${SHEET_APP_ID}`
 
@@ -70,4 +70,4 @@ describe('Modules: Popout', () => {
       expect(setPositionStub.calledOnceWithExactly(POPOUT, coordinates)).to.be.true
     })
   })
-})
+}

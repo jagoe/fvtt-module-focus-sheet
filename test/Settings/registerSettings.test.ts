@@ -5,14 +5,9 @@ import {cast} from '@util/cast'
 import {createSandbox} from 'sinon'
 import {expect} from 'chai'
 
-describe('Module', () => {
-  const sandbox = createSandbox()
-
-  after(() => {
-    sandbox.restore()
-  })
-
+export function registerSettingsTests(): void {
   describe('Register settings', () => {
+    const sandbox = createSandbox()
     const settings: Record<string, Record<string, unknown>> = {}
 
     before(() => {
@@ -30,6 +25,14 @@ describe('Module', () => {
       })
 
       registerSettings()
+    })
+
+    afterEach(() => {
+      sandbox.reset()
+    })
+
+    after(() => {
+      sandbox.restore()
     })
 
     it("should have registered the 'auto open' setting", () => {
@@ -94,7 +97,7 @@ describe('Module', () => {
         onChange(value)
       }
 
-      expect(resetStub.callCount).to.equal(registeredSettings.length + 1) // +1 b/c it gets called on registration as well
+      expect(resetStub.callCount).to.equal(registeredSettings.length)
     })
   })
-})
+}

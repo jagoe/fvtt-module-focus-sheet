@@ -7,28 +7,28 @@ import {cast} from '@util/cast'
 import {expect} from 'chai'
 import {focus} from '@src/Sheet'
 
-describe('Sheet', () => {
-  const sandbox = createSandbox()
-  let focusPopoutStub: SinonStub<[popout: PopoutModule.PopoutState], void>
-  let getPopoutStub: SinonStub<[sheet: ActorSheet], PopoutModule.PopoutState | null>
-  const bringToTopStub = sandbox.stub()
-
-  const SHEET: ActorSheet = cast({bringToTop: bringToTopStub})
-
-  before(() => {
-    focusPopoutStub = sandbox.stub(focusPopout, 'focus')
-    getPopoutStub = sandbox.stub(getPopout, 'getPopout')
-  })
-
-  afterEach(() => {
-    sandbox.reset()
-  })
-
-  after(() => {
-    sandbox.restore()
-  })
-
+export function focusTests(): void {
   describe('Focus', () => {
+    const sandbox = createSandbox()
+    let focusPopoutStub: SinonStub<[popout: PopoutModule.PopoutState], void>
+    let getPopoutStub: SinonStub<[sheet: ActorSheet], PopoutModule.PopoutState | null>
+    const bringToTopStub = sandbox.stub()
+
+    const SHEET: ActorSheet = cast({bringToTop: bringToTopStub})
+
+    before(() => {
+      focusPopoutStub = sandbox.stub(focusPopout, 'focus')
+      getPopoutStub = sandbox.stub(getPopout, 'getPopout')
+    })
+
+    afterEach(() => {
+      sandbox.reset()
+    })
+
+    after(() => {
+      sandbox.restore()
+    })
+
     it('should focus the popout if one exists', () => {
       getPopoutStub.returns(cast({}))
 
@@ -47,4 +47,4 @@ describe('Sheet', () => {
       expect(bringToTopStub.called).to.be.true
     })
   })
-})
+}
