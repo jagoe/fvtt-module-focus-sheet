@@ -3,7 +3,7 @@ import * as waitFor from '@src/@util/waitFor'
 
 import {SinonStub, createSandbox} from 'sinon'
 
-import {Settings} from '@src/Settings'
+import {ModuleSettings} from '@src/Settings'
 import {cast} from '@util/cast'
 import {expect} from 'chai'
 import {open} from '@src/Sheet'
@@ -12,7 +12,6 @@ describe('Sheet', () => {
   const sandbox = createSandbox()
   const renderStub = sandbox.stub()
   let openPopoutStub: SinonStub<[sheet: ActorSheet], void>
-  let settingsStub: SinonStub<[], Settings>
   let waitForStub: SinonStub
   const setPositionStub = sandbox.stub()
 
@@ -21,17 +20,14 @@ describe('Sheet', () => {
     actor: {name: 'Rincewind the Wizzard'},
     setPosition: setPositionStub,
   })
-  let SETTINGS: Settings
+  const SETTINGS: ModuleSettings['AutoOpen'] = {Enabled: true, AsPopout: false, Position: {}}
 
   before(() => {
     openPopoutStub = sandbox.stub(openPopout, 'open')
-    settingsStub = sandbox.stub(Settings, 'GetInstance')
     waitForStub = sandbox.stub(waitFor, 'waitFor')
   })
 
   beforeEach(() => {
-    SETTINGS = cast({AutoOpen: {AsPopout: false, Position: {}}})
-    settingsStub.returns(SETTINGS)
     waitForStub.resolves()
   })
 
@@ -45,7 +41,7 @@ describe('Sheet', () => {
 
   describe('Open', () => {
     it('should render the sheet', async () => {
-      await open(SHEET)
+      await open(SHEET, SETTINGS)
 
       expect(renderStub.called).to.be.true
     })
@@ -57,23 +53,19 @@ describe('Sheet', () => {
         conditionResult = condition()
       })
 
-      await open(cast({...SHEET, rendered: expectedConditionResult}))
+      await open(cast({...SHEET, rendered: expectedConditionResult}), SETTINGS)
 
       expect(conditionResult).to.equal('test condition')
     })
 
     it('should not popout the sheet if auto-open is disabled', async () => {
-      SETTINGS.AutoOpen.AsPopout = false
-
-      await open(SHEET)
+      await open(SHEET, SETTINGS)
 
       expect(openPopoutStub.called).to.be.false
     })
 
     it('should popout the sheet if auto-open is enabled', async () => {
-      SETTINGS.AutoOpen.AsPopout = true
-
-      await open(SHEET)
+      await open(SHEET, {...SETTINGS, AsPopout: true})
 
       expect(openPopoutStub.called).to.be.true
     })
@@ -89,9 +81,7 @@ describe('Sheet', () => {
         'should position a popped-in sheet according to the settings ' +
           `(x: ${position.left ?? '<undefined>'}| y: ${position.top ?? '<undefined>'})`,
         async () => {
-          SETTINGS.AutoOpen.Position = {Top: position.top, Left: position.left}
-
-          await open(SHEET)
+          await open(SHEET, {...SETTINGS, Position: {Top: position.top, Left: position.left}})
 
           expect(setPositionStub.calledOnceWithExactly(position)).to.be.true
         },
