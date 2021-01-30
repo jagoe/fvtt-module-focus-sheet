@@ -61,22 +61,22 @@ describe('Module', () => {
     })
 
     it("should have registered the 'auto open position' settings", () => {
-      const settingTop = settings[`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_TOP}`]
-      delete settingTop.onChange // not relevant for this test
-      const settingLeft = settings[`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_LEFT}`]
-      delete settingLeft.onChange // not relevant for this test
+      const settingX = settings[`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}`]
+      delete settingX.onChange // not relevant for this test
+      const settingY = settings[`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}`]
+      delete settingY.onChange // not relevant for this test
 
-      expect(settingTop).to.eql({
-        name: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_TOP}.name`,
-        hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_TOP}.hint`,
+      expect(settingY).to.eql({
+        name: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}.name`,
+        hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}.hint`,
         scope: 'client',
         config: true,
         type: Number,
         default: undefined,
       })
-      expect(settingLeft).to.eql({
-        name: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_LEFT}.name`,
-        hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_LEFT}.hint`,
+      expect(settingX).to.eql({
+        name: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.name`,
+        hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.hint`,
         scope: 'client',
         config: true,
         type: Number,

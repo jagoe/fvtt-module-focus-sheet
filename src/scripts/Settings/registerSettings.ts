@@ -27,9 +27,9 @@ export function registerSettings(): void {
     onChange: updateSettings,
   })
 
-  game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_TOP, {
-    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_TOP}.name`),
-    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_TOP}.hint`),
+  game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y, {
+    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}.name`),
+    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}.hint`),
     scope: 'client',
     config: true,
     type: Number,
@@ -37,9 +37,9 @@ export function registerSettings(): void {
     onChange: updateSettings,
   })
 
-  game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_LEFT, {
-    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_LEFT}.name`),
-    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_LEFT}.hint`),
+  game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X, {
+    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.name`),
+    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.hint`),
     scope: 'client',
     config: true,
     type: Number,

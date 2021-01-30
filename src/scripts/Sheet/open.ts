@@ -8,8 +8,8 @@ export async function open(sheet: ActorSheet, settings: ModuleSettings['AutoOpen
   await waitFor(() => sheet.rendered, {title: `Rendering sheet for ${sheet.actor.name}`})
 
   if (settings.AsPopout) {
-    openPopout(sheet)
+    openPopout(sheet, settings.Position)
   } else {
-    sheet.setPosition({left: settings.Position.Left, top: settings.Position.Top})
+    sheet.setPosition({left: settings.Position.X, top: settings.Position.Y})
   }
 }

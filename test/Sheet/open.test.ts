@@ -11,7 +11,7 @@ import {open} from '@src/Sheet'
 describe('Sheet', () => {
   const sandbox = createSandbox()
   const renderStub = sandbox.stub()
-  let openPopoutStub: SinonStub<[sheet: ActorSheet], void>
+  let openPopoutStub: SinonStub<[sheet: ActorSheet, position: ModuleSettings['AutoOpen']['Position']], void>
   let waitForStub: SinonStub
   const setPositionStub = sandbox.stub()
 
@@ -68,20 +68,22 @@ describe('Sheet', () => {
       await open(SHEET, {...SETTINGS, AsPopout: true})
 
       expect(openPopoutStub.called).to.be.true
+      expect(openPopoutStub.lastCall.firstArg).to.eql(SHEET)
+      expect(openPopoutStub.lastCall.lastArg).to.eql(SETTINGS.Position)
     })
 
     const positionTestCases = [
-      {top: 0, left: 0},
-      {top: 100, left: undefined},
-      {top: undefined, left: -100},
-      {top: undefined, left: undefined},
+      {x: 0, y: 0},
+      {x: undefined, y: 100},
+      {x: -100, y: undefined},
+      {x: undefined, y: undefined},
     ]
     positionTestCases.forEach((position) => {
       it(
         'should position a popped-in sheet according to the settings ' +
-          `(x: ${position.left ?? '<undefined>'}| y: ${position.top ?? '<undefined>'})`,
+          `(x: ${position.x ?? '<undefined>'}| y: ${position.y ?? '<undefined>'})`,
         async () => {
-          await open(SHEET, {...SETTINGS, Position: {Top: position.top, Left: position.left}})
+          await open(SHEET, {...SETTINGS, Position: {X: position.x, Y: position.y}})
 
           expect(setPositionStub.calledOnceWithExactly(position)).to.be.true
         },

@@ -5,8 +5,8 @@ export interface ModuleSettings {
     Enabled: boolean
     AsPopout: boolean
     Position: {
-      Top?: number
-      Left?: number
+      X?: number
+      Y?: number
     }
   }
 }
@@ -37,8 +37,8 @@ export class Settings implements ModuleSettings {
       Enabled: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN),
       AsPopout: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT),
       Position: {
-        Top: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_TOP),
-        Left: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_LEFT),
+        Y: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y),
+        X: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X),
       },
     }
   }
