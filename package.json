@@ -12,7 +12,7 @@
     "test": "TS_NODE_PROJECT=./test/tsconfig.json mocha --config ./.mocharc.js",
     "test:coverage": "nyc yarn test",
     "test:coverage:lcov": "nyc --reporter=lcov yarn test",
-    "postinstall": "husky install"
+    "postinstall": "is-ci || husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
@@ -35,6 +35,7 @@
     "generate-json-from-js-webpack-plugin": "^0.1.1",
     "gulp": "^4.0.2",
     "husky": "^5.0.8",
+    "is-ci": "^2.0.0",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
     "sinon": "^9.2.4",

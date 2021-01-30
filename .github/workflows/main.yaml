@@ -5,21 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: NPM install
-      uses: bahmutov/npm-install@v1.6.0
-      with:
-        useLockFile: true
-
-    - name: Lint
-      run: npm run lint
-
-  test:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,11 +13,21 @@ jobs:
 
       - name: NPM install
         uses: bahmutov/npm-install@v1.6.0
-        with:
-          useLockFile: true
+        env:
+          HUSKY: 0
+
+      - name: Lint
+        run: npm run lint
 
       - name: Test
         run: npm run test:coverage:lcov
+
+      - name: Upload coverage to CodeCov
+        uses: codecov/codecov-action@v1
+        with:
+          directory: ./coverage
+          flags: unittests
+          fail_ci_if_error: true
 
       - uses: codecov/codecov-action@v1
         with:
@@ -47,8 +43,8 @@ jobs:
 
       - name: NPM install
         uses: bahmutov/npm-install@v1.6.0
-        with:
-          useLockFile: true
+        env:
+          HUSKY: 0
 
       - name: Build
         run: npm run build
@@ -64,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     needs:
-      - test
+      - lint-and-test
       - build
     steps:
       - name: Checkout
