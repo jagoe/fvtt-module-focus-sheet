@@ -1,8 +1,11 @@
 ![Supported Foundry Version](https://img.shields.io/badge/Foundry-v0.7.9-informational)
+![Release](https://img.shields.io/github/v/release/jagoe/fvtt-module-focus-sheet?sort=semver)
 ![Forge Installs](https://img.shields.io/badge/dynamic/json?url=https:%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Ffocus-sheet&query=package.installs&colorB=4aa94a&label=Forge%20Installs)
 
-![Build Status](https://img.shields.io/github/workflow/status/jagoe/fvtt-module-focus-sheet/Module%20CI%2FCD/main)
+![Pipeline Status](https://github.com/jagoe/fvtt-module-focus-sheet/workflows/Module%20CI/CD/badge.svg)
 [![codecov](https://codecov.io/gh/jagoe/fvtt-module-focus-sheet/branch/main/graph/badge.svg?token=SCJTRYKL84)](https://codecov.io/gh/jagoe/fvtt-module-focus-sheet)
+
+![License](https://img.shields.io/github/license/jagoe/fvtt-module-focus-sheet)
 
 ## Changelog
 
