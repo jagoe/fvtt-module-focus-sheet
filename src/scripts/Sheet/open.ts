@@ -8,7 +8,10 @@ export async function open(sheet: ActorSheet): Promise<void> {
   await waitFor(() => sheet.rendered, {title: `Rendering sheet for ${sheet.actor.name}`})
 
   const settings = Settings.GetInstance()
+
   if (settings.AutoOpen.AsPopout) {
     openPopout(sheet)
+  } else {
+    sheet.setPosition({left: settings.AutoOpen.Position.Left, top: settings.AutoOpen.Position.Top})
   }
 }

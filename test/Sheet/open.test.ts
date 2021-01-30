@@ -14,8 +14,13 @@ describe('Sheet', () => {
   let openPopoutStub: SinonStub<[sheet: ActorSheet], void>
   let settingsStub: SinonStub<[], Settings>
   let waitForStub: SinonStub
+  const setPositionStub = sandbox.stub()
 
-  const SHEET: ActorSheet = cast({render: renderStub, actor: {name: 'Rincewind the Wizzard'}})
+  const SHEET: ActorSheet = cast({
+    render: renderStub,
+    actor: {name: 'Rincewind the Wizzard'},
+    setPosition: setPositionStub,
+  })
   let SETTINGS: Settings
 
   before(() => {
@@ -25,7 +30,7 @@ describe('Sheet', () => {
   })
 
   beforeEach(() => {
-    SETTINGS = cast({AutoOpen: {AsPopout: true}})
+    SETTINGS = cast({AutoOpen: {AsPopout: false, Position: {}}})
     settingsStub.returns(SETTINGS)
     waitForStub.resolves()
   })
@@ -71,6 +76,26 @@ describe('Sheet', () => {
       await open(SHEET)
 
       expect(openPopoutStub.called).to.be.true
+    })
+
+    const positionTestCases = [
+      {top: 0, left: 0},
+      {top: 100, left: undefined},
+      {top: undefined, left: -100},
+      {top: undefined, left: undefined},
+    ]
+    positionTestCases.forEach((position) => {
+      it(
+        'should position a popped-in sheet according to the settings ' +
+          `(x: ${position.left ?? '<undefined>'}| y: ${position.top ?? '<undefined>'})`,
+        async () => {
+          SETTINGS.AutoOpen.Position = {Top: position.top, Left: position.left}
+
+          await open(SHEET)
+
+          expect(setPositionStub.calledOnceWithExactly(position)).to.be.true
+        },
+      )
     })
   })
 })
