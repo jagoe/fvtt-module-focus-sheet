@@ -40,6 +40,8 @@ Here you can specify where to open the sheet.\
 If opened without PopOut!, it will be opened relative to the top-left corner of your Foundry VTT viewport.\
 If opened using PopOut!, it will be opened relative to the top-left corner of the main window.
 
+_Caveat:_ Some browser do not support moving windows across screens.
+
 ### (TBD) Minimize and Restore Sheets on Turn End/Start
 
 Enabling these settings will minimize the last sheet once a turn has ended, freeing up space and restore a minimized
