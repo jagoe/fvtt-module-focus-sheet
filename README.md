@@ -1,9 +1,9 @@
 ![Supported Foundry Version](https://img.shields.io/badge/Foundry-v0.7.9-informational)
-<!--- Downloads @ Latest Badge -->
-![Latest Release Download Count](https://img.shields.io/github/downloads/jagoe/fvtt-module-focus-sheet/latest/module.zip)
 
-<!--- Forge Bazaar Install % Badge -->
-![Forge Installs](https://img.shields.io/badge/dynamic/json?url=https://forge-vtt.com/api/bazaar/package/focus-sheet&query=package.installs&colorB=4aa94a&label=Forge%20Installs)
+![Build Status](htpps://img.shields.io/github/workflow/status/jagoe/fvtt-module-focus-sheet/Module%20CI%2FCD/main)
+
+![Latest Release Download Count](https://img.shields.io/github/downloads/jagoe/fvtt-module-focus-sheet/latest/module.zip)
+![Forge Installs](https://img.shields.io/badge/dynamic/json?url=https:%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Ffocus-sheet&query=package.installs&colorB=4aa94a&label=Forge%20Installs)
 
 ## Changelog
 
