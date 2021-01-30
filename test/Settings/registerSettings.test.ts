@@ -71,16 +71,14 @@ describe('Module', () => {
         hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}.hint`,
         scope: 'client',
         config: true,
-        type: Number,
-        default: undefined,
+        type: String,
       })
       expect(settingX).to.eql({
         name: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.name`,
         hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.hint`,
         scope: 'client',
         config: true,
-        type: Number,
-        default: undefined,
+        type: String,
       })
     })
 

@@ -1,5 +1,7 @@
 import {MODULE_KEY, SETTINGS} from '../Module/constants'
 
+import {parseNumber} from '../@util/parseNumber'
+
 export interface ModuleSettings {
   AutoOpen: {
     Enabled: boolean
@@ -37,8 +39,8 @@ export class Settings implements ModuleSettings {
       Enabled: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN),
       AsPopout: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT),
       Position: {
-        Y: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y),
-        X: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X),
+        Y: parseNumber(game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y)),
+        X: parseNumber(game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X)),
       },
     }
   }

@@ -34,8 +34,8 @@ describe('Settings', () => {
     it('should use the correct module settings', () => {
       getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN).returns(true)
       getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT).returns(false)
-      getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X).returns(1)
-      getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y).returns(2)
+      getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X).returns('1')
+      getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y).returns('')
 
       const settings = Settings.GetInstance()
       settings.Reset()
@@ -43,7 +43,7 @@ describe('Settings', () => {
       expect(settings.AutoOpen.Enabled).to.be.true
       expect(settings.AutoOpen.AsPopout).to.be.false
       expect(settings.AutoOpen.Position.X).to.equal(1)
-      expect(settings.AutoOpen.Position.Y).to.equal(2)
+      expect(settings.AutoOpen.Position.Y).to.equal(undefined)
     })
   })
 })
