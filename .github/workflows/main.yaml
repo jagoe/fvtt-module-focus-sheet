@@ -60,7 +60,7 @@ jobs:
     - name: Retrieve dist
       uses: actions/download-artifact@v2
       with:
-        name: ./dist
+        name: dist
 
     # Get the version from 'module.json'
     - name: Get Version
