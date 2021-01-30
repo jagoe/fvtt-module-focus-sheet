@@ -18,7 +18,7 @@ Currently, there is no public API for the module. If there is a need for one, fe
 
 ## Installation
 
-Install using the following URL: <https://raw.githubusercontent.com/jagoe/fvtt-module-focus-sheet/master/module.json>.
+Install using the following URL: <https://github.com/jagoe/fvtt-module-focus-sheet/releases/latest/download/module.json>.
 
 Then, as GM, enable the `Focus Sheet` module in the `Manage Modules` settings in the Game Settings tab.
 
