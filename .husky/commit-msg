@@ -3,3 +3,24 @@
 
 ######## Lint commit message ########
 yarn commitlint --edit $1
+
+
+####### Append ticket number #######
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+# not on a branch, no problem
+[ "$branch" = "HEAD" ] && exit 0
+
+# extract commit message
+commit_msg=$1
+# extract ticket no from branch name
+ticket_no="$(echo "$branch" | grep -Eo '^[0-9]+')"
+
+# no ticket no, no problem
+[ $ticket_no = "" ] && exit 0
+
+# commit message already contains ticket no
+[ $ticket_no = *"$commit_msg" ] && exit 0
+
+# prepend ticket no to commit message
+echo "\n\nRefs #$ticket_no" >> $(git rev-parse --git-path COMMIT_EDITMSG)
