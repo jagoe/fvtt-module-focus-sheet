@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import {isActive} from '@src/Modules'
 
-describe('Modules: Popout', () => {
+export function isActiveTests(): void {
   describe('Is Active', () => {
     const modules = new Map<string, {active: boolean}>()
     const moduleKey = 'test-module'
@@ -36,4 +36,4 @@ describe('Modules: Popout', () => {
       expect(result).to.be.true
     })
   })
-})
+}

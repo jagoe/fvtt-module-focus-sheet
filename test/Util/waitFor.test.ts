@@ -3,21 +3,21 @@ import {createSandbox} from 'sinon'
 import {expect} from 'chai'
 import {waitFor} from '@src/@util/waitFor'
 
-describe('Util', () => {
-  const TIME = new Date(0)
-
-  const sandbox = createSandbox()
-  const timer = sandbox.useFakeTimers(TIME)
-
-  afterEach(() => {
-    sandbox.reset()
-  })
-
-  after(() => {
-    sandbox.restore()
-  })
-
+export function waitForTests(): void {
   describe('Wait for', () => {
+    const TIME = new Date(0)
+
+    const sandbox = createSandbox()
+    const timer = sandbox.useFakeTimers(TIME)
+
+    afterEach(() => {
+      sandbox.reset()
+    })
+
+    after(() => {
+      sandbox.restore()
+    })
+
     it('should resolve once the condition evaluates to true', async () => {
       let condition = false
       const promise = waitFor(() => condition)
@@ -46,4 +46,4 @@ describe('Util', () => {
       throw new Error('Did not fail due to timeout')
     })
   })
-})
+}

@@ -3,17 +3,17 @@ import {createSandbox} from 'sinon'
 import {expect} from 'chai'
 import {setPosition} from '@src/Modules/Popout'
 
-describe('Modules: Popout', () => {
-  const sandbox = createSandbox()
-
-  const moveToStub = sandbox.stub()
-  const POPOUT: PopoutModule.PopoutState = cast({window: {screenX: 500, screenY: 500, moveTo: moveToStub}})
-
-  beforeEach(() => {
-    global.window = cast({screenX: 0, screenY: 0})
-  })
-
+export function setPositionTests(): void {
   describe('Set position', () => {
+    const sandbox = createSandbox()
+
+    const moveToStub = sandbox.stub()
+    const POPOUT: PopoutModule.PopoutState = cast({window: {screenX: 500, screenY: 500, moveTo: moveToStub}})
+
+    beforeEach(() => {
+      global.window = cast({screenX: 0, screenY: 0})
+    })
+
     it('should not change the x coordinate if it has not been provided', () => {
       const newCoordinates = {Y: 0}
 
@@ -39,4 +39,4 @@ describe('Modules: Popout', () => {
       expect(moveToStub.calledWithExactly(600, 400))
     })
   })
-})
+}

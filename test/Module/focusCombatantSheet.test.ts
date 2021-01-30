@@ -10,7 +10,7 @@ import {cast} from '@util/cast'
 import {expect} from 'chai'
 import {focusCombatantSheet} from '@src/Module'
 
-describe('Module', () => {
+export function focusCombatSheetTests(): void {
   describe('Focus combatant sheet', () => {
     const sandbox = createSandbox()
     const bringToTopSpy: SinonSpy = sandbox.spy()
@@ -95,21 +95,19 @@ describe('Module', () => {
       expect(focusStub.called).to.be.true
     })
 
-    describe('Settings', () => {
-      describe('Auto open', () => {
-        beforeEach(() => {
-          SETTINGS.AutoOpen.Enabled = true
-        })
+    describe('Setting: Auto open', () => {
+      beforeEach(() => {
+        SETTINGS.AutoOpen.Enabled = true
+      })
 
-        it('should open the sheet if it has not been rendered yet', async () => {
-          getSheetStub.returns(cast({...SHEET, rendered: false}))
+      it('should open the sheet if it has not been rendered yet', async () => {
+        getSheetStub.returns(cast({...SHEET, rendered: false}))
 
-          await focusCombatantSheet(COMBAT)
+        await focusCombatantSheet(COMBAT)
 
-          expect(openStub.called).to.be.true
-          expect(openStub.lastCall.lastArg).to.eql(SETTINGS.AutoOpen)
-        })
+        expect(openStub.called).to.be.true
+        expect(openStub.lastCall.lastArg).to.eql(SETTINGS.AutoOpen)
       })
     })
   })
-})
+}
