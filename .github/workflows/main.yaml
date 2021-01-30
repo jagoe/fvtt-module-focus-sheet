@@ -2,15 +2,35 @@ name: Module CI/CD
 
 on:
   push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: NPM install
+      uses: bahmutov/npm-install@v1.6.0
+      with:
+        useLockFile: true
+
+    - name: Test
+      run: npm run test:coverage:lcov
+
+    - uses: codecov/codecov-action@v1
+      with:
+        directory: ./coverage
+        flags: unittests
+        fail_ci_if_error: true
+
+
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
 
     - name: NPM install
       uses: bahmutov/npm-install@v1.6.0
@@ -18,19 +38,38 @@ jobs:
         useLockFile: true
 
     - name: Build
-      shell: bash
       run: npm run build
+
+    - name: Upload output
+      uses: actions/upload-artifact@v1
+      with:
+        name: dist
+        path: ./dist
+
+
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - test
+      - build
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Retrieve dist
+      uses: actions/download-artifact@v2
+      with:
+        name: ./dist
 
     # Get the version from 'module.json'
     - name: Get Version
       id: get-version
-      shell: bash
       run: echo "::set-output name=version::$(node ./.github/workflows/get-version.js)"
 
     # Get the includes from 'module.json'
     - name: Get Includes
       id: get-includes
-      shell: bash
       run: echo "::set-output name=files::$(node ./.github/workflows/get-includes.js)"
 
     # create a zip file with all files required by the module to add to the release
@@ -55,7 +94,6 @@ jobs:
     - name: Update Latest Release
       id: create_latest_release
       uses: ncipollo/release-action@v1
-      if: endsWith(github.ref, 'main')
       with:
         allowUpdates: true
         name: Latest

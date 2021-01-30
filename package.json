@@ -11,6 +11,7 @@
     "lint:changed": "eslint $(git diff --name-only $(git branch --show-current) | grep -E \"(.js$|.ts$)\")",
     "test": "TS_NODE_PROJECT=./test/tsconfig.json mocha --config ./.mocharc.js",
     "test:coverage": "nyc yarn test",
+    "test:coverage:lcov": "nyc --reporter=lcov yarn test",
     "postinstall": "husky install"
   },
   "devDependencies": {
