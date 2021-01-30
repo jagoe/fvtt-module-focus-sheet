@@ -34,11 +34,11 @@ By default, the current combatant's sheet will only be brought to the top/focuse
 Enabling this setting also opens the sheet if it has not been opened yet, but only if the player has at least Observer
 permissions. Optionally, automatically opened sheets will be opened popped-out.
 
-#### (TBD) Open At Location
+#### Open At Location
 
 Here you can specify where to open the sheet.\
-If opened using PopOut!, it will be opened relative to the top-left corner of your screen.\
-If opened without PopOut!, it will be opened relative to the top-left corner of your Foundry VTT viewport.
+If opened without PopOut!, it will be opened relative to the top-left corner of your Foundry VTT viewport.\
+If opened using PopOut!, it will be opened relative to the top-left corner of the main window.
 
 ### (TBD) Minimize and Restore Sheets on Turn End/Start
 
