@@ -5,7 +5,7 @@ import {waitFor} from '../@util/waitFor'
 export async function open(sheet: ActorSheet): Promise<void> {
   sheet.render(true)
 
-  await waitFor(() => sheet.rendered)
+  await waitFor(() => sheet.rendered, {title: `Rendering sheet for ${sheet.actor.name}`})
 
   const settings = Settings.GetInstance()
   if (settings.AutoOpen.AsPopout) {

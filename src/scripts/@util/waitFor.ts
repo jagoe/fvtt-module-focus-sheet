@@ -3,8 +3,11 @@
  * @param condition If this function evaluates to true, the Promise gets resolved
  * @param timeout Timeout is ms; if exceeded, the Promise gets rejected
  */
-export async function waitFor(condition: () => boolean, timeout = 1000, title?: string): Promise<void> {
-  for (let time = 0, step = 100; time < timeout; time += step) {
+export async function waitFor(
+  condition: () => boolean,
+  {timeout = 1000, title}: {timeout?: number; title?: string} = {},
+): Promise<void> {
+  for (let time = 0, step = 20; time < timeout; time += step) {
     if (condition()) {
       return
     }

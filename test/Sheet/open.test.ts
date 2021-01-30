@@ -13,19 +13,21 @@ describe('Sheet', () => {
   const renderStub = sandbox.stub()
   let openPopoutStub: SinonStub<[sheet: ActorSheet], void>
   let settingsStub: SinonStub<[], Settings>
+  let waitForStub: SinonStub
 
-  const SHEET: ActorSheet = cast({render: renderStub})
+  const SHEET: ActorSheet = cast({render: renderStub, actor: {name: 'Rincewind the Wizzard'}})
   let SETTINGS: Settings
 
   before(() => {
     openPopoutStub = sandbox.stub(openPopout, 'open')
     settingsStub = sandbox.stub(Settings, 'GetInstance')
-    sandbox.stub(waitFor, 'waitFor').resolves()
+    waitForStub = sandbox.stub(waitFor, 'waitFor')
   })
 
   beforeEach(() => {
     SETTINGS = cast({AutoOpen: {AsPopout: true}})
     settingsStub.returns(SETTINGS)
+    waitForStub.resolves()
   })
 
   afterEach(() => {
@@ -41,6 +43,18 @@ describe('Sheet', () => {
       await open(SHEET)
 
       expect(renderStub.called).to.be.true
+    })
+
+    it('should wait for the sheet to get rendered', async () => {
+      const expectedConditionResult = 'test condition'
+      let conditionResult = ''
+      waitForStub.callsFake(async (condition) => {
+        conditionResult = condition()
+      })
+
+      await open(cast({...SHEET, rendered: expectedConditionResult}))
+
+      expect(conditionResult).to.equal('test condition')
     })
 
     it('should not popout the sheet if auto-open is disabled', async () => {
