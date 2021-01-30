@@ -41,7 +41,7 @@ jobs:
       run: npm run build
 
     - name: Upload output
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: dist
         path: ./dist
