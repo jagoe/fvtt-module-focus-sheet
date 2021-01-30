@@ -7,3 +7,4 @@ dist
 
 # test artifacts
 .nyc_output
+coverage
