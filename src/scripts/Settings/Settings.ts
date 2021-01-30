@@ -1,9 +1,13 @@
-import {MODULE_KEY, SETTING_AUTO_OPEN, SETTING_AUTO_OPEN_POPOUT} from '../Module/constants'
+import {MODULE_KEY, SETTINGS} from '../Module/constants'
 
 export interface ModuleSettings {
   AutoOpen: {
     Enabled: boolean
     AsPopout: boolean
+    Position: {
+      Top?: number
+      Left?: number
+    }
   }
 }
 
@@ -30,8 +34,12 @@ export class Settings implements ModuleSettings {
 
   public Reset(): void {
     this.autoOpen = {
-      Enabled: game.settings.get(MODULE_KEY, SETTING_AUTO_OPEN),
-      AsPopout: game.settings.get(MODULE_KEY, SETTING_AUTO_OPEN_POPOUT),
+      Enabled: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN),
+      AsPopout: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT),
+      Position: {
+        Top: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_TOP),
+        Left: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_LEFT),
+      },
     }
   }
 }

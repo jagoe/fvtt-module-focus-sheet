@@ -1,4 +1,4 @@
-import {MODULE_KEY, SETTING_AUTO_OPEN, SETTING_AUTO_OPEN_POPOUT} from '@src/Module/constants'
+import {MODULE_KEY, SETTINGS} from '@src/Module/constants'
 import {Settings, registerSettings} from '@src/Settings'
 
 import {cast} from '@util/cast'
@@ -28,16 +28,17 @@ describe('Module', () => {
           },
         },
       })
+
+      registerSettings()
     })
 
-    it("should register the 'auto open' setting", () => {
-      registerSettings()
-
-      const setting = settings[`${MODULE_KEY}.${SETTING_AUTO_OPEN}`]
+    it("should have registered the 'auto open' setting", () => {
+      const setting = settings[`${MODULE_KEY}.${SETTINGS.AUTO_OPEN}`]
       delete setting.onChange // not relevant for this test
+
       expect(setting).to.eql({
-        name: `${MODULE_KEY}.${SETTING_AUTO_OPEN}.name`,
-        hint: `${MODULE_KEY}.${SETTING_AUTO_OPEN}.hint`,
+        name: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN}.name`,
+        hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN}.hint`,
         scope: 'client',
         config: true,
         type: Boolean,
@@ -45,18 +46,41 @@ describe('Module', () => {
       })
     })
 
-    it("should register the 'auto popup' setting", () => {
-      registerSettings()
-
-      const setting = settings[`${MODULE_KEY}.${SETTING_AUTO_OPEN_POPOUT}`]
+    it("should have registered the 'auto popup' setting", () => {
+      const setting = settings[`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}`]
       delete setting.onChange // not relevant for this test
+
       expect(setting).to.eql({
-        name: `${MODULE_KEY}.${SETTING_AUTO_OPEN_POPOUT}.name`,
-        hint: `${MODULE_KEY}.${SETTING_AUTO_OPEN_POPOUT}.hint`,
+        name: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}.name`,
+        hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}.hint`,
         scope: 'client',
         config: true,
         type: Boolean,
         default: false,
+      })
+    })
+
+    it("should have registered the 'auto open position' settings", () => {
+      const settingTop = settings[`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_TOP}`]
+      delete settingTop.onChange // not relevant for this test
+      const settingLeft = settings[`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_LEFT}`]
+      delete settingLeft.onChange // not relevant for this test
+
+      expect(settingTop).to.eql({
+        name: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_TOP}.name`,
+        hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_TOP}.hint`,
+        scope: 'client',
+        config: true,
+        type: Number,
+        default: undefined,
+      })
+      expect(settingLeft).to.eql({
+        name: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_LEFT}.name`,
+        hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_LEFT}.hint`,
+        scope: 'client',
+        config: true,
+        type: Number,
+        default: undefined,
       })
     })
 
@@ -65,6 +89,7 @@ describe('Module', () => {
       const value = 'test'
 
       registerSettings()
+
       const registeredSettings = Object.values(settings)
       for (const setting of registeredSettings) {
         const onChange = setting.onChange as (value: unknown) => void

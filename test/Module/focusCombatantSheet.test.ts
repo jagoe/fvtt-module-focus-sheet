@@ -37,6 +37,7 @@ describe('Module', () => {
         AutoOpen: {
           AsPopout: false,
           Enabled: false,
+          Position: {},
         },
       }
 
