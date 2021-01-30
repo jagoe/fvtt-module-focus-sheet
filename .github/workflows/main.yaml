@@ -45,6 +45,7 @@ jobs:
       with:
         name: dist
         path: ./dist
+        retention-days: 1
 
 
   release:
@@ -61,6 +62,10 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: dist
+
+    # DEBUG
+    - name: Display structure of downloaded files
+      run: ls -R
 
     # Get the version from 'module.json'
     - name: Get Version
