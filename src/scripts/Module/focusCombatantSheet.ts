@@ -30,6 +30,6 @@ export async function focusCombatantSheet(combat: Combat): Promise<void> {
   if (sheet.rendered) {
     focus(sheet)
   } else {
-    await open(sheet)
+    await open(sheet, settings.AutoOpen)
   }
 }

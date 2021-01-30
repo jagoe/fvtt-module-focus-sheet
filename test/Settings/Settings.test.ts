@@ -1,4 +1,4 @@
-import {MODULE_KEY, SETTING_AUTO_OPEN, SETTING_AUTO_OPEN_POPOUT} from '@src/Module/constants'
+import {MODULE_KEY, SETTINGS} from '@src/Module/constants'
 
 import {Settings} from '@src/Settings'
 import {cast} from '@util/cast'
@@ -32,14 +32,18 @@ describe('Settings', () => {
 
   describe('Reset', () => {
     it('should use the correct module settings', () => {
-      getSettingStub.withArgs(MODULE_KEY, SETTING_AUTO_OPEN).returns(true)
-      getSettingStub.withArgs(MODULE_KEY, SETTING_AUTO_OPEN_POPOUT).returns(false)
+      getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN).returns(true)
+      getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT).returns(false)
+      getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X).returns('1')
+      getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y).returns('')
 
       const settings = Settings.GetInstance()
       settings.Reset()
 
       expect(settings.AutoOpen.Enabled).to.be.true
       expect(settings.AutoOpen.AsPopout).to.be.false
+      expect(settings.AutoOpen.Position.X).to.equal(1)
+      expect(settings.AutoOpen.Position.Y).to.equal(undefined)
     })
   })
 })

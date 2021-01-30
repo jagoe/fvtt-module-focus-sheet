@@ -18,7 +18,7 @@ describe('Module', () => {
     let getSettingsStub: SinonStub<[], Settings>
     let permissionStub: SinonStub<[sheet: ActorSheet], boolean>
     let focusStub: SinonStub<[sheet: ActorSheet], void>
-    let openStub: SinonStub<[sheet: ActorSheet], Promise<void>>
+    let openStub: SinonStub<[sheet: ActorSheet, settings: ModuleSettings['AutoOpen']], Promise<void>>
 
     let SETTINGS: ModuleSettings
     const COMBAT: Combat = cast({})
@@ -37,6 +37,7 @@ describe('Module', () => {
         AutoOpen: {
           AsPopout: false,
           Enabled: false,
+          Position: {},
         },
       }
 
@@ -106,6 +107,7 @@ describe('Module', () => {
           await focusCombatantSheet(COMBAT)
 
           expect(openStub.called).to.be.true
+          expect(openStub.lastCall.lastArg).to.eql(SETTINGS.AutoOpen)
         })
       })
     })

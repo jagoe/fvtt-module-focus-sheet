@@ -33,14 +33,13 @@ describe('Util', () => {
 
     it('should fail if the timeout triggers', async () => {
       try {
-        const promise = waitFor(() => false, 100, 'test error')
+        const promise = waitFor(() => false, {timeout: 20, title: 'test error'})
 
-        timer.tick(100)
-        timer.tick(200)
+        timer.tick(40)
 
         await promise
       } catch (error) {
-        expect(cast<Error>(error).message).to.equal('Timout of 100 ms exceeded (test error)')
+        expect(cast<Error>(error).message).to.equal('Timout of 20 ms exceeded (test error)')
         return
       }
 
