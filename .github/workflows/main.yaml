@@ -62,12 +62,6 @@ jobs:
           flags: unittests
           fail_ci_if_error: true
 
-      - uses: codecov/codecov-action@v1
-        with:
-          directory: ./coverage
-          flags: unittests
-          fail_ci_if_error: true
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -92,13 +86,6 @@ jobs:
 
       - name: Build
         run: yarn build
-
-      - name: Upload output
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: ./dist
-          retention-days: 1
 
       - name: Upload output
         uses: actions/upload-artifact@v2
