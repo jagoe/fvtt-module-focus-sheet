@@ -8,45 +8,43 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: NPM install
-      uses: bahmutov/npm-install@v1.6.0
-      with:
-        useLockFile: true
+      - name: NPM install
+        uses: bahmutov/npm-install@v1.6.0
+        with:
+          useLockFile: true
 
-    - name: Test
-      run: npm run test:coverage:lcov
+      - name: Test
+        run: npm run test:coverage:lcov
 
-    - uses: codecov/codecov-action@v1
-      with:
-        directory: ./coverage
-        flags: unittests
-        fail_ci_if_error: true
-
+      - uses: codecov/codecov-action@v1
+        with:
+          directory: ./coverage
+          flags: unittests
+          fail_ci_if_error: true
 
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: NPM install
-      uses: bahmutov/npm-install@v1.6.0
-      with:
-        useLockFile: true
+      - name: NPM install
+        uses: bahmutov/npm-install@v1.6.0
+        with:
+          useLockFile: true
 
-    - name: Build
-      run: npm run build
+      - name: Build
+        run: npm run build
 
-    - name: Upload output
-      uses: actions/upload-artifact@v2
-      with:
-        name: dist
-        path: ./dist
-        retention-days: 1
-
+      - name: Upload output
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: ./dist
+          retention-days: 1
 
   release:
     runs-on: ubuntu-latest
@@ -55,83 +53,93 @@ jobs:
       - test
       - build
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Retrieve dist
-      uses: actions/download-artifact@v2
-      with:
-        name: dist
-        path: ./dist
+      - name: Retrieve dist
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: ./dist
 
-    # DEBUG
-    - name: Display structure of downloaded files
-      run: ls -R
+      # DEBUG
+      - name: Display structure of downloaded files
+        run: ls -R
 
-    # Get the version from 'module.json'
-    - name: Get Version
-      id: get-version
-      run: echo "::set-output name=version::$(node ./.github/workflows/get-version.js)"
+      # Get the version from 'module.json'
+      - name: Get Version
+        id: get-version
+        run: echo "::set-output name=version::$(node ./.github/workflows/get-version.js)"
 
-    # Get the includes from 'module.json'
-    - name: Get Includes
-      id: get-includes
-      run: echo "::set-output name=files::$(node ./.github/workflows/get-includes.js)"
+      # Get the includes from 'module.json'
+      - name: Get Includes
+        id: get-includes
+        run: echo "::set-output name=files::$(node ./.github/workflows/get-includes.js)"
 
-    # create a zip file with all files required by the module to add to the release
-    - name: Zip Files
-      working-directory: ./dist
-      run: zip -r ../module.zip ${{steps.get-includes.outputs.files}}
+      # create a zip file with all files required by the module to add to the release
+      - name: Zip Files
+        working-directory: ./dist
+        run: zip -r ../module.zip ${{steps.get-includes.outputs.files}}
 
-    # Useful only for the template so we can leave the manifest and download urls empty
-    - name: Substitute Manifest and Download Links For Versioned Ones
-      id: sub_manifest_link_latest
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: './dist/module.json'
-      env:
-        url: https://github.com/${{github.repository}}
-        bugs: https://github.com/${{github.repository}}/issues
-        changelog: https://github.com/${{github.repository}}/blob/main/CHANGELOG.md
-        manifest: https://github.com/${{github.repository}}/releases/latest/download/module.json
-        download: https://github.com/${{github.repository}}/releases/latest/download/module.zip
+      # Useful only for the template so we can leave the manifest and download urls empty
+      - name: Substitute Manifest and Download Links For Versioned Ones
+        id: sub_manifest_link_latest
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: "./dist/module.json"
+        env:
+          url: https://github.com/${{github.repository}}
+          bugs: https://github.com/${{github.repository}}/issues
+          changelog: https://github.com/${{github.repository}}/blob/main/CHANGELOG.md
+          manifest: https://github.com/${{github.repository}}/releases/latest/download/module.json
+          download: https://github.com/${{github.repository}}/releases/latest/download/module.zip
 
-    # Update the 'latest' release
-    - name: Update Latest Release
-      id: create_latest_release
-      uses: ncipollo/release-action@v1
-      with:
-        allowUpdates: true
-        name: Latest
-        draft: false
-        prerelease: false
-        token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: './dist/module.json, ./module.zip'
-        tag: latest
+      - name: Add latest module.json to archive
+        id: archive_latest_module_json
+        working-directory: ./dist
+        run: zip -r ../module.zip ./module.json
 
-    # Substitute the Manifest and Download URLs in the module.json
-    - name: Substitute Manifest and Download Links For Versioned Ones
-      id: sub_manifest_link_version
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: './dist/module.json'
-      env:
-        url: https://github.com/${{github.repository}}
-        bugs: https://github.com/${{github.repository}}/issues
-        changelog: https://github.com/${{github.repository}}/blob/main/CHANGELOG.md
-        manifest: https://github.com/${{github.repository}}/releases/download/${{steps.get-version.outputs.version}}/module.json
-        download: https://github.com/${{github.repository}}/releases/download/${{steps.get-version.outputs.version}}/module.zip
+      # Update the 'latest' release
+      - name: Update Latest Release
+        id: create_latest_release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          name: Latest
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "./dist/module.json, ./module.zip"
+          tag: latest
 
-    # Create a release for this specific version
-    - name: Create Version Release
-      id: create_version_release
-      uses: ncipollo/release-action@v1
-      continue-on-error: true
-      with:
-        allowUpdates: false
-        name: Release ${{ steps.get-version.outputs.version }}
-        draft: false
-        prerelease: false
-        token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: './dist/module.json,./module.zip'
-        tag: ${{ steps.get-version.outputs.version }}
+      # Substitute the Manifest and Download URLs in the module.json
+      - name: Substitute Manifest and Download Links For Versioned Ones
+        id: sub_manifest_link_version
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: "./dist/module.json"
+        env:
+          url: https://github.com/${{github.repository}}
+          bugs: https://github.com/${{github.repository}}/issues
+          changelog: https://github.com/${{github.repository}}/blob/main/CHANGELOG.md
+          manifest: https://github.com/${{github.repository}}/releases/download/${{steps.get-version.outputs.version}}/module.json
+          download: https://github.com/${{github.repository}}/releases/download/${{steps.get-version.outputs.version}}/module.zip
+
+      - name: Add versioned module.json to archive
+        id: archive_versioned_module_json
+        working-directory: ./dist
+        run: zip -r ../module.zip ./module.json
+
+      # Create a release for this specific version
+      - name: Create Version Release
+        id: create_version_release
+        uses: ncipollo/release-action@v1
+        continue-on-error: true
+        with:
+          allowUpdates: false
+          name: Release ${{ steps.get-version.outputs.version }}
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "./dist/module.json,./module.zip"
+          tag: ${{ steps.get-version.outputs.version }}
