@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.1
+
+_No changes to the module logic, but fix to enable the FVTT Update button for the module._
+
 ## v0.3.0
 
 ### Features
