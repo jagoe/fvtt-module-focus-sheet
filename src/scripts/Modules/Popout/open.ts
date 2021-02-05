@@ -8,9 +8,6 @@ export function open(sheet: ActorSheet, position: ModuleSettings['AutoOpen']['Po
 
   if (position.X !== undefined || position.Y !== undefined) {
     const popout = getPopout(sheet)
-    // await waitFor(() => PopoutModule.singleton.poppedOut.get(sheet.appId) !== undefined, {
-    //   title: `Popping out sheet for ${sheet.actor.name}`,
-    // })
 
     if (popout) {
       setPosition(popout, position)
