@@ -1,7 +1,7 @@
 import {focus, open, playerHasPermissionToView} from '../Sheet'
 
 import {Settings} from '../Settings'
-import {getCombatantSheet} from '../Combat/index'
+import {getCurrentCombatantSheet} from '../Combat/index'
 
 /**
  * Focus the current actor/token sheet of the current combatant.\
@@ -12,7 +12,7 @@ import {getCombatantSheet} from '../Combat/index'
 export async function focusCombatantSheet(combat: Combat): Promise<void> {
   const settings = Settings.GetInstance()
 
-  const sheet = getCombatantSheet(combat)
+  const sheet = getCurrentCombatantSheet(combat)
   if (!sheet) {
     // combatant does not have a sheet
     return

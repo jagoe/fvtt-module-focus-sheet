@@ -4,3 +4,12 @@ declare enum ENTITY_PERMISSIONS {
   OBSERVER = 2,
   OWNER = 3,
 }
+
+declare interface Combatant {
+  actor: Actor
+}
+
+declare interface Combat {
+  combatant: Combatant
+  combatants: Combatant[]
+}
