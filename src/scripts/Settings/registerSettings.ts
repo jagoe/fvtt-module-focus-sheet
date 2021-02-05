@@ -1,9 +1,9 @@
 import {MODULE_KEY, SETTINGS} from '../Module/constants'
 
-import {initialize} from '../Module'
+import {Settings} from '../Settings'
 
-function reloadModule(): void {
-  initialize()
+function reloadSettings(): void {
+  Settings.GetInstance().Reset()
 }
 
 export function registerSettings(): void {
@@ -14,7 +14,7 @@ export function registerSettings(): void {
     config: true,
     type: Boolean,
     default: false,
-    onChange: reloadModule,
+    onChange: reloadSettings,
   })
 
   game.settings.register(MODULE_KEY, SETTINGS.AUTO_CLOSE, {
@@ -24,7 +24,7 @@ export function registerSettings(): void {
     config: true,
     type: Boolean,
     default: false,
-    onChange: reloadModule,
+    onChange: reloadSettings,
   })
 
   game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT, {
@@ -34,7 +34,7 @@ export function registerSettings(): void {
     config: true,
     type: Boolean,
     default: false,
-    onChange: reloadModule,
+    onChange: reloadSettings,
   })
 
   game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X, {
@@ -43,7 +43,7 @@ export function registerSettings(): void {
     scope: 'client',
     config: true,
     type: String,
-    onChange: reloadModule,
+    onChange: reloadSettings,
   })
 
   game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y, {
@@ -52,6 +52,6 @@ export function registerSettings(): void {
     scope: 'client',
     config: true,
     type: String,
-    onChange: reloadModule,
+    onChange: reloadSettings,
   })
 }

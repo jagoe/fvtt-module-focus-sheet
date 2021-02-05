@@ -1,6 +1,13 @@
+import {Settings} from '../Settings'
 import {getPreviousCombatantSheet} from '../Combat'
 
-export async function closePreviousCombatSheet(combat: Combat): Promise<void> {
+export async function closePreviousCombatantSheet(combat: Combat): Promise<void> {
+  const settings = Settings.GetInstance()
+
+  if (!settings.AutoClose) {
+    return
+  }
+
   const previousSheet = getPreviousCombatantSheet(combat)
   if (!previousSheet) {
     // no sheet to close
