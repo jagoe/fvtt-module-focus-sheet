@@ -7,6 +7,8 @@ function i18n(...settings: string[]): string {
 export = {
   [i18n(SETTINGS.AUTO_OPEN, 'name')]: 'Automatically open sheet?',
   [i18n(SETTINGS.AUTO_OPEN, 'hint')]: "If enabled, a combatant's sheet will be opened at the start of their turn.",
+  [i18n(SETTINGS.AUTO_CLOSE, 'name')]: 'Automatically close sheet at end of turn?',
+  [i18n(SETTINGS.AUTO_CLOSE, 'hint')]: "If enabled, a combatant's sheet will be closed at the end of their turn.",
   [i18n(SETTINGS.AUTO_OPEN_POPOUT, 'name')]: 'Automatically popout sheet?',
   [i18n(SETTINGS.AUTO_OPEN_POPOUT, 'hint')]:
     "If enabled, a combatant's sheet will be popped out at the start of their turn.\n" +

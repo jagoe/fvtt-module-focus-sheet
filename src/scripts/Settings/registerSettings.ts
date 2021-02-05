@@ -17,6 +17,16 @@ export function registerSettings(): void {
     onChange: updateSettings,
   })
 
+  game.settings.register(MODULE_KEY, SETTINGS.AUTO_CLOSE, {
+    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.name`),
+    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.hint`),
+    scope: 'client',
+    config: true,
+    type: Boolean,
+    default: false,
+    onChange: updateSettings,
+  })
+
   game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT, {
     name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}.name`),
     hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}.hint`),

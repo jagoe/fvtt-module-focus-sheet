@@ -11,6 +11,7 @@ export interface ModuleSettings {
       Y?: number
     }
   }
+  AutoClose: boolean
 }
 
 export class Settings implements ModuleSettings {
@@ -34,6 +35,12 @@ export class Settings implements ModuleSettings {
     return this.autoOpen
   }
 
+  private autoClose: ModuleSettings['AutoClose']
+
+  public get AutoClose(): ModuleSettings['AutoClose'] {
+    return this.autoClose
+  }
+
   public Reset(): void {
     this.autoOpen = {
       Enabled: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN),
@@ -43,5 +50,7 @@ export class Settings implements ModuleSettings {
         X: parseNumber(game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X)),
       },
     }
+
+    this.autoClose = game.settings.get(MODULE_KEY, SETTINGS.AUTO_CLOSE)
   }
 }
