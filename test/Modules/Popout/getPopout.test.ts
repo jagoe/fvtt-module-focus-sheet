@@ -9,7 +9,7 @@ import {getPopout} from '@src/Modules/Popout'
 export function getPopoutTests(): void {
   describe('Get popout', () => {
     const sandbox = createSandbox()
-    let isActiveStub: SinonStub
+    let isActiveStub: SinonStub<[module: string], boolean>
 
     const POPPED_OUT_SHEETS: Map<number, PopoutModule.PopoutState> = new Map()
     const POPOUT_MODULE = {singleton: {poppedOut: POPPED_OUT_SHEETS}}

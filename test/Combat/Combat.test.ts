@@ -1,5 +1,9 @@
-import {getCombatSheetTests} from './getCombatantSheet.test'
+import {getCombatantSheetTests} from './getCombatantSheet.test'
+import {getCurrentCombatantSheetTests} from './getCurrentCombatantSheet.test'
+import {getPreviousCombatantSheetTests} from './getPreviousCombatantSheet.test'
 
 describe('Combat', () => {
-  getCombatSheetTests()
+  getCurrentCombatantSheetTests()
+  getPreviousCombatantSheetTests()
+  getCombatantSheetTests()
 })

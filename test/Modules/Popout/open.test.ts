@@ -58,13 +58,20 @@ export function openTests(): void {
 
     it('should not position the popout if popout could not be retrieved', () => {
       getPopoutStub.returns(null)
-      open(SHEET, {})
+      open(SHEET, {X: 0, Y: 0})
 
       expect(setPositionStub.called).to.be.false
     })
 
-    it('should position the popout if coordinates are given', () => {
-      const coordinates = {X: 1, Y: -1}
+    it('should position the popout if just the X coordinate is given', () => {
+      const coordinates = {X: 1}
+      open(SHEET, coordinates)
+
+      expect(setPositionStub.calledOnceWithExactly(POPOUT, coordinates)).to.be.true
+    })
+
+    it('should position the popout if just the Y coordinate is given', () => {
+      const coordinates = {Y: 1}
       open(SHEET, coordinates)
 
       expect(setPositionStub.calledOnceWithExactly(POPOUT, coordinates)).to.be.true

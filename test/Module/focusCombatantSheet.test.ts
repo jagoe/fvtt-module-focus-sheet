@@ -1,5 +1,5 @@
 import * as focus from '@src/Sheet/focus'
-import * as getCombatantSheet from '@src/Combat/getCombatantSheet'
+import * as getCurrentCombatantSheet from '@src/Combat/getCurrentCombatantSheet'
 import * as open from '@src/Sheet/open'
 import * as playerHasPermissionToView from '@src/Sheet/playerHasPermissionToView'
 
@@ -25,7 +25,7 @@ export function focusCombatSheetTests(): void {
     const SHEET: ActorSheet = cast({rendered: true, bringToTop: bringToTopSpy})
 
     before(() => {
-      getSheetStub = sandbox.stub(getCombatantSheet, 'getCombatantSheet')
+      getSheetStub = sandbox.stub(getCurrentCombatantSheet, 'getCurrentCombatantSheet')
       getSettingsStub = sandbox.stub(Settings, 'GetInstance')
       permissionStub = sandbox.stub(playerHasPermissionToView, 'playerHasPermissionToView')
       focusStub = sandbox.stub(focus, 'focus')
@@ -39,6 +39,7 @@ export function focusCombatSheetTests(): void {
           Enabled: false,
           Position: {},
         },
+        AutoClose: false,
       }
 
       getSettingsStub.returns(cast(SETTINGS))
