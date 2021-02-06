@@ -1,5 +1,5 @@
 import {SinonStub, createSandbox} from 'sinon'
-import {closePreviousCombatantSheet, focusCombatantSheet, initialize} from '@src/Module'
+import {closeCurrentCombatantSheet, closePreviousCombatantSheet, focusCombatantSheet, initialize} from '@src/Module'
 
 import {expect} from 'chai'
 import {registerSettings} from '@src/Settings'
@@ -32,13 +32,24 @@ export function initializeTests(): void {
       expect(offStub.calledWith('init', registerSettings)).to.be.true
       expect(offStub.calledWith('updateCombat', focusCombatantSheet)).to.be.true
       expect(offStub.calledWith('updateCombat', closePreviousCombatantSheet)).to.be.true
+      expect(offStub.calledWith('deleteCombat', closeCurrentCombatantSheet)).to.be.true
     })
 
     it('should de-register existing hooks before registering them', () => {
       initialize()
 
-      expect(offStub.calledBefore(onStub)).to.be.true
-      expect(offStub.calledBefore(onceStub)).to.be.true
+      expect(offStub.withArgs('init').calledBefore(onceStub.withArgs('init'))).to.be.true
+      expect(
+        offStub
+          .withArgs('updateCombat', focusCombatantSheet)
+          .calledBefore(onStub.withArgs('updateCombat', focusCombatantSheet)),
+      ).to.be.true
+      expect(
+        offStub
+          .withArgs('updateCombat', closePreviousCombatantSheet)
+          .calledBefore(onStub.withArgs('updateCombat', closePreviousCombatantSheet)),
+      ).to.be.true
+      expect(offStub.withArgs('deleteCombat').calledBefore(onStub.withArgs('deleteCombat'))).to.be.true
     })
 
     it('should register settings once on "init" event', () => {
@@ -57,6 +68,12 @@ export function initializeTests(): void {
       initialize()
 
       expect(onStub.calledWithExactly('updateCombat', closePreviousCombatantSheet)).to.be.true
+    })
+
+    it('should register "closeCurrentCombatSheet" on "deleteCombat" event', () => {
+      initialize()
+
+      expect(onStub.calledWithExactly('deleteCombat', closeCurrentCombatantSheet)).to.be.true
     })
   })
 }
