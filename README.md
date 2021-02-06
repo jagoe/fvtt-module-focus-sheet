@@ -41,12 +41,13 @@ Here you can specify where to open the sheet.\
 If opened without PopOut!, it will be opened relative to the top-left corner of your Foundry VTT viewport.\
 If opened using PopOut!, it will be opened relative to the top-left corner of the main window.
 
-_Caveat:_ Some browser do not support moving windows across screens.
+_Caveat:_ Some browsers do not support moving windows across screens.
 
-### (TBD) Minimize and Restore Sheets on Turn End/Start
+### Automatically Close Sheets
 
-Enabling these settings will minimize the last sheet once a turn has ended, freeing up space and restore a minimized
-sheet on turn start, respectively.
+Enabling this setting will close the previous sheet once its turn has ended, freeing up space. When combat ends, the
+currently opened sheet will be closed as well.\
+This functionality is indepent of the auto-open feature.
 
 ## License
 
