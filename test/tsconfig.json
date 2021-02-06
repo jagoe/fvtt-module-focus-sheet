@@ -17,6 +17,9 @@
       "../node_modules/@types",
     ],
     "paths": {
+      "@util": [
+        "test/@util"
+      ],
       "@util/*": [
         "test/@util/*"
       ],
@@ -27,8 +30,5 @@
         "test/*"
       ],
     },
-    "sourceMap": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
   },
 }

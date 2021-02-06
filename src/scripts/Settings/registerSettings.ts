@@ -1,8 +1,8 @@
 import {MODULE_KEY, SETTINGS} from '../Module/constants'
 
-import {Settings} from './Settings'
+import {Settings} from '../Settings'
 
-function updateSettings(): void {
+function reloadSettings(): void {
   Settings.GetInstance().Reset()
 }
 
@@ -14,7 +14,17 @@ export function registerSettings(): void {
     config: true,
     type: Boolean,
     default: false,
-    onChange: updateSettings,
+    onChange: reloadSettings,
+  })
+
+  game.settings.register(MODULE_KEY, SETTINGS.AUTO_CLOSE, {
+    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.name`),
+    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.hint`),
+    scope: 'client',
+    config: true,
+    type: Boolean,
+    default: false,
+    onChange: reloadSettings,
   })
 
   game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT, {
@@ -24,7 +34,7 @@ export function registerSettings(): void {
     config: true,
     type: Boolean,
     default: false,
-    onChange: updateSettings,
+    onChange: reloadSettings,
   })
 
   game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X, {
@@ -33,7 +43,7 @@ export function registerSettings(): void {
     scope: 'client',
     config: true,
     type: String,
-    onChange: updateSettings,
+    onChange: reloadSettings,
   })
 
   game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y, {
@@ -42,6 +52,6 @@ export function registerSettings(): void {
     scope: 'client',
     config: true,
     type: String,
-    onChange: updateSettings,
+    onChange: reloadSettings,
   })
 }

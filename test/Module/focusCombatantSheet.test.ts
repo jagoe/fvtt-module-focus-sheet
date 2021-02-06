@@ -1,5 +1,5 @@
 import * as focus from '@src/Sheet/focus'
-import * as getCombatantSheet from '@src/Combat/getCombatantSheet'
+import * as getCurrentCombatantSheet from '@src/Combat/getCurrentCombatantSheet'
 import * as open from '@src/Sheet/open'
 import * as playerHasPermissionToView from '@src/Sheet/playerHasPermissionToView'
 
@@ -21,11 +21,11 @@ export function focusCombatSheetTests(): void {
     let openStub: SinonStub<[sheet: ActorSheet, settings: ModuleSettings['AutoOpen']], Promise<void>>
 
     let SETTINGS: ModuleSettings
-    const COMBAT: Combat = cast({})
+    const COMBAT: Combat = cast({started: true})
     const SHEET: ActorSheet = cast({rendered: true, bringToTop: bringToTopSpy})
 
     before(() => {
-      getSheetStub = sandbox.stub(getCombatantSheet, 'getCombatantSheet')
+      getSheetStub = sandbox.stub(getCurrentCombatantSheet, 'getCurrentCombatantSheet')
       getSettingsStub = sandbox.stub(Settings, 'GetInstance')
       permissionStub = sandbox.stub(playerHasPermissionToView, 'playerHasPermissionToView')
       focusStub = sandbox.stub(focus, 'focus')
@@ -39,6 +39,7 @@ export function focusCombatSheetTests(): void {
           Enabled: false,
           Position: {},
         },
+        AutoClose: false,
       }
 
       getSettingsStub.returns(cast(SETTINGS))
@@ -51,6 +52,14 @@ export function focusCombatSheetTests(): void {
 
     after(() => {
       sandbox.restore()
+    })
+
+    it('should return early if the combat has not started', async () => {
+      getSheetStub.returns(null)
+
+      await focusCombatantSheet(cast({...COMBAT, started: false}))
+
+      expect(focusStub.called).to.be.false
     })
 
     it('should return early if there is no combatant sheet', async () => {

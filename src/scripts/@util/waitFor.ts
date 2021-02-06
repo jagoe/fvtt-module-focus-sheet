@@ -19,7 +19,7 @@ export async function waitFor(
 }
 
 async function sleep(ms: number): Promise<void> {
-  return await new Promise<void>((resolve) => {
+  await new Promise<void>((resolve) => {
     setTimeout(resolve, ms)
   })
 }

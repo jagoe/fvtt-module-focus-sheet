@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+######## Lint commit message ########
+yarn commitlint --edit $1

@@ -1,17 +1,9 @@
-import {cast} from '@/@util/cast'
+import {cast} from '@util/cast'
 import {expect} from 'chai'
 import {getCombatantSheet} from '@src/Combat'
 
-export function getCombatSheetTests(): void {
+export function getCombatantSheetTests(): void {
   describe('Get combatant sheet', () => {
-    it('should return null if there is no active combatant', () => {
-      const combat: Partial<Combat> = {combatant: null}
-
-      const combatantSheet = getCombatantSheet(cast(combat))
-
-      expect(combatantSheet).to.be.null
-    })
-
     it('should return null if the active combatant does not have an actor', () => {
       const combat: Partial<Combat> = {combatant: {actor: null}}
 
@@ -33,9 +25,9 @@ export function getCombatSheetTests(): void {
       const id = '42'
       const sheet: Partial<ActorSheet> = {id}
       const actor: Partial<Actor> = {sheet: cast(sheet)}
-      const combat: Partial<Combat> = {combatant: {actor}}
+      const combatant: Combatant = cast({actor})
 
-      const combatantSheet = getCombatantSheet(cast(combat))
+      const combatantSheet = getCombatantSheet(combatant)
 
       expect(combatantSheet).not.to.be.null
       expect(combatantSheet!.id).to.equal(id)

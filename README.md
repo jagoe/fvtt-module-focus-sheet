@@ -1,5 +1,6 @@
-![Supported Foundry Version](https://img.shields.io/badge/Foundry-v0.7.9-informational)
 ![Release](https://img.shields.io/github/v/release/jagoe/fvtt-module-focus-sheet?sort=semver)
+![Supported Foundry Version](https://img.shields.io/badge/Foundry-v0.7.9-informational)
+![Latest Release Download Count](https://img.shields.io/github/downloads/jagoe/fvtt-module-focus-sheet/latest/module.zip)
 ![Forge Installs](https://img.shields.io/badge/dynamic/json?url=https:%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Ffocus-sheet&query=package.installs&colorB=4aa94a&label=Forge%20Installs)
 
 ![Pipeline Status](https://github.com/jagoe/fvtt-module-focus-sheet/workflows/Module%20CI/CD/badge.svg)
@@ -40,12 +41,13 @@ Here you can specify where to open the sheet.\
 If opened without PopOut!, it will be opened relative to the top-left corner of your Foundry VTT viewport.\
 If opened using PopOut!, it will be opened relative to the top-left corner of the main window.
 
-_Caveat:_ Some browser do not support moving windows across screens.
+_Caveat:_ Some browsers do not support moving windows across screens.
 
-### (TBD) Minimize and Restore Sheets on Turn End/Start
+### Automatically Close Sheets
 
-Enabling these settings will minimize the last sheet once a turn has ended, freeing up space and restore a minimized
-sheet on turn start, respectively.
+Enabling this setting will close the previous sheet once its turn has ended, freeing up space. When combat ends, the
+currently opened sheet will be closed as well.\
+This functionality is indepent of the auto-open feature.
 
 ## License
 
