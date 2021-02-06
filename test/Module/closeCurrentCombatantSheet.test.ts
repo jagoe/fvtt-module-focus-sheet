@@ -61,8 +61,6 @@ export function closeCurrentCombatantSheetTests(): void {
     })
 
     it('should do nothing if there is not combatant', async () => {
-      SETTINGS.AutoClose = false
-
       await closeCurrentCombatantSheet(cast({...COMBAT, combatant: undefined}))
 
       expect(closeStub.called).to.be.false
