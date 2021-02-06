@@ -16,7 +16,7 @@ _No changes to the module logic, but fix to enable the FVTT Update button for th
 
 ## v0.2.1
 
-_No changes to the module logic, just some fixed references, e.g. the changelog link._
+_No changes to the module logic, but some fixed references, e.g. the changelog link._
 
 ## v0.2.0
 
