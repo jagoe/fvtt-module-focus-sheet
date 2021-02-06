@@ -17,6 +17,9 @@
       "../node_modules/@types",
     ],
     "paths": {
+      "@util": [
+        "test/@util"
+      ],
       "@util/*": [
         "test/@util/*"
       ],

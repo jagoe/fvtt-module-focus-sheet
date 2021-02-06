@@ -1,6 +1,6 @@
 import {MODULE_KEY, SETTINGS} from '../Module/constants'
 
-import {parseNumber} from '../@util/parseNumber'
+import {parseNumber} from '../@util'
 
 export interface ModuleSettings {
   AutoOpen: {

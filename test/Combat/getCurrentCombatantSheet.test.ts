@@ -2,7 +2,7 @@ import * as getCombatantSheet from '@src/Combat/getCombatantSheet'
 
 import {SinonStub, createSandbox} from 'sinon'
 
-import {cast} from '@/@util/cast'
+import {cast} from '@util'
 import {expect} from 'chai'
 import {getCurrentCombatantSheet} from '@src/Combat'
 

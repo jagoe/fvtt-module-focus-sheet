@@ -1,7 +1,7 @@
 import {cast} from '@util/cast'
 import {createSandbox} from 'sinon'
 import {expect} from 'chai'
-import {waitFor} from '@src/@util/waitFor'
+import {waitFor} from '@src/@util'
 
 export function waitForTests(): void {
   describe('Wait for', () => {

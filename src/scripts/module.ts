@@ -1,3 +1,3 @@
-import {initialize} from './Module/initialize'
+import {initialize} from './Module'
 
 initialize()
