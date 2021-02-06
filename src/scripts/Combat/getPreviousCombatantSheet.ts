@@ -1,20 +1,19 @@
 import {getCombatantSheet} from './getCombatantSheet'
 
 export function getPreviousCombatantSheet(combat: Combat): ActorSheet | null {
-  const {combatants} = combat
-  if (combatants === undefined || combatants.length === 0) {
-    // no active combat or no combatants
+  if (!combat.started) {
+    // combat hasn't started yet
     return null
   }
 
-  if (combatants.length === 1) {
-    // won't close the sheet only to immediately re-open it
+  const {turn, turns} = combat
+  if (turns === undefined || turns.length <= 1) {
+    // none or only one combatant; won't close the sheet to immediately re-open it
     return null
   }
 
-  const currentCombatantIndex = combatants.indexOf(combat.combatant)
-  const previousCombatantIndex = currentCombatantIndex > 0 ? currentCombatantIndex - 1 : combatants.length - 1
-  const previousCombatant = combatants[previousCombatantIndex]
+  const previousTurnIndex = turn === 0 ? turns.length - 1 : turn - 1
+  const previousTurn = turns[previousTurnIndex]
 
-  return getCombatantSheet(previousCombatant)
+  return getCombatantSheet(previousTurn)
 }

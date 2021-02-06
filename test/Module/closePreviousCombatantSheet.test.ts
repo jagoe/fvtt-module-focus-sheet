@@ -15,6 +15,7 @@ export function closePreviousCombatantSheetTests(): void {
     let getSheetStub: SinonStub<[combat: Combat], ActorSheet | null>
 
     let SETTINGS: ModuleSettings
+    const COMBAT: Combat = cast({started: true})
     const SHEET: ActorSheet = cast({rendered: true, close: closeStub})
 
     before(() => {
@@ -43,10 +44,18 @@ export function closePreviousCombatantSheetTests(): void {
       sandbox.restore()
     })
 
+    it('should return early if the combat has not started', async () => {
+      getSheetStub.returns(null)
+
+      await closePreviousCombatantSheet(cast({...COMBAT, started: false}))
+
+      expect(closeStub.called).to.be.false
+    })
+
     it('should do nothing if the "auto close" setting is disabled', async () => {
       SETTINGS.AutoClose = false
 
-      await closePreviousCombatantSheet(cast({}))
+      await closePreviousCombatantSheet(COMBAT)
 
       expect(closeStub.called).to.be.false
     })
@@ -54,7 +63,7 @@ export function closePreviousCombatantSheetTests(): void {
     it('should do nothing if there is no previous combatant sheet', async () => {
       getSheetStub.returns(null)
 
-      await closePreviousCombatantSheet(cast({}))
+      await closePreviousCombatantSheet(COMBAT)
 
       expect(closeStub.called).to.be.false
     })
@@ -63,7 +72,7 @@ export function closePreviousCombatantSheetTests(): void {
       const sheet: Partial<ActorSheet> = {...SHEET, rendered: false}
       getSheetStub.returns(cast(sheet))
 
-      await closePreviousCombatantSheet(cast({}))
+      await closePreviousCombatantSheet(COMBAT)
 
       expect(closeStub.called).to.be.false
     })
@@ -71,7 +80,7 @@ export function closePreviousCombatantSheetTests(): void {
     it('should close the previous combatant sheet', async () => {
       getSheetStub.returns(SHEET)
 
-      await closePreviousCombatantSheet(cast({}))
+      await closePreviousCombatantSheet(COMBAT)
 
       expect(closeStub.called).to.be.true
     })

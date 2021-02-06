@@ -2,6 +2,10 @@ import {Settings} from '../Settings'
 import {getPreviousCombatantSheet} from '../Combat'
 
 export async function closePreviousCombatantSheet(combat: Combat): Promise<void> {
+  if (!combat.started) {
+    return
+  }
+
   const settings = Settings.GetInstance()
 
   if (!settings.AutoClose) {

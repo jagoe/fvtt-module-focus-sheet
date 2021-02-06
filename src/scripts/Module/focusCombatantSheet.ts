@@ -10,6 +10,10 @@ import {getCurrentCombatantSheet} from '../Combat/index'
  * @param combat A Combat instance (usually provided by a hook)
  */
 export async function focusCombatantSheet(combat: Combat): Promise<void> {
+  if (!combat.started) {
+    return
+  }
+
   const settings = Settings.GetInstance()
 
   const sheet = getCurrentCombatantSheet(combat)

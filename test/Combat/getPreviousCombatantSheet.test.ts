@@ -11,6 +11,8 @@ export function getPreviousCombatantSheetTests(): void {
     const sandbox = createSandbox()
     let getSheetStub: SinonStub<[combatant: Combatant], ActorSheet | null>
 
+    const COMBAT: Partial<Combat> = {started: true}
+
     before(() => {
       getSheetStub = sandbox.stub(getCombatantSheet, 'getCombatantSheet')
     })
@@ -23,14 +25,22 @@ export function getPreviousCombatantSheetTests(): void {
       sandbox.restore()
     })
 
-    const noCombatantCases = [
-      {title: 'not defined', combatants: undefined},
-      {title: 'empty', combatants: []},
-      {title: 'only one', combatants: [{}]},
+    it('should return null if combat hasn not started', () => {
+      const combat: Partial<Combat> = {...COMBAT, started: false}
+
+      const combatantSheet = getPreviousCombatantSheet(cast(combat))
+
+      expect(combatantSheet).to.be.null
+    })
+
+    const noTurnsCases = [
+      {title: 'not defined', turns: undefined},
+      {title: 'empty', turns: []},
+      {title: 'only one', turns: [{}]},
     ]
-    noCombatantCases.forEach((testCase) => {
-      it(`should return null if there are no combatants: ${testCase.title}`, () => {
-        const combat: Partial<Combat> = {combatants: testCase.combatants}
+    noTurnsCases.forEach((testCase) => {
+      it(`should return null if there are not enough turns: ${testCase.title}`, () => {
+        const combat: Partial<Combat> = {...COMBAT, turns: cast(testCase.turns)}
 
         const combatantSheet = getPreviousCombatantSheet(cast(combat))
 
@@ -38,20 +48,20 @@ export function getPreviousCombatantSheetTests(): void {
       })
     })
 
-    it('should get the combatant sheet of the previous combatant', () => {
-      const currentCombatant: Combatant = cast({})
-      const previousCombatant: Combatant = cast({})
-      getPreviousCombatantSheet(cast({combatant: currentCombatant, combatants: [previousCombatant, currentCombatant]}))
+    it('should get the sheet of the previous combatant', () => {
+      const currentTurn: CombatTurn = cast({})
+      const previousTurn: CombatTurn = cast({})
+      getPreviousCombatantSheet(cast({...COMBAT, turn: 1, turns: [previousTurn, currentTurn]}))
 
-      expect(getSheetStub.calledWithExactly(previousCombatant)).to.be.true
+      expect(getSheetStub.calledWithExactly(previousTurn)).to.be.true
     })
 
-    it('should get the combatant sheet of the last combatant if it is the first turn', () => {
-      const currentCombatant: Combatant = cast({})
-      const previousCombatant: Combatant = cast({})
-      getPreviousCombatantSheet(cast({combatant: currentCombatant, combatants: [currentCombatant, previousCombatant]}))
+    it('should get the sheet of the last combatant if it is the first turn', () => {
+      const currentTurn: CombatTurn = cast({})
+      const previousTurn: CombatTurn = cast({})
+      getPreviousCombatantSheet(cast({...COMBAT, turn: 0, turns: [currentTurn, previousTurn]}))
 
-      expect(getSheetStub.calledWithExactly(previousCombatant)).to.be.true
+      expect(getSheetStub.calledWithExactly(previousTurn)).to.be.true
     })
   })
 }

@@ -21,7 +21,7 @@ export function focusCombatSheetTests(): void {
     let openStub: SinonStub<[sheet: ActorSheet, settings: ModuleSettings['AutoOpen']], Promise<void>>
 
     let SETTINGS: ModuleSettings
-    const COMBAT: Combat = cast({})
+    const COMBAT: Combat = cast({started: true})
     const SHEET: ActorSheet = cast({rendered: true, bringToTop: bringToTopSpy})
 
     before(() => {
@@ -52,6 +52,14 @@ export function focusCombatSheetTests(): void {
 
     after(() => {
       sandbox.restore()
+    })
+
+    it('should return early if the combat has not started', async () => {
+      getSheetStub.returns(null)
+
+      await focusCombatantSheet(cast({...COMBAT, started: false}))
+
+      expect(focusStub.called).to.be.false
     })
 
     it('should return early if there is no combatant sheet', async () => {
