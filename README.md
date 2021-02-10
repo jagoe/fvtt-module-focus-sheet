@@ -49,6 +49,10 @@ Enabling this setting will close the previous sheet once its turn has ended, fre
 currently opened sheet will be closed as well.\
 This functionality is indepent of the auto-open feature.
 
+### Ignore PC Sheets
+
+Enabling this setting will prevent PC (player character) sheets from being affected by any other of the module' features.
+
 ## License
 
 This Foundry VTT module is licensed under a [GNU General Public License v3.0 License](./LICENSE).

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.0
+
+* add setting to ignore module features for PC sheets
+
 ## v0.4.0
 
 * auto-close sheet on turn end and when combat ends
