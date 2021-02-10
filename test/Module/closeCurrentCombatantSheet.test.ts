@@ -3,6 +3,7 @@ import * as getCombatantSheet from '@src/Combat/getCombatantSheet'
 import {ModuleSettings, Settings} from '@src/Settings'
 import {SinonStub, createSandbox} from 'sinon'
 
+import {DEFAULT_SETTINGS} from '@util/fixtures'
 import {cast} from '@util/cast'
 import {closeCurrentCombatantSheet} from '@src/Module'
 import {expect} from 'chai'
@@ -24,14 +25,7 @@ export function closeCurrentCombatantSheetTests(): void {
     })
 
     beforeEach(() => {
-      SETTINGS = {
-        AutoOpen: {
-          AsPopout: false,
-          Enabled: false,
-          Position: {},
-        },
-        AutoClose: true,
-      }
+      SETTINGS = {...DEFAULT_SETTINGS(), AutoClose: true}
 
       getSettingsStub.returns(cast(SETTINGS))
     })

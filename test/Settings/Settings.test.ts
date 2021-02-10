@@ -35,6 +35,7 @@ describe('Settings', () => {
     it('should use the correct module settings', () => {
       getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN).returns(true)
       getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_CLOSE).returns(true)
+      getSettingStub.withArgs(MODULE_KEY, SETTINGS.IGNORE_PC_SHEETS).returns(true)
       getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT).returns(true)
       getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X).returns('1')
       getSettingStub.withArgs(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y).returns('')
@@ -44,6 +45,7 @@ describe('Settings', () => {
 
       expect(settings.AutoOpen.Enabled).to.be.true
       expect(settings.AutoClose).to.be.true
+      expect(settings.IgnorePcSheets).to.be.true
       expect(settings.AutoOpen.AsPopout).to.be.true
       expect(settings.AutoOpen.Position.X).to.equal(1)
       expect(settings.AutoOpen.Position.Y).to.equal(undefined)

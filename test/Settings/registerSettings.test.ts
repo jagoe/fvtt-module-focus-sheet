@@ -49,6 +49,34 @@ export function registerSettingsTests(): void {
       })
     })
 
+    it("should have registered the 'auto close' setting", () => {
+      const setting = settings[`${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}`]
+      delete setting.onChange // not relevant for this test
+
+      expect(setting).to.eql({
+        name: `${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.name`,
+        hint: `${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.hint`,
+        scope: 'client',
+        config: true,
+        type: Boolean,
+        default: false,
+      })
+    })
+
+    it("should have registered the 'ignore PC sheets' setting", () => {
+      const setting = settings[`${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}`]
+      delete setting.onChange // not relevant for this test
+
+      expect(setting).to.eql({
+        name: `${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}.name`,
+        hint: `${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}.hint`,
+        scope: 'client',
+        config: true,
+        type: Boolean,
+        default: true,
+      })
+    })
+
     it("should have registered the 'auto popup' setting", () => {
       const setting = settings[`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}`]
       delete setting.onChange // not relevant for this test

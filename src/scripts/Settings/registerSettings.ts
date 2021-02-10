@@ -27,6 +27,16 @@ export function registerSettings(): void {
     onChange: reloadSettings,
   })
 
+  game.settings.register(MODULE_KEY, SETTINGS.IGNORE_PC_SHEETS, {
+    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}.name`),
+    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}.hint`),
+    scope: 'client',
+    config: true,
+    type: Boolean,
+    default: true,
+    onChange: reloadSettings,
+  })
+
   game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT, {
     name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}.name`),
     hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}.hint`),

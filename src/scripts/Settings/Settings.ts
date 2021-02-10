@@ -12,6 +12,7 @@ export interface ModuleSettings {
     }
   }
   AutoClose: boolean
+  IgnorePcSheets: boolean
 }
 
 export class Settings implements ModuleSettings {
@@ -38,7 +39,13 @@ export class Settings implements ModuleSettings {
   private autoClose: ModuleSettings['AutoClose']
 
   public get AutoClose(): ModuleSettings['AutoClose'] {
-    return this.autoClose
+    return this.ignorePcSheets
+  }
+
+  private ignorePcSheets: ModuleSettings['IgnorePcSheets']
+
+  public get IgnorePcSheets(): ModuleSettings['IgnorePcSheets'] {
+    return this.ignorePcSheets
   }
 
   public Reset(): void {
@@ -52,5 +59,6 @@ export class Settings implements ModuleSettings {
     }
 
     this.autoClose = game.settings.get(MODULE_KEY, SETTINGS.AUTO_CLOSE)
+    this.ignorePcSheets = game.settings.get(MODULE_KEY, SETTINGS.IGNORE_PC_SHEETS)
   }
 }

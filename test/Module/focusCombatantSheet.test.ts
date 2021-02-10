@@ -6,6 +6,7 @@ import * as playerHasPermissionToView from '@src/Sheet/playerHasPermissionToView
 import {ModuleSettings, Settings} from '@src/Settings'
 import {SinonSpy, SinonStub, createSandbox} from 'sinon'
 
+import {DEFAULT_SETTINGS} from '@util/fixtures'
 import {cast} from '@util/cast'
 import {expect} from 'chai'
 import {focusCombatantSheet} from '@src/Module'
@@ -33,14 +34,7 @@ export function focusCombatSheetTests(): void {
     })
 
     beforeEach(() => {
-      SETTINGS = {
-        AutoOpen: {
-          AsPopout: false,
-          Enabled: false,
-          Position: {},
-        },
-        AutoClose: false,
-      }
+      SETTINGS = DEFAULT_SETTINGS()
 
       getSettingsStub.returns(cast(SETTINGS))
       permissionStub.returns(true)
