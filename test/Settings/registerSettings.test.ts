@@ -1,3 +1,5 @@
+import * as getSystemPcActorTypes from '@src/System/getSystemPcActorTypes'
+
 import {MODULE_KEY, SETTINGS} from '@src/Module/constants'
 import {Settings, registerSettings} from '@src/Settings'
 
@@ -24,6 +26,8 @@ export function registerSettingsTests(): void {
         },
       })
 
+      sandbox.stub(getSystemPcActorTypes, 'getSystemPcActorTypes')
+
       registerSettings()
     })
 
@@ -46,6 +50,34 @@ export function registerSettingsTests(): void {
         config: true,
         type: Boolean,
         default: false,
+      })
+    })
+
+    it("should have registered the 'auto close' setting", () => {
+      const setting = settings[`${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}`]
+      delete setting.onChange // not relevant for this test
+
+      expect(setting).to.eql({
+        name: `${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.name`,
+        hint: `${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.hint`,
+        scope: 'client',
+        config: true,
+        type: Boolean,
+        default: false,
+      })
+    })
+
+    it("should have registered the 'ignore PC sheets' setting", () => {
+      const setting = settings[`${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}`]
+      delete setting.onChange // not relevant for this test
+
+      expect(setting).to.eql({
+        name: `${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}.name`,
+        hint: `${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}.hint`,
+        scope: 'client',
+        config: true,
+        type: Boolean,
+        default: true,
       })
     })
 

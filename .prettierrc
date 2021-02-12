@@ -1,7 +1,7 @@
 {
   "arrowParens": "always",
   "bracketSpacing": false,
-  "printWidth": 120,
+  "printWidth": 150,
   "quoteProps": "consistent",
   "semi": false,
   "singleQuote": true,

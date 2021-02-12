@@ -49,6 +49,20 @@ Enabling this setting will close the previous sheet once its turn has ended, fre
 currently opened sheet will be closed as well.\
 This functionality is indepent of the auto-open feature.
 
+### Ignore PC Sheets
+
+Enabling this setting will prevent PC (player character) sheets from being affected by any other of the module' features.\
+This is being configured by a comma-separated list of sheet types that each represent a sheet type you want the module to ignore.
+
+For the following systems PC sheet types will be recognized automatically:
+
+* D&D 5e
+
+Feel free to request more or create a PR to augment [the list](src/scripts/System/getSystemPcActorTypes.ts).
+
+The setting can be used to ignore any other type of sheet as well, such as NPC sheets, vehicle sheets, PoI sheets, etc.\
+To retrieve the sheet type of the current combatant, you can enter `game.combat.combatant.actor.data.type` in the browser console.
+
 ## License
 
 This Foundry VTT module is licensed under a [GNU General Public License v3.0 License](./LICENSE).
