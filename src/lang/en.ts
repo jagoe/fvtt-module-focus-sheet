@@ -15,7 +15,7 @@ export = {
   [i18n(SETTINGS.IGNORE_PC_SHEETS, 'hint')]: 'If enabled, this module will completely ignore PC (player character) sheets.',
 
   [i18n(SETTINGS.PC_ACTOR_TYPES, 'name')]: 'PC sheet types',
-  [i18n(SETTINGS.PC_ACTOR_TYPES, 'hint')]: `Here you can specify which actor sheet types are considered PC sheets.
+  [i18n(SETTINGS.PC_ACTOR_TYPES, 'hint')]: `Here you can specify which actor sheet types are considered PC sheets as a comma-separated list.
 For the following systems this is already configured: dnd5e.
 Feel free to request more.`,
 
