@@ -1,8 +1,10 @@
 import {Settings} from '../Settings'
 import {getCombatantSheet} from '../Combat'
+import {isPC} from '../Combatant'
 
 export async function closeCurrentCombatantSheet(combat: Combat): Promise<void> {
-  if (!combat.started) {
+  if (!combat.started || combat.combatant === undefined) {
+    // no active combat turn; nothing to do
     return
   }
 
@@ -12,8 +14,8 @@ export async function closeCurrentCombatantSheet(combat: Combat): Promise<void> 
     return
   }
 
-  if (combat.combatant === undefined) {
-    // no combatant; nothing to do
+  if (settings.IgnorePcSheets.Enabled && isPC(combat.combatant, settings.IgnorePcSheets.ActorTypes)) {
+    // PC sheets are ignored; nothing to do
     return
   }
 

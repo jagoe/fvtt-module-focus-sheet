@@ -2,6 +2,7 @@ import {focus, open, playerHasPermissionToView} from '../Sheet'
 
 import {Settings} from '../Settings'
 import {getCurrentCombatantSheet} from '../Combat/index'
+import {isPC} from '../Combatant'
 
 /**
  * Focus the current actor/token sheet of the current combatant.\
@@ -10,11 +11,17 @@ import {getCurrentCombatantSheet} from '../Combat/index'
  * @param combat A Combat instance (usually provided by a hook)
  */
 export async function focusCombatantSheet(combat: Combat): Promise<void> {
-  if (!combat.started) {
+  if (!combat.started || combat.combatant === undefined) {
+    // no active combat turn; nothing to do
     return
   }
 
   const settings = Settings.GetInstance()
+
+  if (settings.IgnorePcSheets.Enabled && isPC(combat.combatant, settings.IgnorePcSheets.ActorTypes)) {
+    // PC sheets are ignored; nothing to do
+    return
+  }
 
   const sheet = getCurrentCombatantSheet(combat)
   if (!sheet) {

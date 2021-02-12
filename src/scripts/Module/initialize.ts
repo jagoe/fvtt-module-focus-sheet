@@ -10,7 +10,6 @@ export function initialize(): void {
   Hooks.off('updateCombat', closePreviousCombatantSheet)
   Hooks.off('deleteCombat', closeCurrentCombatantSheet)
 
-  // register hooks based on settings
   Hooks.once('init', registerSettings)
   Hooks.on('updateCombat', focusCombatantSheet)
   Hooks.on('updateCombat', closePreviousCombatantSheet)

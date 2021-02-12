@@ -12,7 +12,10 @@ export interface ModuleSettings {
     }
   }
   AutoClose: boolean
-  IgnorePcSheets: boolean
+  IgnorePcSheets: {
+    Enabled: boolean
+    ActorTypes: string[]
+  }
 }
 
 export class Settings implements ModuleSettings {
@@ -39,7 +42,7 @@ export class Settings implements ModuleSettings {
   private autoClose: ModuleSettings['AutoClose']
 
   public get AutoClose(): ModuleSettings['AutoClose'] {
-    return this.ignorePcSheets
+    return this.autoClose
   }
 
   private ignorePcSheets: ModuleSettings['IgnorePcSheets']
@@ -59,6 +62,9 @@ export class Settings implements ModuleSettings {
     }
 
     this.autoClose = game.settings.get(MODULE_KEY, SETTINGS.AUTO_CLOSE)
-    this.ignorePcSheets = game.settings.get(MODULE_KEY, SETTINGS.IGNORE_PC_SHEETS)
+    this.ignorePcSheets = {
+      Enabled: game.settings.get(MODULE_KEY, SETTINGS.IGNORE_PC_SHEETS),
+      ActorTypes: (game.settings.get(MODULE_KEY, SETTINGS.PC_ACTOR_TYPES) as string)?.split(/\s+,\s+/g).map((s) => s.trim()) ?? [],
+    }
   }
 }

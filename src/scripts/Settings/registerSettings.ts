@@ -1,6 +1,7 @@
 import {MODULE_KEY, SETTINGS} from '../Module/constants'
 
 import {Settings} from '../Settings'
+import {getSystemPcActorTypes} from '../System'
 
 function reloadSettings(): void {
   Settings.GetInstance().Reset()
@@ -34,6 +35,16 @@ export function registerSettings(): void {
     config: true,
     type: Boolean,
     default: true,
+    onChange: reloadSettings,
+  })
+
+  game.settings.register(MODULE_KEY, SETTINGS.PC_ACTOR_TYPES, {
+    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.PC_ACTOR_TYPES}.name`),
+    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.PC_ACTOR_TYPES}.hint`),
+    scope: 'world',
+    config: true,
+    type: String,
+    default: getSystemPcActorTypes(),
     onChange: reloadSettings,
   })
 

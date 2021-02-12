@@ -1,3 +1,5 @@
+import * as getSystemPcActorTypes from '@src/System/getSystemPcActorTypes'
+
 import {MODULE_KEY, SETTINGS} from '@src/Module/constants'
 import {Settings, registerSettings} from '@src/Settings'
 
@@ -23,6 +25,8 @@ export function registerSettingsTests(): void {
           },
         },
       })
+
+      sandbox.stub(getSystemPcActorTypes, 'getSystemPcActorTypes')
 
       registerSettings()
     })
