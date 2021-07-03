@@ -39,16 +39,9 @@ export function initializeTests(): void {
       initialize()
 
       expect(offStub.withArgs('init').calledBefore(onceStub.withArgs('init'))).to.be.true
-      expect(
-        offStub
-          .withArgs('updateCombat', focusCombatantSheet)
-          .calledBefore(onStub.withArgs('updateCombat', focusCombatantSheet)),
-      ).to.be.true
-      expect(
-        offStub
-          .withArgs('updateCombat', closePreviousCombatantSheet)
-          .calledBefore(onStub.withArgs('updateCombat', closePreviousCombatantSheet)),
-      ).to.be.true
+      expect(offStub.withArgs('updateCombat', focusCombatantSheet).calledBefore(onStub.withArgs('updateCombat', focusCombatantSheet))).to.be.true
+      expect(offStub.withArgs('updateCombat', closePreviousCombatantSheet).calledBefore(onStub.withArgs('updateCombat', closePreviousCombatantSheet)))
+        .to.be.true
       expect(offStub.withArgs('deleteCombat').calledBefore(onStub.withArgs('deleteCombat'))).to.be.true
     })
 

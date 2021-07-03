@@ -3197,7 +3197,7 @@ format@^0.2.0:
 
 "foundry-pc-types@https://gitlab.com/foundry-projects/foundry-pc/foundry-pc-types/-/archive/master/foundry-pc-types-master.tar":
   version "0.1.0"
-  resolved "https://gitlab.com/foundry-projects/foundry-pc/foundry-pc-types/-/archive/master/foundry-pc-types-master.tar#c52140b7f0ae000e29da5d6d7b9b68baefceaff4"
+  resolved "https://gitlab.com/foundry-projects/foundry-pc/foundry-pc-types/-/archive/master/foundry-pc-types-master.tar#dc0212ef280a88d7d78f2cdedc255d19d5375bb6"
   dependencies:
     "@types/howler" "^2.2.1"
     "@types/jquery" "^3.5.1"
