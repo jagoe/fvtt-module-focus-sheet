@@ -46,22 +46,16 @@ export function closePreviousCombatantSheetTests(): void {
       expect(closeStub.called).to.be.false
     })
 
-    it('should return early if there is no combatant', async () => {
-      await closePreviousCombatantSheet(cast({...COMBAT, combatant: undefined}))
+    it('should return early if there is no previous combatant', async () => {
+      getSheetStub.returns(null)
+
+      await closePreviousCombatantSheet(cast({...COMBAT}))
 
       expect(closeStub.called).to.be.false
     })
 
     it('should do nothing if the "auto close" setting is disabled', async () => {
       SETTINGS.AutoClose = false
-
-      await closePreviousCombatantSheet(COMBAT)
-
-      expect(closeStub.called).to.be.false
-    })
-
-    it('should do nothing if there is no previous combatant sheet', async () => {
-      getSheetStub.returns(null)
 
       await closePreviousCombatantSheet(COMBAT)
 
@@ -84,7 +78,7 @@ export function closePreviousCombatantSheetTests(): void {
     })
 
     describe('Setting: Ignore PC Sheets', () => {
-      let isPCStub: SinonStub<[combatant: Combatant, pcActorTypes: string[]], boolean>
+      let isPCStub: SinonStub<[actor?: Actor, pcActorTypes?: string[]], boolean>
 
       before(() => {
         isPCStub = sandbox.stub(isPC, 'isPC')
@@ -95,20 +89,22 @@ export function closePreviousCombatantSheetTests(): void {
           SETTINGS.IgnorePcSheets.Enabled = true
         })
 
-        it('should check if the current combatant actor is a PC using the settings', async () => {
+        it('should check if the previous combatant actor is a PC using the settings', async () => {
+          getSheetStub.returns(SHEET)
+
           await closePreviousCombatantSheet(COMBAT)
 
-          expect(isPCStub.calledWithExactly(COMBAT.combatant, SETTINGS.IgnorePcSheets.ActorTypes))
+          expect(isPCStub.calledWithExactly(SHEET.actor, SETTINGS.IgnorePcSheets.ActorTypes))
         })
 
-        it('should return early if the combatant is a PC', async () => {
+        it('should return early if the previous combatant is a PC', async () => {
           isPCStub.returns(true)
           await closePreviousCombatantSheet(COMBAT)
 
           expect(closeStub.called).to.be.false
         })
 
-        it('should close the combatant sheet if the combatant is an NPC', async () => {
+        it('should close the combatant sheet if the previous combatant is an NPC', async () => {
           isPCStub.returns(false)
           await closePreviousCombatantSheet(COMBAT)
 
@@ -121,7 +117,7 @@ export function closePreviousCombatantSheetTests(): void {
           SETTINGS.IgnorePcSheets.Enabled = false
         })
 
-        it('should close the combatant sheet if the combatant is a PC', async () => {
+        it('should close the combatant sheet if the previous combatant is a PC', async () => {
           isPCStub.returns(true)
           await closePreviousCombatantSheet(COMBAT)
 

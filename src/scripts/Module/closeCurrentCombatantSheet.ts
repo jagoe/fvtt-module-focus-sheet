@@ -14,7 +14,7 @@ export async function closeCurrentCombatantSheet(combat: Combat): Promise<void> 
     return
   }
 
-  if (settings.IgnorePcSheets.Enabled && isPC(combat.combatant, settings.IgnorePcSheets.ActorTypes)) {
+  if (settings.IgnorePcSheets.Enabled && isPC(combat.combatant.actor, settings.IgnorePcSheets.ActorTypes)) {
     // PC sheets are ignored; nothing to do
     return
   }

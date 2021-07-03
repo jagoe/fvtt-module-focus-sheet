@@ -18,7 +18,7 @@ export async function focusCombatantSheet(combat: Combat): Promise<void> {
 
   const settings = Settings.GetInstance()
 
-  if (settings.IgnorePcSheets.Enabled && isPC(combat.combatant, settings.IgnorePcSheets.ActorTypes)) {
+  if (settings.IgnorePcSheets.Enabled && isPC(combat.combatant.actor, settings.IgnorePcSheets.ActorTypes)) {
     // PC sheets are ignored; nothing to do
     return
   }
