@@ -8,6 +8,7 @@
   "scripts": {
     "commit": "cz",
     "build": "gulp build",
+    "build:dev": "MINIMIZE=false gulp build",
     "lint": "eslint .",
     "lint:staged": "eslint $(git diff --staged --name-status $(git branch --show-current) | grep -P '^(?!D)' | awk '{print $NF}' | grep -E \"(.js$|.ts$)\")",
     "alex:staged": "alex $(git diff --staged --name-status $(git branch --show-current) | grep -P '^(?!D)' | awk '{print $NF}' | grep -E \"(.txt$|.md$)\")",
