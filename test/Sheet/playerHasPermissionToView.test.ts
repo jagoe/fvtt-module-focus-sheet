@@ -12,7 +12,7 @@ export function playerHasPermissionToViewTests(): void {
     }
 
     before(() => {
-      global.ENTITY_PERMISSIONS = cast(ENTITY_PERMISSIONS)
+      global.CONST = cast({ENTITY_PERMISSIONS: ENTITY_PERMISSIONS})
     })
 
     const insufficientLevels = [ENTITY_PERMISSIONS.NONE, ENTITY_PERMISSIONS.LIMITED]

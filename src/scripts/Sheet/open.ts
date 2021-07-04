@@ -5,11 +5,10 @@ import {waitFor} from '../@util'
 export async function open(sheet: ActorSheet, settings: ModuleSettings['AutoOpen']): Promise<void> {
   sheet.render(true)
 
-  await waitFor(() => sheet.rendered, {title: `Rendering sheet for ${sheet.actor.name}`})
-
   if (settings.AsPopout) {
-    openPopout(sheet, settings.Position)
+    await openPopout(sheet, settings.Position)
   } else {
+    await waitFor(() => sheet.rendered, {title: `Rendering sheet for ${sheet.actor.name}`})
     sheet.setPosition({left: settings.Position.X, top: settings.Position.Y})
   }
 }

@@ -1,3 +1,5 @@
 export * from './focus'
-export * from './playerHasPermissionToView'
+export * from './getSheetElement'
 export * from './open'
+export * from './playerHasPermissionToView'
+export * from './setSheetVisibility'

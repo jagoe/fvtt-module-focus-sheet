@@ -6,14 +6,11 @@ import {registerSettings} from '@src/Settings'
 
 export function initializeTests(): void {
   const sandbox = createSandbox()
-  let onStub: SinonStub
-  let onceStub: SinonStub
-  let offStub: SinonStub
+  const onStub: SinonStub = sandbox.stub()
+  const onceStub: SinonStub = sandbox.stub()
+  const offStub: SinonStub = sandbox.stub()
 
   before(() => {
-    onStub = sandbox.stub()
-    onceStub = sandbox.stub()
-    offStub = sandbox.stub()
     global.Hooks = {on: onStub, once: onceStub, off: offStub}
   })
 
@@ -39,16 +36,9 @@ export function initializeTests(): void {
       initialize()
 
       expect(offStub.withArgs('init').calledBefore(onceStub.withArgs('init'))).to.be.true
-      expect(
-        offStub
-          .withArgs('updateCombat', focusCombatantSheet)
-          .calledBefore(onStub.withArgs('updateCombat', focusCombatantSheet)),
-      ).to.be.true
-      expect(
-        offStub
-          .withArgs('updateCombat', closePreviousCombatantSheet)
-          .calledBefore(onStub.withArgs('updateCombat', closePreviousCombatantSheet)),
-      ).to.be.true
+      expect(offStub.withArgs('updateCombat', focusCombatantSheet).calledBefore(onStub.withArgs('updateCombat', focusCombatantSheet))).to.be.true
+      expect(offStub.withArgs('updateCombat', closePreviousCombatantSheet).calledBefore(onStub.withArgs('updateCombat', closePreviousCombatantSheet)))
+        .to.be.true
       expect(offStub.withArgs('deleteCombat').calledBefore(onStub.withArgs('deleteCombat'))).to.be.true
     })
 

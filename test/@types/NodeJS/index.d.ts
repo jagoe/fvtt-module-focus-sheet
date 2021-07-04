@@ -6,7 +6,7 @@ declare global {
       Hooks: unknown
       PopoutModule: typeof PopoutModule | undefined
       game: Game
-      ENTITY_PERMISSIONS: Record<string, number>
+      CONST: typeof CONST
     }
   }
 }

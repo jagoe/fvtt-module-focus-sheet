@@ -84,7 +84,7 @@ export function closeCurrentCombatantSheetTests(): void {
     })
 
     describe('Setting: Ignore PC Sheets', () => {
-      let isPCStub: SinonStub<[combatant: Combatant, pcActorTypes: string[]], boolean>
+      let isPCStub: SinonStub<[actor?: Actor, pcActorTypes?: string[]], boolean>
 
       before(() => {
         isPCStub = sandbox.stub(isPC, 'isPC')

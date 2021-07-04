@@ -3,8 +3,14 @@ import {getPreviousCombatantSheet} from '../Combat'
 import {isPC} from '../Combatant'
 
 export async function closePreviousCombatantSheet(combat: Combat): Promise<void> {
-  if (!combat.started || combat.combatant === undefined) {
+  if (!combat.started) {
     // no active combat turn; nothing to do
+    return
+  }
+
+  const previousCombatantSheet = await getPreviousCombatantSheet(combat)
+  if (!previousCombatantSheet) {
+    // no previous combatant; nothing to do
     return
   }
 
@@ -14,21 +20,15 @@ export async function closePreviousCombatantSheet(combat: Combat): Promise<void>
     return
   }
 
-  if (settings.IgnorePcSheets.Enabled && isPC(combat.combatant, settings.IgnorePcSheets.ActorTypes)) {
+  if (settings.IgnorePcSheets.Enabled && isPC(previousCombatantSheet.actor, settings.IgnorePcSheets.ActorTypes)) {
     // PC sheets are ignored; nothing to do
     return
   }
 
-  const previousSheet = getPreviousCombatantSheet(combat)
-  if (!previousSheet) {
-    // no sheet to close
-    return
-  }
-
-  if (!previousSheet.rendered) {
+  if (!previousCombatantSheet.rendered) {
     // sheet isn't being displayed, no need to close it
     return
   }
 
-  await previousSheet.close()
+  await previousCombatantSheet.close()
 }
