@@ -1,6 +1,4 @@
-import * as isFullyOpaque from '@src/Sheet/isFullyOpaque'
 import * as openPopout from '@src/Modules/Popout/open'
-import * as setSheetVisibility from '@src/Sheet/setSheetVisibility'
 import * as waitFor from '@src/@util/waitFor'
 
 import {SinonStub, createSandbox} from 'sinon'
@@ -14,24 +12,20 @@ export function openTests(): void {
   describe('Open', () => {
     const sandbox = createSandbox()
     const renderStub = sandbox.stub()
-    let isFullyOpaqueStub: SinonStub<[sheet: ActorSheet], boolean>
-    let openPopoutStub: SinonStub<[sheet: ActorSheet, position: ModuleSettings['AutoOpen']['Position']], void>
-    let setVisibilityStub: SinonStub<[sheet: ActorSheet, setVisible: boolean], void>
+    let openPopoutStub: SinonStub<[sheet: ActorSheet, position: ModuleSettings['AutoOpen']['Position']], Promise<void>>
     let waitForStub: SinonStub
     const setPositionStub = sandbox.stub()
 
     const SHEET: ActorSheet = cast({
-      render: renderStub,
       actor: {name: 'Rincewind the Wizzard'},
+      render: renderStub,
       setPosition: setPositionStub,
     })
     const BASE_SETTINGS: ModuleSettings['AutoOpen'] = {Enabled: true, AsPopout: false, Position: {}}
 
     before(() => {
-      isFullyOpaqueStub = sandbox.stub(isFullyOpaque, 'isFullyOpaque')
-      openPopoutStub = sandbox.stub(openPopout, 'open')
-      setVisibilityStub = sandbox.stub(setSheetVisibility, 'setSheetVisibility')
       waitForStub = sandbox.stub(waitFor, 'waitFor')
+      openPopoutStub = sandbox.stub(openPopout, 'open')
     })
 
     beforeEach(() => {
@@ -92,34 +86,6 @@ export function openTests(): void {
 
     describe('Open popped-out', () => {
       const SETTINGS = {...BASE_SETTINGS, AsPopout: true}
-
-      beforeEach(() => {
-        waitForStub.callsFake(async (condition) => {
-          condition()
-
-          return true
-        })
-      })
-
-      it('should wait for the sheet to become fully opaque', async () => {
-        await open(cast(SHEET), SETTINGS)
-
-        expect(isFullyOpaqueStub.calledOnce).to.be.true
-      })
-
-      it('should hide the sheet while waiting', async () => {
-        const sheet = {...SHEET}
-        await open(cast(sheet), SETTINGS)
-
-        expect(setVisibilityStub.withArgs(cast(sheet), false).calledBefore(waitForStub))
-      })
-
-      it('should re-display the sheet after waiting', async () => {
-        const sheet = {...SHEET}
-        await open(cast(sheet), SETTINGS)
-
-        expect(setVisibilityStub.withArgs(cast(sheet), true).calledAfter(waitForStub))
-      })
 
       it('should popout the sheet if auto-open is enabled', async () => {
         await open(SHEET, SETTINGS)
