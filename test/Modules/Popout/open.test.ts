@@ -13,10 +13,7 @@ export function openTests(): void {
     const sandbox = createSandbox()
 
     const popoutStub = sandbox.stub()
-    let setPositionStub: SinonStub<
-      [popout: PopoutModule.PopoutState, position: ModuleSettings['AutoOpen']['Position']],
-      void
-    >
+    let setPositionStub: SinonStub<[popout: PopoutModule.PopoutState, position: ModuleSettings['AutoOpen']['Position']], void>
     let getPopoutStub: SinonStub<[sheet: ActorSheet], PopoutModule.PopoutState | null>
 
     const POPOUT_MODULE_ID = 'popout'
@@ -25,7 +22,7 @@ export function openTests(): void {
     const POPOUT: PopoutModule.PopoutState = cast({})
 
     before(() => {
-      global.PopoutModule = cast({singleton: {ID: POPOUT_MODULE_ID, onPopoutClicked: popoutStub}})
+      global.PopoutModule = cast({popoutApp: popoutStub, singleton: {ID: POPOUT_MODULE_ID}})
       getPopoutStub = sandbox.stub(getPopout, 'getPopout')
       setPositionStub = sandbox.stub(setPosition, 'setPosition')
     })
@@ -43,11 +40,9 @@ export function openTests(): void {
     })
 
     it('should open the popout for the correct sheet', () => {
-      const expectedSheetId = `popout_${POPOUT_MODULE_ID}_${SHEET_APP_ID}`
-
       open(SHEET, {})
 
-      expect(popoutStub.calledOnceWithExactly(expectedSheetId, SHEET)).to.be.true
+      expect(popoutStub.calledOnceWithExactly(SHEET)).to.be.true
     })
 
     it('should not position the popout if no coordinates are given', () => {
