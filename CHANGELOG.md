@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.6.0
+
+* FVTT v0.8 compatibility
+* fixed PopOut! compatibility
+* fix bug where NPC sheet would not be closed at the start of a PC's turn
+
 ## v0.5.0
 
 * add setting to ignore module features for PC sheets

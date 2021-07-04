@@ -9,9 +9,9 @@
       "discord": "ich#0084"
     }
   ],
-  "version": "0.5.0",
-  "minimumCoreVersion": "0.7.9",
-  "compatibleCoreVersion": "0.7.9",
+  "version": "0.6.0",
+  "minimumCoreVersion": "0.8.0",
+  "compatibleCoreVersion": "0.8.8",
   "manifestPlusVersion": "1.0.0",
   "url": "",
   "manifest": "",
