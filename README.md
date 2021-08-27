@@ -1,5 +1,5 @@
 ![Release](https://img.shields.io/github/v/release/jagoe/fvtt-module-focus-sheet?sort=semver)
-![Supported Foundry Version](https://img.shields.io/badge/Foundry-v0.7.9-informational)
+![Supported Foundry Version](https://img.shields.io/badge/Foundry-v0.8.9-informational)
 ![Latest Release Download Count](https://img.shields.io/github/downloads/jagoe/fvtt-module-focus-sheet/latest/module.zip)
 ![Forge Installs](https://img.shields.io/badge/dynamic/json?url=https:%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Ffocus-sheet&query=package.installs&colorB=4aa94a&label=Forge%20Installs&suffix=%25)
 
