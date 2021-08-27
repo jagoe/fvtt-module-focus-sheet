@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.6.1
+
+* bump FVTT compatibility to v0.8.9
+
 ## v0.6.0
 
 * FVTT v0.8 compatibility
