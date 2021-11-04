@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.6.2
+
+* upgrade some insecure development dependencies
+  * since this should not affect the module in any way, there will be no corresponding publication on Foundry
+
 ## v0.6.1
 
 * bump FVTT compatibility to v0.8.9
