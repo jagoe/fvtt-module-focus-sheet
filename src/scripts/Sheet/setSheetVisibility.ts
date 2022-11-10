@@ -1,4 +1,4 @@
-import {getSheetElement} from './getSheetElement'
+import { getSheetElement } from './getSheetElement'
 
 export function setSheetVisibility(sheet: ActorSheet, setVisible: boolean): void {
   const element = getSheetElement(sheet)

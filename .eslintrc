@@ -14,7 +14,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "standard-with-typescript"
+    "standard-with-typescript",
+    "prettier"
   ],
   "ignorePatterns": [
     "dist",
@@ -51,16 +52,6 @@
         "allowNullableString": false,
         "allowNullableNumber": false,
         "allowAny": true
-      }
-    ],
-    "comma-dangle": [
-      "error",
-      {
-        "arrays": "always-multiline",
-        "objects": "always-multiline",
-        "imports": "always-multiline",
-        "exports": "always-multiline",
-        "functions": "always-multiline"
       }
     ],
     "indent": "off",

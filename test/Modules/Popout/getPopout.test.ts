@@ -1,10 +1,10 @@
 import * as isActive from '@src/Modules/isActive'
 
-import {SinonStub, createSandbox} from 'sinon'
+import { SinonStub, createSandbox } from 'sinon'
 
-import {cast} from '@util/cast'
-import {expect} from 'chai'
-import {getPopout} from '@src/Modules/Popout'
+import { cast } from '@util/cast'
+import { expect } from 'chai'
+import { getPopout } from '@src/Modules/Popout'
 
 export function getPopoutTests(): void {
   describe('Get popout', () => {
@@ -12,8 +12,8 @@ export function getPopoutTests(): void {
     let isActiveStub: SinonStub<[module: string], boolean>
 
     const POPPED_OUT_SHEETS: Map<number, PopoutModule.PopoutState> = new Map()
-    const POPOUT_MODULE = {singleton: {poppedOut: POPPED_OUT_SHEETS}}
-    const SHEET: ActorSheet = ({appId: 1} as unknown) as ActorSheet
+    const POPOUT_MODULE = { singleton: { poppedOut: POPPED_OUT_SHEETS } }
+    const SHEET: ActorSheet = ({ appId: 1 } as unknown) as ActorSheet
     const POPOUT: PopoutModule.PopoutState = cast({})
 
     before(() => {

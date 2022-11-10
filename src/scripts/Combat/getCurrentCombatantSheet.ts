@@ -1,4 +1,4 @@
-import {getCombatantSheet} from './getCombatantSheet'
+import { getCombatantSheet } from './getCombatantSheet'
 
 export function getCurrentCombatantSheet(combat: Combat): ActorSheet | null {
   if (combat.combatant === undefined) {

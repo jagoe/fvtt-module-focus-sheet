@@ -1,10 +1,10 @@
 import * as getSheetElement from '@src/Sheet/getSheetElement'
 
-import {SinonStub, createSandbox} from 'sinon'
+import { SinonStub, createSandbox } from 'sinon'
 
-import {cast} from '@util'
-import {expect} from 'chai'
-import {setSheetVisibility} from '@src/Sheet/setSheetVisibility'
+import { cast } from '@util'
+import { expect } from 'chai'
+import { setSheetVisibility } from '@src/Sheet/setSheetVisibility'
 
 export function setSheetVisibilityTests(): void {
   describe('Set sheet visibility', () => {
@@ -34,7 +34,7 @@ export function setSheetVisibilityTests(): void {
     })
 
     it('should set the sheet visibility to hidden', () => {
-      const element: HTMLElement = cast({style: {visibility: ''}})
+      const element: HTMLElement = cast({ style: { visibility: '' } })
       getSheetElementStub.returns(element)
 
       setSheetVisibility(SHEET, false)
@@ -43,7 +43,7 @@ export function setSheetVisibilityTests(): void {
     })
 
     it('should set the sheet visibility to default (i.e. visible)', () => {
-      const element: HTMLElement = cast({style: {visibility: 'hidden'}})
+      const element: HTMLElement = cast({ style: { visibility: 'hidden' } })
       getSheetElementStub.returns(element)
 
       setSheetVisibility(SHEET, true)

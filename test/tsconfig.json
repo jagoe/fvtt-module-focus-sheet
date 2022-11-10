@@ -4,7 +4,7 @@
     "baseUrl": "..",
     "types": [
       "node",
-      "foundry-pc-types",
+      "@league-of-foundry-developers/foundry-vtt-types",
       "chai",
       "mocha",
       "NodeJS",

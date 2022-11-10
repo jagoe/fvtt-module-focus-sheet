@@ -5,12 +5,12 @@ import * as setPosition from '@src/Modules/Popout/setPosition'
 import * as setSheetVisibility from '@src/Sheet/setSheetVisibility'
 import * as waitFor from '@src/@util/waitFor'
 
-import {SinonStub, createSandbox} from 'sinon'
+import { SinonStub, createSandbox } from 'sinon'
 
-import {ModuleSettings} from '@src/Settings'
-import {cast} from '@util/cast'
-import {expect} from 'chai'
-import {open} from '@src/Modules/Popout'
+import { ModuleSettings } from '@src/Settings'
+import { cast } from '@util/cast'
+import { expect } from 'chai'
+import { open } from '@src/Modules/Popout'
 
 export function openTests(): void {
   describe('Open', () => {
@@ -29,13 +29,13 @@ export function openTests(): void {
     const SHEET_APP_ID = 'x33'
     const SHEET: ActorSheet = cast({
       appId: SHEET_APP_ID,
-      actor: {name: 'Rincewind the Wizzard'},
+      actor: { name: 'Rincewind the Wizzard' }
     })
     const POPOUT: PopoutModule.PopoutState = cast({})
 
     before(() => {
-      global.Hooks = {on: onStub}
-      global.PopoutModule = cast({popoutApp: popoutStub, singleton: {ID: POPOUT_MODULE_ID}})
+      global.Hooks = { on: onStub }
+      global.PopoutModule = cast({ popoutApp: popoutStub, singleton: { ID: POPOUT_MODULE_ID } })
       getPopoutStub = sandbox.stub(getPopout, 'getPopout')
       getSheetElementStub = sandbox.stub(getSheetElement, 'getSheetElement')
       isFullyOpaqueStub = sandbox.stub(isFullyOpaque, 'isFullyOpaque')
@@ -62,14 +62,14 @@ export function openTests(): void {
     })
 
     it('should wait for the sheet have an HTML element before hiding it', async () => {
-      const sheet = {...SHEET}
+      const sheet = { ...SHEET }
       await open(cast(sheet), {})
 
       expect(getSheetElementStub.withArgs(cast(sheet)).calledBefore(setVisibilityStub))
     })
 
     it('should hide the sheet before it gets rendered', async () => {
-      const sheet = {...SHEET}
+      const sheet = { ...SHEET }
       await open(cast(sheet), {})
 
       expect(setVisibilityStub.withArgs(cast(sheet), false).calledBefore(waitForStub))
@@ -95,20 +95,20 @@ export function openTests(): void {
 
     it('should not position the popout if popout could not be retrieved', async () => {
       getPopoutStub.returns(null)
-      await open(SHEET, {X: 0, Y: 0})
+      await open(SHEET, { X: 0, Y: 0 })
 
       expect(setPositionStub.called).to.be.false
     })
 
     it('should position the popout if just the X coordinate is given', async () => {
-      const coordinates = {X: 1}
+      const coordinates = { X: 1 }
       await open(SHEET, coordinates)
 
       expect(setPositionStub.calledOnceWithExactly(POPOUT, coordinates)).to.be.true
     })
 
     it('should position the popout if just the Y coordinate is given', async () => {
-      const coordinates = {Y: 1}
+      const coordinates = { Y: 1 }
       await open(SHEET, coordinates)
 
       expect(setPositionStub.calledOnceWithExactly(POPOUT, coordinates)).to.be.true
@@ -133,7 +133,7 @@ export function openTests(): void {
           })
 
           it('should not re-display any other sheet', async () => {
-            const otherSheet: ActorSheet = cast({...SHEET, appId: 'other'})
+            const otherSheet: ActorSheet = cast({ ...SHEET, appId: 'other' })
             onStub.withArgs(event).callsFake((_event, cb) => cb(otherSheet))
 
             await open(SHEET, {})

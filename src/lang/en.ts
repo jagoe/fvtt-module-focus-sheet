@@ -1,4 +1,4 @@
-import {MODULE_KEY, SETTINGS} from '../scripts/Module/constants'
+import { MODULE_KEY, SETTINGS } from '../scripts/Module/constants'
 
 function i18n(...settings: string[]): string {
   return `${MODULE_KEY}.${settings.join('.')}`

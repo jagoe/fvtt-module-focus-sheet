@@ -9,7 +9,7 @@
       "ES2018"
     ],
     "types": [
-      "foundry-pc-types",
+      "@league-of-foundry-developers/foundry-vtt-types",
       "node",
     ],
     "allowUmdGlobalAccess": true,

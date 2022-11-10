@@ -1,8 +1,8 @@
-import {SinonStub, createSandbox} from 'sinon'
-import {closeCurrentCombatantSheet, closePreviousCombatantSheet, focusCombatantSheet, initialize} from '@src/Module'
+import { SinonStub, createSandbox } from 'sinon'
+import { closeCurrentCombatantSheet, closePreviousCombatantSheet, focusCombatantSheet, initialize } from '@src/Module'
 
-import {expect} from 'chai'
-import {registerSettings} from '@src/Settings'
+import { expect } from 'chai'
+import { registerSettings } from '@src/Settings'
 
 export function initializeTests(): void {
   const sandbox = createSandbox()
@@ -11,7 +11,7 @@ export function initializeTests(): void {
   const offStub: SinonStub = sandbox.stub()
 
   before(() => {
-    global.Hooks = {on: onStub, once: onceStub, off: offStub}
+    global.Hooks = { on: onStub, once: onceStub, off: offStub }
   })
 
   afterEach(() => {

@@ -1,4 +1,4 @@
-import {getSheetElement} from './getSheetElement'
+import { getSheetElement } from './getSheetElement'
 
 export function isFullyOpaque(sheet: ActorSheet): boolean {
   const element = getSheetElement(sheet)

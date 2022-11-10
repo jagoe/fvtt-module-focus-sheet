@@ -1,8 +1,8 @@
 import * as initialize from '@src/Module/initialize'
 
-import {SinonStub, createSandbox} from 'sinon'
+import { SinonStub, createSandbox } from 'sinon'
 
-import {expect} from 'chai'
+import { expect } from 'chai'
 
 describe('Bootstrap', () => {
   const sandbox = createSandbox()

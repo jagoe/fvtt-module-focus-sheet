@@ -1,10 +1,10 @@
 import * as getSheetElement from '@src/Sheet/getSheetElement'
 
-import {SinonStub, createSandbox} from 'sinon'
+import { SinonStub, createSandbox } from 'sinon'
 
-import {cast} from '@util'
-import {expect} from 'chai'
-import {isFullyOpaque} from '@src/Sheet/isFullyOpaque'
+import { cast } from '@util'
+import { expect } from 'chai'
+import { isFullyOpaque } from '@src/Sheet/isFullyOpaque'
 
 export function isFullyOpaqueTests(): void {
   describe('Is fully opaque', () => {
@@ -34,7 +34,7 @@ export function isFullyOpaqueTests(): void {
     })
 
     it('should return true if the sheet element has no opacity (defaulting to opaque)', () => {
-      getSheetElementStub.returns(cast({style: {opacity: ''}}))
+      getSheetElementStub.returns(cast({ style: { opacity: '' } }))
 
       const isOpaque = isFullyOpaque(SHEET)
 
@@ -42,7 +42,7 @@ export function isFullyOpaqueTests(): void {
     })
 
     it('should return true if the sheet element has opacity of "1"', () => {
-      getSheetElementStub.returns(cast({style: {opacity: '1'}}))
+      getSheetElementStub.returns(cast({ style: { opacity: '1' } }))
 
       const isOpaque = isFullyOpaque(SHEET)
 
@@ -52,7 +52,7 @@ export function isFullyOpaqueTests(): void {
     const testCases = ['0', '0.5', '-1', 'invalid']
     testCases.forEach((value) => {
       it(`should return false if the sheet element has opacity below 1 (${value})`, () => {
-        getSheetElementStub.returns(cast({style: {opacity: value}}))
+        getSheetElementStub.returns(cast({ style: { opacity: value } }))
 
         const isOpaque = isFullyOpaque(SHEET)
 

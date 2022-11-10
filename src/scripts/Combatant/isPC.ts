@@ -1,7 +1,7 @@
-export function isPC(actor?: Actor, pcActorTypes: string[] = []): boolean {
-  if (actor === undefined) {
+export function isPC(actor: Actor | null, pcActorTypes: string[] = []): boolean {
+  if (actor === null) {
     return false
   }
 
-  return pcActorTypes.includes(actor.data.type)
+  return pcActorTypes.includes(actor.type)
 }

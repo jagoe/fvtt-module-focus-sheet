@@ -1,6 +1,6 @@
-import {Settings} from '../Settings'
-import {getCombatantSheet} from '../Combat'
-import {isPC} from '../Combatant'
+import { Settings } from '../Settings'
+import { getCombatantSheet } from '../Combat'
+import { isPC } from '../Combatant'
 
 export async function closeCurrentCombatantSheet(combat: Combat): Promise<void> {
   if (!combat.started || combat.combatant === undefined) {

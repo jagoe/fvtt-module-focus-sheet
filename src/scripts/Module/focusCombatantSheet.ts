@@ -1,8 +1,8 @@
-import {focus, open, playerHasPermissionToView} from '../Sheet'
+import { focus, open, playerHasPermissionToView } from '../Sheet'
 
-import {Settings} from '../Settings'
-import {getCurrentCombatantSheet} from '../Combat/index'
-import {isPC} from '../Combatant'
+import { Settings } from '../Settings'
+import { getCurrentCombatantSheet } from '../Combat/index'
+import { isPC } from '../Combatant'
 
 /**
  * Focus the current actor/token sheet of the current combatant.\

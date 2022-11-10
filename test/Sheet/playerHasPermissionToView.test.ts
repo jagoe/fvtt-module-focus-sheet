@@ -1,10 +1,10 @@
-import {cast} from '@util/cast'
-import {expect} from 'chai'
-import {playerHasPermissionToView} from '@src/Sheet'
+import { cast } from '@util/cast'
+import { expect } from 'chai'
+import { playerHasPermissionToView } from '@src/Sheet'
 
 export function playerHasPermissionToViewTests(): void {
   describe('Player has permission to view sheet', () => {
-    enum ENTITY_PERMISSIONS {
+    enum DOCUMENT_PERMISSION_LEVELS {
       NONE = 0,
       LIMITED = 1,
       OBSERVER = 2,
@@ -12,13 +12,13 @@ export function playerHasPermissionToViewTests(): void {
     }
 
     before(() => {
-      global.CONST = cast({ENTITY_PERMISSIONS: ENTITY_PERMISSIONS})
+      global.CONST = cast({ DOCUMENT_PERMISSION_LEVELS })
     })
 
-    const insufficientLevels = [ENTITY_PERMISSIONS.NONE, ENTITY_PERMISSIONS.LIMITED]
+    const insufficientLevels = [DOCUMENT_PERMISSION_LEVELS.NONE, DOCUMENT_PERMISSION_LEVELS.LIMITED]
     insufficientLevels.forEach((level) => {
       it(`should return false for permission below Observer: ${level}`, () => {
-        const sheet: ActorSheet = cast({actor: {permission: level}})
+        const sheet: ActorSheet = cast({ actor: { permission: level } })
 
         const hasPermission = playerHasPermissionToView(sheet)
 
@@ -26,10 +26,10 @@ export function playerHasPermissionToViewTests(): void {
       })
     })
 
-    const sufficientLevels = [ENTITY_PERMISSIONS.OBSERVER, ENTITY_PERMISSIONS.OWNER]
+    const sufficientLevels = [DOCUMENT_PERMISSION_LEVELS.OBSERVER, DOCUMENT_PERMISSION_LEVELS.OWNER]
     sufficientLevels.forEach((level) => {
       it(`should return true for permission level at or above Observer: ${level}`, () => {
-        const sheet: ActorSheet = cast({actor: {permission: level}})
+        const sheet: ActorSheet = cast({ actor: { permission: level } })
 
         const hasPermission = playerHasPermissionToView(sheet)
 

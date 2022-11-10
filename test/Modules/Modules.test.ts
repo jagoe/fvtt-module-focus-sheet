@@ -1,4 +1,4 @@
-import {PopoutTests} from './Popout/Popout.tests'
+import { PopoutTests } from './Popout/Popout.tests'
 
 describe('Modules', () => {
   PopoutTests()
