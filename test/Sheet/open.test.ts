@@ -1,12 +1,12 @@
 import * as openPopout from '@src/Modules/Popout/open'
 import * as waitFor from '@src/@util/waitFor'
 
-import {SinonStub, createSandbox} from 'sinon'
+import { SinonStub, createSandbox } from 'sinon'
 
-import {ModuleSettings} from '@src/Settings'
-import {cast} from '@util/cast'
-import {expect} from 'chai'
-import {open} from '@src/Sheet'
+import { ModuleSettings } from '@src/Settings'
+import { cast } from '@util/cast'
+import { expect } from 'chai'
+import { open } from '@src/Sheet'
 
 export function openTests(): void {
   describe('Open', () => {
@@ -17,11 +17,11 @@ export function openTests(): void {
     const setPositionStub = sandbox.stub()
 
     const SHEET: ActorSheet = cast({
-      actor: {name: 'Rincewind the Wizzard'},
+      actor: { name: 'Rincewind the Wizzard' },
       render: renderStub,
       setPosition: setPositionStub,
     })
-    const BASE_SETTINGS: ModuleSettings['AutoOpen'] = {Enabled: true, AsPopout: false, Position: {}}
+    const BASE_SETTINGS: ModuleSettings['AutoOpen'] = { Enabled: true, AsPopout: false, Position: {} }
 
     before(() => {
       waitForStub = sandbox.stub(waitFor, 'waitFor')
@@ -47,7 +47,7 @@ export function openTests(): void {
     })
 
     describe('Open popped-in', () => {
-      const SETTINGS = {...BASE_SETTINGS, AsPopout: false}
+      const SETTINGS = { ...BASE_SETTINGS, AsPopout: false }
 
       it('should wait for the sheet to get rendered', async () => {
         const expectedConditionResult = true
@@ -55,7 +55,7 @@ export function openTests(): void {
         waitForStub.callsFake(async (condition) => {
           conditionResult = condition()
         })
-        await open(cast({...SHEET, rendered: true}), SETTINGS)
+        await open(cast({ ...SHEET, rendered: true }), SETTINGS)
 
         expect(conditionResult).to.equal(expectedConditionResult)
       })
@@ -67,16 +67,16 @@ export function openTests(): void {
       })
 
       const positionTestCases = [
-        {left: 0, top: 0},
-        {left: undefined, top: 100},
-        {left: -100, top: undefined},
-        {left: undefined, top: undefined},
+        { left: 0, top: 0 },
+        { left: undefined, top: 100 },
+        { left: -100, top: undefined },
+        { left: undefined, top: undefined }
       ]
       positionTestCases.forEach((position) => {
         it(
           'should position the sheet according to the settings ' + `(x: ${position.left ?? '<undefined>'} | y: ${position.top ?? '<undefined>'})`,
           async () => {
-            await open(SHEET, {...SETTINGS, Position: {X: position.left, Y: position.top}})
+            await open(SHEET, { ...SETTINGS, Position: { X: position.left, Y: position.top } })
 
             expect(setPositionStub.calledOnceWithExactly(position)).to.be.true
           },
@@ -85,7 +85,7 @@ export function openTests(): void {
     })
 
     describe('Open popped-out', () => {
-      const SETTINGS = {...BASE_SETTINGS, AsPopout: true}
+      const SETTINGS = { ...BASE_SETTINGS, AsPopout: true }
 
       it('should popout the sheet if auto-open is enabled', async () => {
         await open(SHEET, SETTINGS)

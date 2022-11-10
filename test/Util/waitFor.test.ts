@@ -1,7 +1,7 @@
-import {cast} from '@util/cast'
-import {createSandbox} from 'sinon'
-import {expect} from 'chai'
-import {waitFor} from '@src/@util'
+import { cast } from '@util/cast'
+import { createSandbox } from 'sinon'
+import { expect } from 'chai'
+import { waitFor } from '@src/@util'
 
 export function waitForTests(): void {
   describe('Wait for', () => {
@@ -33,7 +33,7 @@ export function waitForTests(): void {
 
     it('should fail if the timeout triggers', async () => {
       try {
-        const promise = waitFor(() => false, {timeout: 20, title: 'test error'})
+        const promise = waitFor(() => false, { timeout: 20, title: 'test error' })
 
         timer.tick(40)
 

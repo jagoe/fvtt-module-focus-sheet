@@ -1,4 +1,4 @@
-import {getCombatantSheet} from './getCombatantSheet'
+import { getCombatantSheet } from './getCombatantSheet'
 
 export function getPreviousCombatantSheet(combat: Combat): ActorSheet | null {
   if (!combat.started) {
@@ -6,8 +6,8 @@ export function getPreviousCombatantSheet(combat: Combat): ActorSheet | null {
     return null
   }
 
-  const {turn, turns} = combat
-  if (turns === undefined || turns.length <= 1) {
+  const { turn, turns } = combat
+  if (turns === undefined || turns.length <= 1 || turn === null) {
     // none or only one combatant; won't close the sheet to immediately re-open it
     return null
   }

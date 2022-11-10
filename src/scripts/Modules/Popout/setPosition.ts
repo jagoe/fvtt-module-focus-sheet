@@ -1,4 +1,4 @@
-import {ModuleSettings} from '../../Settings'
+import { ModuleSettings } from '../../Settings'
 
 export function setPosition(popout: PopoutModule.PopoutState, position: ModuleSettings['AutoOpen']['Position']): void {
   const x = position.X !== undefined ? window.screenX + position.X : popout.window.screenX

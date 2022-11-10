@@ -1,4 +1,4 @@
-import {isPCTests} from './isPC.test'
+import { isPCTests } from './isPC.test'
 
 describe('Combat', () => {
   isPCTests()

@@ -1,16 +1,16 @@
-import {getSheetElement, setSheetVisibility} from '../../Sheet'
+import { getSheetElement, setSheetVisibility } from '../../Sheet'
 
-import {ModuleSettings} from '../../Settings'
-import {getPopout} from './getPopout'
-import {isFullyOpaque} from '../../Sheet/isFullyOpaque'
-import {setPosition} from './setPosition'
-import {waitFor} from '../../@util'
+import { ModuleSettings } from '../../Settings'
+import { getPopout } from './getPopout'
+import { isFullyOpaque } from '../../Sheet/isFullyOpaque'
+import { setPosition } from './setPosition'
+import { waitFor } from '../../@util'
 
 export async function open(sheet: ActorSheet, position: ModuleSettings['AutoOpen']['Position']): Promise<void> {
   // hide the sheet to reduce flicker caused by first rendering the sheet and then replacing it with the popout
-  await waitFor(() => getSheetElement(sheet) !== null, {title: `Rendering sheet for ${sheet.actor.name}`})
+  await waitFor(() => getSheetElement(sheet) !== null, { title: `Rendering sheet for ${sheet.actor.name ?? ''}` })
   setSheetVisibility(sheet, false)
-  await waitFor(() => isFullyOpaque(sheet), {title: `Rendering sheet for ${sheet.actor.name}`})
+  await waitFor(() => isFullyOpaque(sheet), { title: `Rendering sheet for ${sheet.actor.name ?? ''}` })
 
   // popout the sheet
   PopoutModule.popoutApp(sheet)

@@ -1,13 +1,13 @@
 import * as getPreviousCombatantSheet from '@src/Combat/getPreviousCombatantSheet'
 import * as isPC from '@src/Combatant/isPC'
 
-import {DEFAULT_COMBAT, DEFAULT_SETTINGS, DEFAULT_SHEET} from '@util/fixtures'
-import {ModuleSettings, Settings} from '@src/Settings'
-import {SinonStub, createSandbox} from 'sinon'
+import { DEFAULT_COMBAT, DEFAULT_SETTINGS, DEFAULT_SHEET } from '@util/fixtures'
+import { ModuleSettings, Settings } from '@src/Settings'
+import { SinonStub, createSandbox } from 'sinon'
 
-import {cast} from '@util/cast'
-import {closePreviousCombatantSheet} from '@src/Module'
-import {expect} from 'chai'
+import { cast } from '@util/cast'
+import { closePreviousCombatantSheet } from '@src/Module'
+import { expect } from 'chai'
 
 export function closePreviousCombatantSheetTests(): void {
   describe('Close previous combatant sheet', () => {
@@ -18,7 +18,7 @@ export function closePreviousCombatantSheetTests(): void {
 
     let SETTINGS: ModuleSettings
     const COMBAT: Combat = DEFAULT_COMBAT()
-    const SHEET: ActorSheet = cast({...DEFAULT_SHEET(), close: closeStub})
+    const SHEET: ActorSheet = cast({ ...DEFAULT_SHEET(), close: closeStub })
 
     before(() => {
       getSheetStub = sandbox.stub(getPreviousCombatantSheet, 'getPreviousCombatantSheet')
@@ -26,7 +26,7 @@ export function closePreviousCombatantSheetTests(): void {
     })
 
     beforeEach(() => {
-      SETTINGS = {...DEFAULT_SETTINGS(), AutoClose: true}
+      SETTINGS = { ...DEFAULT_SETTINGS(), AutoClose: true }
 
       getSettingsStub.returns(cast(SETTINGS))
       getSheetStub.returns(SHEET)
@@ -41,7 +41,7 @@ export function closePreviousCombatantSheetTests(): void {
     })
 
     it('should return early if the combat has not started', async () => {
-      await closePreviousCombatantSheet(cast({...COMBAT, started: false}))
+      await closePreviousCombatantSheet(cast({ ...COMBAT, started: false }))
 
       expect(closeStub.called).to.be.false
     })
@@ -49,7 +49,7 @@ export function closePreviousCombatantSheetTests(): void {
     it('should return early if there is no previous combatant', async () => {
       getSheetStub.returns(null)
 
-      await closePreviousCombatantSheet(cast({...COMBAT}))
+      await closePreviousCombatantSheet(cast({ ...COMBAT }))
 
       expect(closeStub.called).to.be.false
     })
@@ -63,7 +63,7 @@ export function closePreviousCombatantSheetTests(): void {
     })
 
     it('should do nothing if the previous combatant sheet is alredy closed', async () => {
-      const sheet: Partial<ActorSheet> = {...SHEET, rendered: false}
+      const sheet: Partial<ActorSheet> = { ...SHEET, rendered: false }
       getSheetStub.returns(cast(sheet))
 
       await closePreviousCombatantSheet(COMBAT)
@@ -78,7 +78,7 @@ export function closePreviousCombatantSheetTests(): void {
     })
 
     describe('Setting: Ignore PC Sheets', () => {
-      let isPCStub: SinonStub<[actor?: Actor, pcActorTypes?: string[]], boolean>
+      let isPCStub: SinonStub<[actor: Actor | null, pcActorTypes?: string[]], boolean>
 
       before(() => {
         isPCStub = sandbox.stub(isPC, 'isPC')

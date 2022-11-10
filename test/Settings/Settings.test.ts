@@ -1,10 +1,10 @@
-import {MODULE_KEY, SETTINGS} from '@src/Module/constants'
+import { MODULE_KEY, SETTINGS } from '@src/Module/constants'
 
-import {Settings} from '@src/Settings'
-import {cast} from '@util/cast'
-import {createSandbox} from 'sinon'
-import {expect} from 'chai'
-import {registerSettingsTests} from './registerSettings.test'
+import { Settings } from '@src/Settings'
+import { cast } from '@util/cast'
+import { createSandbox } from 'sinon'
+import { expect } from 'chai'
+import { registerSettingsTests } from './registerSettings.test'
 
 describe('Settings', () => {
   const sandbox = createSandbox()

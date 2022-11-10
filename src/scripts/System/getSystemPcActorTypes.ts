@@ -1,5 +1,6 @@
 export function getSystemPcActorTypes(): string[] {
-  const system = game.system.id
+  const gameGlobal = game as unknown as Game
+  const system = gameGlobal.system.id
 
   if (system === 'dnd5e') {
     return ['character']

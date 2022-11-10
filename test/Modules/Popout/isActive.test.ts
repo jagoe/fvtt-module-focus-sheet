@@ -1,13 +1,13 @@
-import {expect} from 'chai'
-import {isActive} from '@src/Modules'
+import { expect } from 'chai'
+import { isActive } from '@src/Modules'
 
 export function isActiveTests(): void {
   describe('Is Active', () => {
-    const modules = new Map<string, {active: boolean}>()
+    const modules = new Map<string, { active: boolean }>()
     const moduleKey = 'test-module'
 
     before(() => {
-      global.game = ({modules} as unknown) as Game
+      global.game = ({ modules } as unknown) as Game
     })
 
     beforeEach(() => {
@@ -21,7 +21,7 @@ export function isActiveTests(): void {
     })
 
     it('returns false if the popout module is not active', () => {
-      modules.set(moduleKey, {active: false})
+      modules.set(moduleKey, { active: false })
 
       const result = isActive(moduleKey)
 
@@ -29,7 +29,7 @@ export function isActiveTests(): void {
     })
 
     it('returns true if the popout module is active', () => {
-      modules.set(moduleKey, {active: true})
+      modules.set(moduleKey, { active: true })
 
       const result = isActive(moduleKey)
 

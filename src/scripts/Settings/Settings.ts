@@ -1,6 +1,6 @@
-import {MODULE_KEY, SETTINGS} from '../Module/constants'
+import { MODULE_KEY, SETTINGS } from '../Module/constants'
 
-import {parseNumber} from '../@util'
+import { parseNumber } from '../@util'
 
 export interface ModuleSettings {
   AutoOpen: {
@@ -52,19 +52,21 @@ export class Settings implements ModuleSettings {
   }
 
   public Reset(): void {
+    const gameGlobal = game as unknown as Game
+
     this.autoOpen = {
-      Enabled: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN),
-      AsPopout: game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT),
+      Enabled: gameGlobal.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN) as boolean,
+      AsPopout: gameGlobal.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT) as boolean,
       Position: {
-        Y: parseNumber(game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y)),
-        X: parseNumber(game.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X)),
+        Y: parseNumber(gameGlobal.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y) as string),
+        X: parseNumber(gameGlobal.settings.get(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X) as string),
       },
     }
 
-    this.autoClose = game.settings.get(MODULE_KEY, SETTINGS.AUTO_CLOSE)
+    this.autoClose = gameGlobal.settings.get(MODULE_KEY, SETTINGS.AUTO_CLOSE) as boolean
     this.ignorePcSheets = {
-      Enabled: game.settings.get(MODULE_KEY, SETTINGS.IGNORE_PC_SHEETS),
-      ActorTypes: (game.settings.get(MODULE_KEY, SETTINGS.PC_ACTOR_TYPES) as string)?.split(/\s+,\s+/g).map((s) => s.trim()) ?? [],
+      Enabled: gameGlobal.settings.get(MODULE_KEY, SETTINGS.IGNORE_PC_SHEETS) as boolean,
+      ActorTypes: (gameGlobal.settings.get(MODULE_KEY, SETTINGS.PC_ACTOR_TYPES) as string)?.split(/\s+,\s+/g).map((s) => s.trim()) ?? [],
     }
   }
 }

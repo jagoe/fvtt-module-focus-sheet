@@ -1,3 +1,4 @@
 export function isActive(module: string): boolean {
-  return game.modules.get(module)?.active ?? false
+  const gameGlobal = game as unknown as Game
+  return gameGlobal.modules.get(module)?.active ?? false
 }

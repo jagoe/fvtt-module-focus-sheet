@@ -1,16 +1,18 @@
 import * as getSystemPcActorTypes from '@src/System/getSystemPcActorTypes'
 
-import {MODULE_KEY, SETTINGS} from '@src/Module/constants'
-import {Settings, registerSettings} from '@src/Settings'
+import { MODULE_KEY, SETTINGS } from '@src/Module/constants'
+import { Settings, registerSettings } from '@src/Settings'
 
-import {cast} from '@util/cast'
-import {createSandbox} from 'sinon'
-import {expect} from 'chai'
+import { cast } from '@util/cast'
+import { createSandbox, SinonStub } from 'sinon'
+import { expect } from 'chai'
 
 export function registerSettingsTests(): void {
   describe('Register settings', () => {
     const sandbox = createSandbox()
     const settings: Record<string, Record<string, unknown>> = {}
+
+    let getSystemPcActorTypesStub: SinonStub<[], string[]>
 
     before(() => {
       global.game = cast({
@@ -26,7 +28,8 @@ export function registerSettingsTests(): void {
         },
       })
 
-      sandbox.stub(getSystemPcActorTypes, 'getSystemPcActorTypes')
+      getSystemPcActorTypesStub = sandbox.stub(getSystemPcActorTypes, 'getSystemPcActorTypes')
+      getSystemPcActorTypesStub.returns([])
 
       registerSettings()
     })
@@ -121,6 +124,7 @@ export function registerSettingsTests(): void {
       const resetStub = sandbox.stub(Settings.prototype, 'Reset')
       const value = 'test'
 
+      getSystemPcActorTypesStub.returns([])
       registerSettings()
 
       const registeredSettings = Object.values(settings)

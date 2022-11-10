@@ -1,16 +1,18 @@
-import {MODULE_KEY, SETTINGS} from '../Module/constants'
+import { MODULE_KEY, SETTINGS } from '../Module/constants'
 
-import {Settings} from '../Settings'
-import {getSystemPcActorTypes} from '../System'
+import { Settings } from '../Settings'
+import { getSystemPcActorTypes } from '../System'
 
 function reloadSettings(): void {
   Settings.GetInstance().Reset()
 }
 
 export function registerSettings(): void {
-  game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN, {
-    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN}.name`),
-    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN}.hint`),
+  const gameGlobal = game as unknown as Game
+
+  gameGlobal.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN, {
+    name: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN}.name`),
+    hint: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN}.hint`),
     scope: 'client',
     config: true,
     type: Boolean,
@@ -18,9 +20,9 @@ export function registerSettings(): void {
     onChange: reloadSettings,
   })
 
-  game.settings.register(MODULE_KEY, SETTINGS.AUTO_CLOSE, {
-    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.name`),
-    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.hint`),
+  gameGlobal.settings.register(MODULE_KEY, SETTINGS.AUTO_CLOSE, {
+    name: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.name`),
+    hint: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_CLOSE}.hint`),
     scope: 'client',
     config: true,
     type: Boolean,
@@ -28,9 +30,9 @@ export function registerSettings(): void {
     onChange: reloadSettings,
   })
 
-  game.settings.register(MODULE_KEY, SETTINGS.IGNORE_PC_SHEETS, {
-    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}.name`),
-    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}.hint`),
+  gameGlobal.settings.register(MODULE_KEY, SETTINGS.IGNORE_PC_SHEETS, {
+    name: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}.name`),
+    hint: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.IGNORE_PC_SHEETS}.hint`),
     scope: 'client',
     config: true,
     type: Boolean,
@@ -38,19 +40,19 @@ export function registerSettings(): void {
     onChange: reloadSettings,
   })
 
-  game.settings.register(MODULE_KEY, SETTINGS.PC_ACTOR_TYPES, {
-    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.PC_ACTOR_TYPES}.name`),
-    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.PC_ACTOR_TYPES}.hint`),
+  gameGlobal.settings.register(MODULE_KEY, SETTINGS.PC_ACTOR_TYPES, {
+    name: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.PC_ACTOR_TYPES}.name`),
+    hint: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.PC_ACTOR_TYPES}.hint`),
     scope: 'world',
     config: true,
     type: String,
-    default: getSystemPcActorTypes(),
+    default: getSystemPcActorTypes().join(','),
     onChange: reloadSettings,
   })
 
-  game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT, {
-    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}.name`),
-    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}.hint`),
+  gameGlobal.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POPOUT, {
+    name: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}.name`),
+    hint: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POPOUT}.hint`),
     scope: 'client',
     config: true,
     type: Boolean,
@@ -58,18 +60,18 @@ export function registerSettings(): void {
     onChange: reloadSettings,
   })
 
-  game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X, {
-    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.name`),
-    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.hint`),
+  gameGlobal.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_X, {
+    name: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.name`),
+    hint: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.hint`),
     scope: 'client',
     config: true,
     type: String,
     onChange: reloadSettings,
   })
 
-  game.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y, {
-    name: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}.name`),
-    hint: game.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}.hint`),
+  gameGlobal.settings.register(MODULE_KEY, SETTINGS.AUTO_OPEN_POSITION_Y, {
+    name: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}.name`),
+    hint: gameGlobal.i18n.localize(`${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}.hint`),
     scope: 'client',
     config: true,
     type: String,

@@ -1,11 +1,11 @@
 import * as focusPopout from '@src/Modules/Popout/focus'
 import * as getPopout from '@src/Modules/Popout/getPopout'
 
-import {SinonStub, createSandbox} from 'sinon'
+import { SinonStub, createSandbox } from 'sinon'
 
-import {cast} from '@util/cast'
-import {expect} from 'chai'
-import {focus} from '@src/Sheet'
+import { cast } from '@util/cast'
+import { expect } from 'chai'
+import { focus } from '@src/Sheet'
 
 export function focusTests(): void {
   describe('Focus', () => {
@@ -14,7 +14,7 @@ export function focusTests(): void {
     let getPopoutStub: SinonStub<[sheet: ActorSheet], PopoutModule.PopoutState | null>
     const bringToTopStub = sandbox.stub()
 
-    const SHEET: ActorSheet = cast({bringToTop: bringToTopStub})
+    const SHEET: ActorSheet = cast({ bringToTop: bringToTopStub })
 
     before(() => {
       focusPopoutStub = sandbox.stub(focusPopout, 'focus')

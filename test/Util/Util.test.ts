@@ -1,4 +1,4 @@
-import {waitForTests} from './waitFor.test'
+import { waitForTests } from './waitFor.test'
 
 describe('Util', () => {
   waitForTests()
