@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.1
+
+* Fix the module breaking the "Configure Settings" window in Foundry
+
 ## v0.7.0
 
 * Add compatibility with v9 and v10

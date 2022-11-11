@@ -66,6 +66,7 @@ export function registerSettings(): void {
     scope: 'client',
     config: true,
     type: String,
+    default: '',
     onChange: reloadSettings,
   })
 
@@ -75,6 +76,7 @@ export function registerSettings(): void {
     scope: 'client',
     config: true,
     type: String,
+    default: '',
     onChange: reloadSettings,
   })
 }

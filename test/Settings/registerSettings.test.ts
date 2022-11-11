@@ -2,9 +2,9 @@ import * as getSystemPcActorTypes from '@src/System/getSystemPcActorTypes'
 
 import { MODULE_KEY, SETTINGS } from '@src/Module/constants'
 import { Settings, registerSettings } from '@src/Settings'
+import { SinonStub, createSandbox } from 'sinon'
 
 import { cast } from '@util/cast'
-import { createSandbox, SinonStub } from 'sinon'
 import { expect } from 'chai'
 
 export function registerSettingsTests(): void {
@@ -109,6 +109,7 @@ export function registerSettingsTests(): void {
         hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_Y}.hint`,
         scope: 'client',
         config: true,
+        default: '',
         type: String,
       })
       expect(settingX).to.eql({
@@ -116,6 +117,7 @@ export function registerSettingsTests(): void {
         hint: `${MODULE_KEY}.${SETTINGS.AUTO_OPEN_POSITION_X}.hint`,
         scope: 'client',
         config: true,
+        default: '',
         type: String,
       })
     })
