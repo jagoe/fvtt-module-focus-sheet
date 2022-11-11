@@ -57,6 +57,7 @@ This is being configured by a comma-separated list of sheet types that each repr
 For the following systems PC sheet types will be recognized automatically:
 
 * D&D 5e
+* Patfinder 2e
 
 Feel free to request more or create a PR to augment [the list](src/scripts/System/getSystemPcActorTypes.ts).
 
