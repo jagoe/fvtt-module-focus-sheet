@@ -1,8 +1,6 @@
 name: Module CI/CD
 
-on:
-  push:
-  workflow_dispatch:
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   lint:
@@ -105,7 +103,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'jagoe/fvtt-module-focus-sheet'
     needs:
       - lint
       - test
