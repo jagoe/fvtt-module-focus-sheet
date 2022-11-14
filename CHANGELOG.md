@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.8.0
+
+* Add support for Pathfinder 2e system (`pf2e`)
+
 ## v0.7.1
 
 * Fix the module breaking the "Configure Settings" window in Foundry
