@@ -2,7 +2,8 @@
 
 ## v0.8.1
 
-_No changes to the user experience. You could safely skip this update if you wished to._
+_This is a maintenance update, so there are no changes to the user experience._\
+_There will be no release on Foundry for this version._
 
 * Upgrade build dependencies
 
