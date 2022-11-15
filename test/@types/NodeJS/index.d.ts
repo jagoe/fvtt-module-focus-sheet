@@ -1,12 +1,6 @@
-export {}
-
-declare global {
-  namespace NodeJS {
-    interface Global {
-      Hooks: unknown
-      PopoutModule: typeof PopoutModule | undefined
-      game: Game
-      CONST: typeof CONST
-    }
-  }
+declare interface FoundryGlobal extends Global {
+  Hooks: unknown
+  PopoutModule: typeof PopoutModule | undefined
+  game: Game
+  CONST: typeof CONST
 }

@@ -12,6 +12,8 @@ import { cast } from '@util/cast'
 import { expect } from 'chai'
 import { open } from '@src/Modules/Popout'
 
+declare const global: FoundryGlobal
+
 export function openTests(): void {
   describe('Open', () => {
     const sandbox = createSandbox()

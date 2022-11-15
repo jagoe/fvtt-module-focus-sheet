@@ -4,6 +4,8 @@ import { closeCurrentCombatantSheet, closePreviousCombatantSheet, focusCombatant
 import { expect } from 'chai'
 import { registerSettings } from '@src/Settings'
 
+declare const global: FoundryGlobal
+
 export function initializeTests(): void {
   const sandbox = createSandbox()
   const onStub: SinonStub = sandbox.stub()

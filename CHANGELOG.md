@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.8.1
+
+_This is a maintenance update, so there are no changes to the user experience._\
+_There will be no release on Foundry for this version._
+
+* Upgrade build dependencies
+
 ## v0.8.0
 
 * Add support for Pathfinder 2e system (`pf2e`)

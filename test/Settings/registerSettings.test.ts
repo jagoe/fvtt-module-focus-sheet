@@ -7,6 +7,8 @@ import { SinonStub, createSandbox } from 'sinon'
 import { cast } from '@util/cast'
 import { expect } from 'chai'
 
+declare const global: FoundryGlobal
+
 export function registerSettingsTests(): void {
   describe('Register settings', () => {
     const sandbox = createSandbox()
