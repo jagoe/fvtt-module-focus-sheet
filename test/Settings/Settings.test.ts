@@ -6,6 +6,8 @@ import { createSandbox } from 'sinon'
 import { expect } from 'chai'
 import { registerSettingsTests } from './registerSettings.test'
 
+declare const global: FoundryGlobal
+
 describe('Settings', () => {
   const sandbox = createSandbox()
   const getSettingStub = sandbox.stub()

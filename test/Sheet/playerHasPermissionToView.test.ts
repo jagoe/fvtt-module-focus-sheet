@@ -2,6 +2,8 @@ import { cast } from '@util/cast'
 import { expect } from 'chai'
 import { playerHasPermissionToView } from '@src/Sheet'
 
+declare const global: FoundryGlobal
+
 export function playerHasPermissionToViewTests(): void {
   describe('Player has permission to view sheet', () => {
     enum DOCUMENT_PERMISSION_LEVELS {

@@ -1,6 +1,8 @@
 import { expect } from 'chai'
 import { isActive } from '@src/Modules'
 
+declare const global: FoundryGlobal
+
 export function isActiveTests(): void {
   describe('Is Active', () => {
     const modules = new Map<string, { active: boolean }>()
