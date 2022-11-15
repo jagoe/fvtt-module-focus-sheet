@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.8.1
+
+_No changes to the user experience. You could safely skip this update if you wished to._
+
+* Upgrade build dependencies
+
 ## v0.8.0
 
 * Add support for Pathfinder 2e system (`pf2e`)
